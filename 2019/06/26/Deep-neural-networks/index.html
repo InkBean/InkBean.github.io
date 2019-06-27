@@ -1,0 +1,412 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/in.png">
+	<link rel="shortcut icon" href="/img/in.png">
+	
+			    <title>
+    InkBin's Blog
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
+    <meta name="keywords" content="inkbin, Machine Learning, Neural Network, Deep Learning">
+    
+    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	 
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg.jpg') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+			    
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+</head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_coy.css">
+<link rel="stylesheet" href="/css/typo.css">
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">InkBin</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special">
+            <ul class="menu links">
+			<!-- Homepage  主页  --> 
+			<li>
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/Learning/">Learning</a></li><li><a class="category-link" href="/categories/日常/">日常</a>
+	                    </li></ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">归档</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="archive-link" href="/archives/2019/06/">June 2019</a>
+	                    </li></ul>
+	        </li>
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="关于">
+		                关于
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/friends/" title="友達">
+		                友達
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+                    
+                    <li>
+                        <a title="github" href="https://github.com/InkBin" target="_blank" rel="noopener">
+                            <i class="icon fa fa-github"></i>
+                        </a>
+                    </li>
+                    
+			</ul>
+</nav>
+
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/hn.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Study Notes for &#39;Deep L-layer Neural Networks&#39;</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p>For Andrew Ng’s <a href https: www.coursera.org learn neural-networks-deep-learning home welcome"">‘Neural Networks and Deep Learning’</a> on Coursera.</p>
+<br>
+
+<p>Written to sum up what I’ve learnt from the materials in the last week(week 4) of this course. </p>
+<h1 id="Programming-assignment"><a href="#Programming-assignment" class="headerlink" title="Programming assignment"></a><strong>Programming assignment</strong></h1><p>This week’s programming assignment walked me through the process of implementing a <strong>L-layer deep neural network.</strong> If anything of this part looks confusing, feel free to refer to the notes taken for the video lectures in the next section of this blog post. </p>
+<p><strong>Methodology:</strong></p>
+<blockquote>
+<ol>
+<li>Initialize parameters / Define hyperparameters</li>
+<li>Loop for num_iterations:<br>a. Forward propagation<br>b. Compute cost function<br>c. Backward propagation<br>d. Update parameters (using parameters, and grads from backprop) </li>
+<li>Use trained parameters to predict labels</li>
+</ol>
+</blockquote>
+<p><strong>Architecture:</strong></p>
+<p><img src="./pic/final_outline.png" alt="image"></p>
+<p><strong>Forward propagation:</strong></p>
+<p>You repeat the process of Linear-ReLU from the 1st layer to the L-1 layer.</p>
+<blockquote>
+<p>Z[l] = np.dot(W[l], A[l - 1]) + b</p>
+<p>A[l] = relu(Z[l])</p>
+</blockquote>
+<p>Then for the Lth layer, do the same thing except for changing the activation function from “ReLU”  “Sigmoid”. </p>
+<p>In each layer, you should cache the value of A_prev, W, and b as linear_cache and the value of Z as activation cache, for future use in the backward propagation part. </p>
+<p><strong>Compute cost:</strong></p>
+<p>Next you should compute the loss.</p>
+<p><strong>Backward propagation:</strong></p>
+<p>Compute the partial derivative of A in the Lth layer with respect to the loss function. </p>
+<p>Use dAL, Y, and the caches obtained from the forward propagation part to loop over the layers and compute dA_prev, dW, db for each layer. </p>
+<p><strong>Update parameters:</strong></p>
+<p>Loop through the layers and update the parameters W and b. </p>
+<hr>
+<p>The figure below shows the process of forward prop and back prop along with caching and how caches are used. </p>
+<p><img src="./pic/N4N1.png" alt="image"></p>
+<br>
+
+<hr>
+<h1 id="Notes-taken-for-the-video-lectures"><a href="#Notes-taken-for-the-video-lectures" class="headerlink" title="Notes taken for the video lectures."></a><strong><em>Notes taken for the video lectures.</em></strong></h1><h1 id="Notations-for-a-deep-neural-network"><a href="#Notations-for-a-deep-neural-network" class="headerlink" title="Notations for a deep neural network"></a><strong>Notations for a deep neural network</strong></h1><blockquote>
+<p>l (lower case L) denotes number of layers</p>
+<p>n[l] = number of units in layer l</p>
+<p>a[l] = activations in layer l</p>
+<p>​       = g[l](z[l]) </p>
+<p>w[l] = weights to compute z[l]</p>
+<p>b[l] = biases to compute z[l]</p>
+<p>x = a[0]</p>
+<p>a[L] = yhat</p>
+</blockquote>
+<p><strong>P.S.</strong> Note that the []s above are all superscripts. </p>
+<h1 id="Forward-propagation-in-a-deep-network"><a href="#Forward-propagation-in-a-deep-network" class="headerlink" title="Forward propagation in a deep network"></a><strong>Forward propagation in a deep network</strong></h1><p>General rule(vectorized)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Z[l] = W[l] * A[l - 1] + b[l]</span><br><span class="line">A[l] = g[l](Z[l])</span><br></pre></td></tr></table></figure>
+
+<p>Though we do want to get rid of explicit for loops whenever we can, when implementing forward propagation, we still have to write one, looping over the l layers. </p>
+<h1 id="Get-your-matrix-dimensions-right"><a href="#Get-your-matrix-dimensions-right" class="headerlink" title="Get your matrix dimensions right"></a><strong>Get your matrix dimensions right</strong></h1><blockquote>
+<p>W[l] = (n[l], n[l - 1])</p>
+<p>b[l] = (n[l], 1) </p>
+<p>Z[l] = (n[l], m)</p>
+<p>A[l] = (n[l], m)</p>
+</blockquote>
+<hr>
+<p> The derivatives of the functions have the same dimensions as those of the original functions</p>
+<blockquote>
+<p>dW[l] = (n[l], n[l - 1]) </p>
+<p>db[l] = (n[l], 1) </p>
+<p>dZ[l] = (n[l], m)</p>
+<p>dA[l] = (n[l], m)</p>
+</blockquote>
+<h1 id="Why-deep-representations"><a href="#Why-deep-representations" class="headerlink" title="Why deep representations?"></a><strong>Why deep representations?</strong></h1><p><strong>e.g.</strong> Face recognition</p>
+<p>1st layer: what’re the edges in the picture</p>
+<p>2nd layer: group edges to detect different parts of faces</p>
+<p>3rd layer: put together different parts of faces</p>
+<br>
+
+<p>It’s a simple to complex hiearchical, compositional representation.</p>
+<p>Shallower layers detect simpler things, then the deeper layers put together the simpler things detected.</p>
+<br>
+
+<p><strong>Circuit theory</strong></p>
+<blockquote>
+<p>Informally: there’re functions you can compute with a “small” L-layer deep neural network that shallower networks require exponentially more hidden units to compute</p>
+</blockquote>
+<h1 id="Building-blocks-of-deep-neural-networks"><a href="#Building-blocks-of-deep-neural-networks" class="headerlink" title="Building blocks of deep neural networks"></a><strong>Building blocks of deep neural networks</strong></h1><p>In layer l</p>
+<p><strong>Forward:</strong></p>
+<blockquote>
+<p>Input a[l - 1]</p>
+<p>Calculate with parameters W[l] and b[l]</p>
+<p>Output a[l]; <strong><em>cache a[l], z[l], W[l] and b[l]</em></strong></p>
+</blockquote>
+<p><strong>*Backward:</strong> </p>
+<blockquote>
+<p>input da[l], z[l]</p>
+<p>Calculate with parameters W[l] and b[l]</p>
+<p>Output da[l - 1], dW[l], db[l]         // dZ[l] will be calculated in between as an intermediate matrix. </p>
+</blockquote>
+<p>Repeat this process over the l layers. </p>
+<h1 id="Forward-and-backward-propagation"><a href="#Forward-and-backward-propagation" class="headerlink" title="Forward and backward propagation"></a><strong>Forward and backward propagation</strong></h1><p><strong>Forward:</strong></p>
+<blockquote>
+<p>Z[l] = W[l]  A[l - 1] + b[l]</p>
+<p>A[l] = g[l](Z[l])</p>
+</blockquote>
+<hr>
+<br>
+
+<p><strong>Backward:</strong></p>
+<blockquote>
+<p>dZ[l] = ( W[l + 1] * dZ[l + 1] ) ***** g’[l](Z[l])</p>
+<p>​         =dA[l] <strong><em>** g’[l](Z[l])             // the bold **’</em>‘</strong> here denotes element wise multiplication</p>
+<p>dW[l] = (1 / m)  *  ( dZ[l] * A[l] ) </p>
+<p>// actually, notice that A[l] is used so it should be cache in the forward propagation process as well</p>
+<p>db[l] = (1 / m) * np.sum(dZ[l], axis = 1, keepdims = True)</p>
+<p>dA[l - 1] = (W[l].T * dZ[l])</p>
+</blockquote>
+<p>dA[L], which is dA of the final/output layer, is calculated as follows</p>
+<blockquote>
+<p>dA[L] = - ( Y / A )  + (1 - Y) / (1 - A ) </p>
+</blockquote>
+<p>This is obtained by taking the derivative of the <strong>Cross-entropy Loss Function</strong></p>
+<blockquote>
+<p>( Y * log(A)  + (1 - Y) *  log(1 - A) )</p>
+</blockquote>
+<h1 id="Parameters-vs-Hyperparameters"><a href="#Parameters-vs-Hyperparameters" class="headerlink" title="Parameters vs Hyperparameters"></a><strong>Parameters vs Hyperparameters</strong></h1><p><strong>Parameters:</strong></p>
+<blockquote>
+<p>W[1], b[1], W[2], b[2] …</p>
+</blockquote>
+<br>
+
+<p><strong>Hyperparameters:</strong></p>
+<blockquote>
+<ol>
+<li>Learning rate - alpha</li>
+<li>Number of iterations</li>
+<li>Number of hidden layers - L</li>
+<li>Number of hidden units - from n[1] to n[L]</li>
+<li>Choice of activation function - g[1] to g[l]</li>
+</ol>
+</blockquote>
+<p>The hyperparameters are those that somehow determine the final values of the parameters W and b.</p>
+<p>There’re also other hyperparameters.</p>
+<p><strong>e.g.</strong> Momentum, mini batch size, regularization…</p>
+<h1 id="What-does-deep-learning-have-to-do-with-the-human-brain"><a href="#What-does-deep-learning-have-to-do-with-the-human-brain" class="headerlink" title="What does deep learning have to do with the human brain?"></a><strong>What does deep learning have to do with the human brain?</strong></h1><blockquote>
+<p>Still, even neuroscientists today don’t quite understand what even a single neuron is doing.</p>
+</blockquote>
+<p>Andrew mentioned that he became less and less prone to the analogy of human brain and neural network. </p>
+<br>
+
+<p>When I was taking a class in Cognitive Science, I found that “Connectionism”, which is an idea to explain the underlying mental phenomena behind human brain, resonates with neural network. A neuron has two states, either it fires or not. What decides the state is if it receives a signal that’s strong enough to activate it. The process of calculating the strength of the signal is analogous to forward propagation, and that of adjusting the activation threshold and weights of a neuron is analogous to backward propagation. </p>
+<p>I personally felt that this did make an intuitive sense when I was reading it, but for now also somehow feel like it’s oversimplified. Hope to study and investigate more on this myself in the future. Part of the reason why I didn’t give up studying Computer Science upon the completion of my first year in college is that I thought deep learning could be a very useful tool in studying the human brain, in the respect of both itself as an analogy and its functionality. </p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'inkbin'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/06/26/Deep-neural-networks/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/06/26/Deep-neural-networks/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//inkbin.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy; <a href="https://inkbin.github.io" style="border-bottom: none;">InkBin's Blog</a></li>
+                <li>Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Theme: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+                <span id="busuanzi_container_site_uv">有<span id="busuanzi_value_site_uv"></span>个小伙伴来过</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>
