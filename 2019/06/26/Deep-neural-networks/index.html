@@ -158,43 +158,37 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                <p>For Andrew Ng’s <a href https: www.coursera.org learn neural-networks-deep-learning home welcome"">‘Neural Networks and Deep Learning’</a> on Coursera.</p>
-<br>
-
-<p>Written to sum up what I’ve learnt from the materials in the last week(week 4) of this course. </p>
-<h1 id="Programming-assignment"><a href="#Programming-assignment" class="headerlink" title="Programming assignment"></a><strong>Programming assignment</strong></h1><p>This week’s programming assignment walked me through the process of implementing a <strong>L-layer deep neural network.</strong> If anything of this part looks confusing, feel free to refer to the notes taken for the video lectures in the next section of this blog post. </p>
-<p><strong>Methodology:</strong></p>
-<blockquote>
+                <p>Week 4 in Andrew Ng’s <a href https: www.coursera.org learn neural-networks-deep-learning home welcome"">‘Neural Networks and Deep Learning’</a> on Coursera.</p>
+<h1 id="Programming-assignment"><a href="#Programming-assignment" class="headerlink" title="Programming assignment"></a><strong>Programming assignment</strong></h1><p>This week’s programming assignment walked me through the process of implementing a <strong>L-layer deep neural network.</strong> Refer to the notes taken for the video lectures in the next section of this blog post to better understand the mechanism of the PA. </p>
+<h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology:"></a><strong>Methodology:</strong></h2><blockquote>
 <ol>
 <li>Initialize parameters / Define hyperparameters</li>
 <li>Loop for num_iterations:<br>a. Forward propagation<br>b. Compute cost function<br>c. Backward propagation<br>d. Update parameters (using parameters, and grads from backprop) </li>
 <li>Use trained parameters to predict labels</li>
 </ol>
 </blockquote>
-<p><strong>Architecture:</strong></p>
-<p><img src="./pic/final_outline.png" alt="image"></p>
-<p><strong>Forward propagation:</strong></p>
-<p>You repeat the process of Linear-ReLU from the 1st layer to the L-1 layer.</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture:"></a><strong>Architecture:</strong></h2><p><strong>Forward propagation:</strong></p>
+<p>Repeat the process of Linear-ReLU from the 1st layer to the L-1 layer.</p>
 <blockquote>
 <p>Z[l] = np.dot(W[l], A[l - 1]) + b</p>
 <p>A[l] = relu(Z[l])</p>
 </blockquote>
 <p>Then for the Lth layer, do the same thing except for changing the activation function from “ReLU”  “Sigmoid”. </p>
-<p>In each layer, you should cache the value of A_prev, W, and b as linear_cache and the value of Z as activation cache, for future use in the backward propagation part. </p>
+<p>In each layer, cache the value of A_prev, W, and b as linear_cache and the value of Z as activation cache, for future use in the backward propagation part. </p>
 <p><strong>Compute cost:</strong></p>
-<p>Next you should compute the loss.</p>
+<p>Compute the loss.</p>
 <p><strong>Backward propagation:</strong></p>
 <p>Compute the partial derivative of A in the Lth layer with respect to the loss function. </p>
 <p>Use dAL, Y, and the caches obtained from the forward propagation part to loop over the layers and compute dA_prev, dW, db for each layer. </p>
 <p><strong>Update parameters:</strong></p>
 <p>Loop through the layers and update the parameters W and b. </p>
-<hr>
-<p>The figure below shows the process of forward prop and back prop along with caching and how caches are used. </p>
-<p><img src="./pic/N4N1.png" alt="image"></p>
 <br>
 
+<p><em>Below are notes taken for the video lectures.</em></p>
 <hr>
-<h1 id="Notes-taken-for-the-video-lectures"><a href="#Notes-taken-for-the-video-lectures" class="headerlink" title="Notes taken for the video lectures."></a><strong><em>Notes taken for the video lectures.</em></strong></h1><h1 id="Notations-for-a-deep-neural-network"><a href="#Notations-for-a-deep-neural-network" class="headerlink" title="Notations for a deep neural network"></a><strong>Notations for a deep neural network</strong></h1><blockquote>
+<br>
+
+<h1 id="Notations-for-a-deep-neural-network"><a href="#Notations-for-a-deep-neural-network" class="headerlink" title="Notations for a deep neural network"></a><strong>Notations for a deep neural network</strong></h1><blockquote>
 <p>l (lower case L) denotes number of layers</p>
 <p>n[l] = number of units in layer l</p>
 <p>a[l] = activations in layer l</p>
@@ -302,7 +296,7 @@
 <br>
 
 <p>When I was taking a class in Cognitive Science, I found that “Connectionism”, which is an idea to explain the underlying mental phenomena behind human brain, resonates with neural network. A neuron has two states, either it fires or not. What decides the state is if it receives a signal that’s strong enough to activate it. The process of calculating the strength of the signal is analogous to forward propagation, and that of adjusting the activation threshold and weights of a neuron is analogous to backward propagation. </p>
-<p>I personally felt that this did make an intuitive sense when I was reading it, but for now also somehow feel like it’s oversimplified. Hope to study and investigate more on this myself in the future. Part of the reason why I didn’t give up studying Computer Science upon the completion of my first year in college is that I thought deep learning could be a very useful tool in studying the human brain, in the respect of both itself as an analogy and its functionality. </p>
+<p>I personally felt that this did make an intuitive sense when I was reading it, but for now I also somehow feel like it’s oversimplified. Hope to study and investigate more on this myself in the future. Part of the reason why I didn’t give up studying Computer Science upon the completion of my first year in college is that I thought deep learning could be a very useful tool in studying the human brain, in the respect of both itself as an analogy and its functionality. </p>
 
             </div>
 

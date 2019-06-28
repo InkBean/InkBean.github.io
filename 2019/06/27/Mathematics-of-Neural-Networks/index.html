@@ -158,7 +158,51 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                
+                <p><strong>Under Construction…</strong></p>
+<p><strong>咕咕咕</strong></p>
+<p>Each iteration over all the training examples basically does four steps</p>
+<blockquote>
+<ol>
+<li>Forward propagation</li>
+<li>Compute cost function</li>
+<li>Backward propagation</li>
+<li>Update parameters (using parameters, and grads from backprop) </li>
+</ol>
+</blockquote>
+<h2 id="Forward-propagation"><a href="#Forward-propagation" class="headerlink" title="Forward propagation"></a><strong>Forward propagation</strong></h2><p>To fully understand the process of forward propagation, we need to answer ourselves two questions.</p>
+<p>​    <strong>1. What are the dimensions of the matrices?</strong></p>
+<p>​    <strong>2. Why do they have such dimensions? (How to interpret their dimensions)</strong></p>
+<p>Let’s start from the input.</p>
+<blockquote>
+<p>dim of X = (nx, m) = (n[0], m)</p>
+</blockquote>
+<p>We know that each training example of X has <strong>nx</strong> (or <strong>n[o]</strong> since it’s at the 0th layer) # of features, and we have <strong>m</strong> training examples.</p>
+<p>The matrix X is made by stacking up <strong>m</strong> training examples column by column, each column stands for one training example of X, of dimension(<strong>n[0], 1</strong>). Keep in mind that each training example of X is a column vector.</p>
+<br>
+
+<p>To compute the values of the nodes of the 1st layer, </p>
+<p>we need two more parameters: W[1] and b[1]</p>
+<blockquote>
+<p>dim of W[1] = (n[1], n[0])</p>
+<p>dim of b[1] = (n[1], 1) </p>
+</blockquote>
+<p>and two steps of calculation. </p>
+<blockquote>
+<ol>
+<li><p>Z[1] = W[1] * X + b</p>
+</li>
+<li><p>A[1] = g(Z[1])</p>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>dim of Z[1] = (n[1], m)</p>
+<p>dim of A[1] = (n[1], m)</p>
+</blockquote>
+<h2 id="Cost-function"><a href="#Cost-function" class="headerlink" title="Cost function"></a><strong>Cost function</strong></h2><p>maximum likelihood</p>
+<p>cross-entropy loss</p>
+<h2 id="Back-propagation"><a href="#Back-propagation" class="headerlink" title="Back propagation"></a><strong>Back propagation</strong></h2><p>chain rule</p>
+<h1 id="Update-parameters"><a href="#Update-parameters" class="headerlink" title="Update parameters"></a><strong>Update parameters</strong></h1>
             </div>
 
             <!-- Post Comments -->
