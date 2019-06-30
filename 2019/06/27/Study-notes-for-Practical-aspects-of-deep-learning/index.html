@@ -159,6 +159,226 @@
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
                 <p>Week 1 in Andrew Ng’s <a href https: www.coursera.org learn deep-neural-network home welcome"">Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization</a> on Coursera.</p>
+<h1 id="Setting-up-your-machine-learning-application"><a href="#Setting-up-your-machine-learning-application" class="headerlink" title="Setting up your machine learning application"></a><strong>Setting up your machine learning application</strong></h1><h3 id="1-Train-dev-test-sets"><a href="#1-Train-dev-test-sets" class="headerlink" title="1- Train/dev/test sets"></a><strong>1- Train/dev/test sets</strong></h3><hr>
+<p><strong>Training set</strong></p>
+<p><strong>Hold-out cross validation set / development set</strong></p>
+<blockquote>
+<p>Test different algorithms on it, and see which one works better</p>
+</blockquote>
+<p><strong>Test set</strong></p>
+<blockquote>
+<p>Provide a completely unbiased estimate of your learning algorithm</p>
+</blockquote>
+<br>
+
+<p><strong>Distribution:</strong></p>
+<p>Prev: 70/30, 60/20/20</p>
+<p>Big data era: 98/1/1 for instance</p>
+<p>We have much smaller proportion for dev and train sets.</p>
+<br>
+
+<p><strong>Mismatched train/test distribution:</strong></p>
+<p>Train set: cat pictures from webpages</p>
+<p>Dev/test sets: cat pictures from users using your app</p>
+<p>Tip: Make sure that dev and test sets come from the same distribution</p>
+<p>Not having test set might be OK if you don’t need to have a completely unbiased estimate of your learning algorithm. Usually, when a dataset is divided to only two sets, which are train and dev sets, some people may call the dev set as “test set”. This use of terminalogy isn’t quite appropriate, since the learning algorithm can be overfitting to the “test set”, which make it biased.</p>
+<h2 id="2-Bias-variance"><a href="#2-Bias-variance" class="headerlink" title="2- Bias/variance"></a><strong>2- Bias/variance</strong></h2><p>High bias: underfitting | not even doing good on the training set </p>
+<p>High variance: overfitting | trainset error &gt; dev set error</p>
+<p>High bias + high variance: underfits in some regions and overfits in some regions. </p>
+<p>No high bias or high variance. We want our algorithm just right. </p>
+<br>
+
+<p>The metrics to evaluate is dependent on human error or optimal (bayes) error.</p>
+<h2 id="3-Basic-“recipe”-for-machine-learning"><a href="#3-Basic-“recipe”-for-machine-learning" class="headerlink" title="3- Basic “recipe” for machine learning"></a><strong>3- Basic “recipe” for machine learning</strong></h2><p><strong>1- Does it have high bias? (training data performance)</strong></p>
+<blockquote>
+<p>Bigger network</p>
+<p>Train longer</p>
+<p>Try more advanced optimization algorithm</p>
+<p>(Change a neural network architecture) May or may not help</p>
+</blockquote>
+<p><strong>2- Doe it have high variance?</strong></p>
+<blockquote>
+<p>More data</p>
+<p>Regularization</p>
+<p>(Change a neural network architecture) May or may not help</p>
+</blockquote>
+<br>
+
+<p>Now we don’t usually talk about “Bias variance trade off”, since we’re able to reduce one of them without hurting the other thing that much. </p>
+<h1 id="Regularizing-your-neural-network"><a href="#Regularizing-your-neural-network" class="headerlink" title="Regularizing your neural network"></a><strong>Regularizing your neural network</strong></h1><h2 id="1-Regularization"><a href="#1-Regularization" class="headerlink" title="1- Regularization"></a><strong>1- Regularization</strong></h2><p>In logistic regression, we make</p>
+<blockquote>
+<p>J(W, b) = (1/m) * (sum of Loss function over the training set) + (lambda / 2m)  * (W.T * W)</p>
+</blockquote>
+<p><strong>L2 regularization:</strong> </p>
+<blockquote>
+<p>Eucledian norm, L2 norm, (W.T * W)</p>
+<p>Used more often than L1</p>
+</blockquote>
+<p><strong>L1 regularization:</strong> </p>
+<blockquote>
+<p>Instead add (lambda / 2m) * (sum of the nx features of W)</p>
+<p>W will be very sparse, have lots of 0s in it</p>
+</blockquote>
+<p>Lambda - regularization parameter</p>
+<br>
+
+<p>In a neural network, we make</p>
+<blockquote>
+<p>J(W, b) = (1/m) * (sum of Loss function over the training set) </p>
+<p>​                + (lambda / 2m) * (sum of square of elements of W[l] over the L layers)</p>
+</blockquote>
+<p>Add a  Forbenius norm instead of a L2 norm</p>
+<p>The consequence is：</p>
+<blockquote>
+<p>dW[l] = dW[l](from back prop) + (lambda / m) * W[l]</p>
+<p>W[l] = W[l] - alpha * (dW[l](from back prop) +  (lambda / m) * W[l])</p>
+<p>​        = (1 - (alpha * lambda / m) ) * W[l] - alpha * (dW[l](from back prop)</p>
+</blockquote>
+<p>L2 weight regularization is also called “Weight decay”</p>
+<h2 id="2-Why-regularization-reduces-overfitting"><a href="#2-Why-regularization-reduces-overfitting" class="headerlink" title="2- Why regularization reduces overfitting?"></a><strong>2- Why regularization reduces overfitting?</strong></h2><p>Intuition: </p>
+<p>Reduce the impact of lots of hidden units, make it a simpler neural network.</p>
+<blockquote>
+<p>Lambda is big, which penalizes W, which in turn makes Z(absolute value of Z) small. </p>
+<p>For instance, when g(Z) = tanh(Z), since Z is taking values close to 0, it will be roughly linear as if it’s linear regression. </p>
+<p>The whole NN will be not too far from computing a large linear function, which prevents overfitting.</p>
+</blockquote>
+<p>When plotting the cost function, remember to include the regularization term. </p>
+<h2 id="3-Dropout-regularization"><a href="#3-Dropout-regularization" class="headerlink" title="3- Dropout regularization"></a><strong>3- Dropout regularization</strong></h2><p>Set some probability,  <strong>keep-prob</strong>, of eliminating the nodes in a neural network</p>
+<p>Train it using the simplified network</p>
+<p><strong>Implementing dropout (“Inverted dropout”)</strong></p>
+<blockquote>
+<p>For layer 3</p>
+<p>set keep-prob = 0.8</p>
+<p>d3 =  np.ramdom.rand(a[3].shape[0], a[3].shape[1]) &lt; keep-prob</p>
+<p>80% chance that an element in d3 will be 1 and 20% chance to be 0</p>
+<p>a[3] = np.multiply(a[3], d[3]) // this is element wise multiplication</p>
+<p>or a[3] = a[3] * d[3] which also works</p>
+<p>a[3] /= keep-prob  // to keep the expected value of a[3] unchanged</p>
+</blockquote>
+<p>Each iteration of gradient descent, set a different set of zeroed units</p>
+<p>Recommend not to use dropout at test time.</p>
+<h2 id="4-Understanding-dropout"><a href="#4-Understanding-dropout" class="headerlink" title="4- Understanding dropout"></a><strong>4- Understanding dropout</strong></h2><p>Intuition: cannot rely on any one feature, so have to spread out weights. This also helps to shrink weights. </p>
+<p>For the layers that you are more worry about overfitting(having lots of parameters), you can set keep-prob small. But usually, keep-prob for input layer is 1.0. </p>
+<br>
+
+<p>Downside: Have a less well defiend cost function, so cannot plot a graph of <strong>J vs # of iterations</strong> to see if your algorithm runs correctly. </p>
+<p>Solution: Run it without dropout for a while to see if the cost decreases by each iteration, if it does, then apply dropout.</p>
+<h2 id="5-Other-regularization-methods"><a href="#5-Other-regularization-methods" class="headerlink" title="5- Other regularization methods"></a><strong>5- Other regularization methods</strong></h2><p><strong>Data augmentation:</strong></p>
+<p>Flip the image horizontally, randomly zomm in, random distortion…</p>
+<p>Yet the examples created this way are not as good as a brand new examples. But still it’s an inexpensive way to augment your training set which helps regularization.</p>
+<br>
+
+<p>One concept to know is <strong>orthogonalization.</strong></p>
+<p>There’re two tasks you want to do</p>
+<blockquote>
+<ol>
+<li><p>Optimize cost function J</p>
+</li>
+<li><p>Not overfit</p>
+</li>
+</ol>
+</blockquote>
+<p>The principle is to make the two tasks completely separated. You may want to work on these two problems independently.</p>
+<p><strong>Early stopping:</strong></p>
+<p>When you plot the graph of <strong>J with respect to # of iterations</strong>, plot <strong>dev set error</strong> on the graph as well</p>
+<p>Dev set error may increase from some point, so you may stop training at this point. By stopping half-way, you have a mid-size W.</p>
+<p>The downside is, however, it couples the two tasks described in the explanation of orthogonalization above.</p>
+<p>It still has a good side though, because unlike L2 regularization that you need to try multiple values of lambda, early stopping allows you to try out values of small-size, mid-size and large-size W by running the gradient descent process just once.</p>
+<h1 id="Setting-up-your-optimization-problem"><a href="#Setting-up-your-optimization-problem" class="headerlink" title="Setting up your optimization problem"></a><strong>Setting up your optimization problem</strong></h1><h2 id="1-Normalizing-inputs"><a href="#1-Normalizing-inputs" class="headerlink" title="1- Normalizing inputs"></a><strong>1- Normalizing inputs</strong></h2><p><strong>Subtract mean:</strong></p>
+<blockquote>
+<p>Subtract each feature of x by its mean(μ) to make x have zero mean</p>
+</blockquote>
+<p><strong>Normalize variance:</strong></p>
+<blockquote>
+<p>σ^2 = (1 / m) * (sum of X * X, element wise) </p>
+<p>x /= σ^2</p>
+</blockquote>
+<p>Remember to use the same μ and σ for the test set. </p>
+<br>
+
+<p><strong>Unnormalized input features:</strong></p>
+<p>The cost function can look like an elongated bowl. </p>
+<p>(features take on different scales, <strong>e.g.</strong> x1 ranges from 1 to 1000 while x2 ranges from 0 to 1)</p>
+<p>Have to take on very small learning rate.</p>
+<p><strong>Normalized input features:</strong> </p>
+<p>Cost function look more symmetric.</p>
+<br>
+
+<p>Reminds me of the <strong>“Feature scaling”</strong> section in Andrew’s machine learning course. </p>
+<h2 id="2-Vanishing-Exploding-gradients"><a href="#2-Vanishing-Exploding-gradients" class="headerlink" title="2- Vanishing / Exploding gradients"></a><strong>2- Vanishing / Exploding gradients</strong></h2><blockquote>
+<p>If W[l] &gt; 1</p>
+<p>​    Activation increase exponentially, so as gradients</p>
+<p>If W[l] &lt; 0 </p>
+<p>​    Activation decrease exponentially, so as gradients</p>
+</blockquote>
+<h2 id="3-Weight-initialization-for-deep-networks"><a href="#3-Weight-initialization-for-deep-networks" class="headerlink" title="3- Weight initialization for deep networks"></a><strong>3- Weight initialization for deep networks</strong></h2><p>The larger number of features is, the smaller you want the weight to be.</p>
+<blockquote>
+<p>Variance of W = 1 / n[l - 1]</p>
+<p>or 2 / n[l - 1] for ReLU activation function since this value works slightly better.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W[l] = np.ramdom.randn(n[l], n[l - 1]) * np.sqrt( 2 / n[l - 1])</span><br></pre></td></tr></table></figure>
+
+<p>if you’re using a Tanh activation function, then (Xavier initialization)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W[l] = np.ramdom.randn(n[l], n[l - 1]) * np.sqrt( 1 / n[l - 1])</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Numerical-approximation-of-gradients"><a href="#4-Numerical-approximation-of-gradients" class="headerlink" title="4- Numerical approximation of gradients"></a><strong>4- Numerical approximation of gradients</strong></h2><p>f’(θ) = lim (ε to 0)    ( f(θ + ε)  -  f(θ - ε) ) / (2 * ε)</p>
+<br>
+
+<p>If you use this <strong>two sided difference equation</strong></p>
+<blockquote>
+<p>( f(θ + ε)  -  f(θ - ε) ) / (2 * ε)</p>
+</blockquote>
+<p>to approximate the derivative</p>
+<p>Approximation error = O(ε^2)</p>
+<br>
+
+<p>If you use this <strong>one sided difference equation</strong></p>
+<blockquote>
+<p>( f(θ + ε) -   f(θ) ) / ε</p>
+</blockquote>
+<p>Approximation error = O(ε)</p>
+<p>which is much bigger(much less accurate)</p>
+<br>
+
+<p>So that’s why we rather use the two sided difference equation to do gradient checking even if it’s twice slower.</p>
+<h2 id="5-Gradient-checking"><a href="#5-Gradient-checking" class="headerlink" title="5- Gradient checking"></a><strong>5- Gradient checking</strong></h2><p>Take W[1], b[1], … W[L], b[L], reshape each to a vector, then concatenate them to a giant vector <strong>θ</strong>.</p>
+<p>So J(W[1], b[1], … W[L], b[L]) becomes J(θ), a function of only one parameter</p>
+<p>Similarly, take dW[1],db[1], … dW[L], db[L], reshape each to a vector <strong>dθ</strong>, then concatenate them to a giant vector dθ of the same dimension as θ.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for each i:</span><br><span class="line">		dθapprox[i] = ( J(θ1, θ2,...θi + ε,...) - J(θ1, θ2,...θi - ε,...) )/ 2 * θ</span><br><span class="line">								≈ dθi = dJ/dθi</span><br></pre></td></tr></table></figure>
+
+<p><strong>dθ</strong> is computed using back prop. You want to make sure that the gradients computed by your back propagation gives you a correct result, a result that’s close to the approximation above. </p>
+<p>To check if  dθapprox ≈ dθ, usually we use a 10^-7 value of ε and plug it into the formula below.</p>
+<p>If </p>
+<blockquote>
+<p>||dθapprox - dθ|| / ( ||dθapprox|| -  ||dθ||)  ≈ 10^-7</p>
+</blockquote>
+<p>Then it should be great.</p>
+<p>But if its value is too big, say 10^-3, then we may need to concern about this.</p>
+<h2 id="6-Gradient-checking-implementation-notes"><a href="#6-Gradient-checking-implementation-notes" class="headerlink" title="6- Gradient checking implementation notes"></a><strong>6- Gradient checking implementation notes</strong></h2><p>Don’t use in training - only in debug</p>
+<br>
+
+<p>If algorithm fails grad check, look at components to try to identify bug</p>
+<blockquote>
+<p>For instance, finding out that db[l] or dw[l], gradients in a particular layer ‘l’ is too far from the approximations, might be helpful to identify where the bug is.</p>
+</blockquote>
+<br>
+
+<p>Remember regularization</p>
+<blockquote>
+<p>Include the regularization term when calculating approximation.</p>
+</blockquote>
+<br>
+
+<p>Doesn’t work with dropout. </p>
+<blockquote>
+<p>You may set keep-prob = 1.0 then turn on dropout then it’ll be fine</p>
+</blockquote>
+<br>
+
+<p>Run at random initialization, perhaps again after some training</p>
+<blockquote>
+<p>Because perhaps your backprop make work fine with small values of W and b but not with bigger values.</p>
+</blockquote>
 
             </div>
 
