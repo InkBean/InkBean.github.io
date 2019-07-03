@@ -106,7 +106,7 @@
 	            <a href="#s1">归档</a>
 	                    <ul class="submenu">
 	                        <li>
-	                        <a class="archive-link" href="/archives/2019/06/">June 2019</a>
+	                        <a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
 	                    </li></ul>
 	        </li>
 	        
@@ -316,6 +316,7 @@
 <p>Variance of W = 1 / n[l - 1]</p>
 <p>or 2 / n[l - 1] for ReLU activation function since this value works slightly better.</p>
 </blockquote>
+<p><strong>He initialization:</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W[l] = np.ramdom.randn(n[l], n[l - 1]) * np.sqrt( 2 / n[l - 1])</span><br></pre></td></tr></table></figure>
 
 <p>if you’re using a Tanh activation function, then (Xavier initialization)</p>
@@ -350,7 +351,7 @@
 <p>To check if  dθapprox ≈ dθ, usually we use a 10^-7 value of ε and plug it into the formula below.</p>
 <p>If </p>
 <blockquote>
-<p>||dθapprox - dθ|| / ( ||dθapprox|| -  ||dθ||)  ≈ 10^-7</p>
+<p>||dθapprox - dθ|| / ( ||dθapprox|| + ||dθ||)  ≈ 10^-7</p>
 </blockquote>
 <p>Then it should be great.</p>
 <p>But if its value is too big, say 10^-3, then we may need to concern about this.</p>

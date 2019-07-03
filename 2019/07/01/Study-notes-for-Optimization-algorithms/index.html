@@ -1,0 +1,449 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/in.png">
+	<link rel="shortcut icon" href="/img/in.png">
+	
+			    <title>
+    InkBean's Blog
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
+    <meta name="keywords" content="inkbean, Machine Learning, Neural Network, Deep Learning">
+    
+    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	 
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg.jpg') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+			    
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+</head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_coy.css">
+<link rel="stylesheet" href="/css/typo.css">
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">InkBean</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special">
+            <ul class="menu links">
+			<!-- Homepage  主页  --> 
+			<li>
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/Learning/">Learning</a></li><li><a class="category-link" href="/categories/日常/">日常</a>
+	                    </li></ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">归档</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
+	                    </li></ul>
+	        </li>
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="关于">
+		                关于
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/friends/" title="友達">
+		                友達
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+                    
+                    <li>
+                        <a title="github" href="https://github.com/InkBean" target="_blank" rel="noopener">
+                            <i class="icon fa fa-github"></i>
+                        </a>
+                    </li>
+                    
+			</ul>
+</nav>
+
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/jsw.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Study notes for &#39;Optimization algorithms&#39;</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p>Week 2 in Andrew Ng’s <a href https: www.coursera.org learn deep-neural-network home welcome"">Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization</a> on Coursera.</p>
+<h1 id="Optimization-Algorithms"><a href="#Optimization-Algorithms" class="headerlink" title="Optimization Algorithms"></a><strong>Optimization Algorithms</strong></h1><hr>
+<h3 id="1-Mini-batch-gradient-descent"><a href="#1-Mini-batch-gradient-descent" class="headerlink" title="1- Mini-batch gradient descent"></a><strong>1- Mini-batch gradient descent</strong></h3><p>Vectorization allows you to effeciently compute on <strong>m</strong> examples.</p>
+<p>Split up the training set to smaller training sets: mini-batches</p>
+<blockquote>
+<p>X{t}, Y{t}  | You also need to split your training data accordingly to have Y{t}</p>
+<p>The curly brackets above are superscript</p>
+</blockquote>
+<p><strong>Epoch:</strong> Single pass through the training set </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">for t = 1:T</span><br><span class="line">	forward_prop on X&#123;t&#125;</span><br><span class="line">		Z[1] = W[1] * X&#123;t&#125; + b[1]</span><br><span class="line">		A[1] = g[1](Z[1])</span><br><span class="line">		...</span><br><span class="line">		Z[L] = W[L] * X&#123;t&#125; + b[L]</span><br><span class="line">		A[L] = g[L](Z[L])</span><br><span class="line">		</span><br><span class="line">	Compute_cost</span><br><span class="line">		compute J&#123;t&#125; using Yhat&#123;t&#125;,Y&#123;t&#125;</span><br><span class="line">		</span><br><span class="line">	Back_prop</span><br><span class="line">		compute the gradients with respect to J using only X&#123;t&#125; and Y&#123;t&#125;</span><br><span class="line">		</span><br><span class="line">	Update_parameters</span><br></pre></td></tr></table></figure>
+
+<p>In <strong>batch gradient descent</strong>(gradient descent through all the m training examples), 1 epoch allows you to take only one gradient descent step. With <strong>mini-batch gradient descent</strong>, 1 epoch allows you to take </p>
+<p>Of course you may also run multiple epochs.</p>
+<br>
+
+<p>For batch gradient descent, you expect the cost to go down on <strong>every</strong> iteration</p>
+<p>For mini-batch gradient descent, if you plot a graph of <strong>J{t}</strong> with respect to <strong># of iterations</strong>, you may see a curve that doesn’t go down on every iteration but trend downwards. </p>
+<br>
+
+<p><strong>Choose your mini-batch size:</strong></p>
+<blockquote>
+<p>If mini-batch size = m, it’s just batch gradient descent</p>
+<p>It takes too long for each iteration</p>
+</blockquote>
+<blockquote>
+<p>If mini-batch size = 1, it’s stochastic gradient descent  </p>
+<p>Then every example is itself a mini-batch</p>
+<p>It can be extremely noisy, won’t ever converge,</p>
+<p>and also lose your speed up from vectorization</p>
+</blockquote>
+<p>What works the best is something <strong>in between *<em>1 and m, a mini-batch size *</em>not too big/small</strong>. In this case you do benefit from vectorization, and also make progress without needing to wait to process the entire training set. </p>
+<p>Typical mini-batch size: </p>
+<blockquote>
+<p>64(2 ^ 6), 128(2 ^ 7), 256(2 ^ 8), 512(2 ^ 9)</p>
+<p>Sometimes because of the way our computer works, your code run faster if the size is the power of 2</p>
+</blockquote>
+<h3 id="2-Exponentially-weighted-averages"><a href="#2-Exponentially-weighted-averages" class="headerlink" title="2- Exponentially weighted averages"></a><strong>2- Exponentially weighted averages</strong></h3><p>Or <strong><em>exponentially weighted moving averages</em></strong> in statistics.</p>
+<p><strong>Temperature in London</strong></p>
+<blockquote>
+<p>V is perspective temperature, θ is actual data collected.</p>
+<p>Initialize V0 = 0</p>
+<p>V1 = 0.9 * V0 + 0.1 * θ1</p>
+<p>V2 = 0.9 * V1 + 0.1 * θ2</p>
+<p>…</p>
+</blockquote>
+<p><strong>General equation</strong></p>
+<blockquote>
+<p>Vt = β * Vt-1 + (1 - β) * θt</p>
+</blockquote>
+<p>Vt as approximately average over the last (1 / 1 - β) days of temperature.</p>
+<br>
+
+<p><strong>Intuition</strong></p>
+<blockquote>
+<p>V100 = 0.9 * V99 + 0.1 * θ100</p>
+<p>V99 = 0.9 * V98 + 0.1 * θ99</p>
+<p>V98 = 0.9 * V97 + 0.1 * θ98</p>
+<p>…</p>
+<p>V100 = 0.1 * θ100 + 0.1 * 0.9 * θ99 + 0.1 * (0.9 ^ 2) * θ98 </p>
+</blockquote>
+<p>Take daily tempeature, multiply it with the value of the exponentially decaying function, then sum it up</p>
+<p>The coefficients of the thetas sum up to be very close to 1. bias correction</p>
+<blockquote>
+<p>ε = 1 - β</p>
+<p>0.9 ^ 10 ≈ 0.35 ≈ e ^ -1 // It takes 10 days to decay to 1/e of the weight of the current day</p>
+<p>( (1 - ε)^(1 / ε) ) / 0.9 = e ^ -1 = 1 / e</p>
+<p>Similarly 0.98 ^ 50 ≈ 1 / e</p>
+</blockquote>
+<p><strong>Implementation</strong></p>
+<blockquote>
+<p>Vθ = 0</p>
+<p>Vθ = β * V0 + (1 - β) * θ1</p>
+<p>Vθ = β * V1 + (1 - β) * θ2</p>
+<p>…</p>
+<hr>
+<p>Vθ = 0</p>
+<p>Repeat{</p>
+<p>​        Get θt </p>
+<p>​        Vθ =  β * Vθ + (1 - β) * θt</p>
+<p>}</p>
+</blockquote>
+<p>Though this is less accurate than actually summing up the data over the last x(variable) days and take the average, this method doesn’t need to explicitly keep the data of the last x days. The former requires more memory and is computationally expensive. </p>
+<br>
+
+<p><strong>Bias Correction</strong></p>
+<p>The initial phases can be inaccurate (way smaller than it’s supposed to be) </p>
+<blockquote>
+<p>β = 0.98</p>
+<p>V0 = 0</p>
+<p>V1 = 0.02 * θ1</p>
+<p>V2 = 0.0196 * θ1 + 0.02 * θ2</p>
+</blockquote>
+<br>
+
+<p>To solve it, </p>
+<blockquote>
+<p>Vt = Vt / ( 1 - β ^ t )</p>
+<p><strong>e.g.</strong> When t = 2</p>
+<p>V2 = V2 / ( 1 - 0.98 ^ 2 ) = ( 0.0196 * θ1 + 0.02 * θ2 ) / 0.0396</p>
+</blockquote>
+<p>which removes the bias.</p>
+<blockquote>
+<p>When t is big, ( 1 - β ^ t ) is close to 1.</p>
+</blockquote>
+<p>Though in practice, people don’t usually bother to implement bias correction. This is because the values will  warm up after around 10 iterations.</p>
+<h3 id="3-Gradient-descent-with-momentum"><a href="#3-Gradient-descent-with-momentum" class="headerlink" title="3- Gradient descent with momentum"></a><strong>3- Gradient descent with momentum</strong></h3><p>It almost always works better than the straightforward gradient descent without momentum. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">VdW = 0</span><br><span class="line">Vdb = 0</span><br><span class="line">On iteration t:</span><br><span class="line">		Compute dW, db on the current mini-batch</span><br><span class="line">		VdW = β * VdW + (1 - β) * dW    // resonates with Vθ =  β * Vθ + (1 - β) * θt</span><br><span class="line">		Vdb = β * Vdb + (1 - β) * db</span><br><span class="line">		</span><br><span class="line">		W = W - α * VdW</span><br><span class="line">		b = b - α * Vdb</span><br></pre></td></tr></table></figure>
+
+<p>This allows your algorithm to take a <strong>more straightforward path</strong> to the minimum, instead of oscillating(in direction that’s deviated from the straightforward path) too much each time. </p>
+<p>In short, it speeds up in the correct direction and reduces oscillation.</p>
+<p><strong>An analogy:</strong></p>
+<blockquote>
+<p>Imagine the process of gradient descent as a ball rolling down a hill.</p>
+<p>VdW = β * VdW + (1 - β) * dW </p>
+<p>Current velocity = friction * velocity of the last moment + acceleration</p>
+</blockquote>
+<p><strong>Hyperparameters:</strong></p>
+<blockquote>
+<p>α, β</p>
+<p>β = 0.9 usually works very well (average over the last approximately 10 gradients)</p>
+</blockquote>
+<h3 id="4-RMSprop"><a href="#4-RMSprop" class="headerlink" title="4- RMSprop"></a><strong>4- RMSprop</strong></h3><p>Root mean square prop</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SdW = 0</span><br><span class="line">Sdb = 0</span><br><span class="line">On iteration t:</span><br><span class="line">		Compute dW, db on the current mini-batch</span><br><span class="line">		SdW = β2 * SdW + (1 - β2) * dW ^ 2</span><br><span class="line">		Sdb = β2 * Sdb + (1 - β2) * db ^ 2</span><br><span class="line">		// the square of dW, db above are element wise squaring operation</span><br><span class="line">		// use the notation &apos;β2&apos; to distinguish it from the &apos;β&apos; in momentum</span><br><span class="line">		</span><br><span class="line">		W = W - α * dW / (sqrt(SdW) + ε)</span><br><span class="line">		b = b - α * db / (sqrt(Sdb) + ε) </span><br><span class="line">		// Usually set ε = 10^-8, make sure the denominator isn&apos;t 0 or a super small number</span><br></pre></td></tr></table></figure>
+
+<p>Allow you to use a faster learning rate.</p>
+<br>
+
+<p>这块还得再好好看看…补充性地看了一些材料感觉还是差点</p>
+<h3 id="5-Adam-optimization-algorithm"><a href="#5-Adam-optimization-algorithm" class="headerlink" title="5- Adam optimization algorithm"></a><strong>5- Adam optimization algorithm</strong></h3><p>It’s an algorithm that combines momentum and RMSprop.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">VdW = 0, SdW = 0</span><br><span class="line">Vdb = 0, Sdb = 0</span><br><span class="line">On iteration t:</span><br><span class="line">		Compute dW, db on the current mini-batch</span><br><span class="line">		VdW = β1 * VdW + (1 - β1) * dW </span><br><span class="line">		Vdb = β1 * Vdb + (1 - β1) * db </span><br><span class="line">		// Momentum</span><br><span class="line">		</span><br><span class="line">		SdW = β2 * dW + (1 - β2) * dW ^ 2</span><br><span class="line">		Sdb = β2 * Sdb + (1 - β2) * db ^ 2</span><br><span class="line">		// RMSprop</span><br><span class="line">		</span><br><span class="line">		VdW_corrected = VdW / (1 - β1^t)</span><br><span class="line">		Vdb_corrected = Vdb / (1 - β1^t)</span><br><span class="line">		// Bias correction</span><br><span class="line">		</span><br><span class="line">		W = W - α * VdW_corrected / (sqrt(SdW) + ε)</span><br><span class="line">		b = b - α * Vdb_corrected / (sqrt(Sdb) + ε)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p><strong>Hyperparameters:</strong></p>
+<blockquote>
+<p>α needs to be tuned</p>
+<p>β1 = 0.9     usually works well</p>
+<p>β2 = 0.999  recommended by the authors of the ‘Adam’ paper</p>
+<p>ε = 10 ^ -8   recommended by the authors of the ‘Adam’ paper</p>
+<p>People don’t usually tune β1, β2, ε.</p>
+</blockquote>
+<br>
+
+<p><strong>‘Adam’</strong> stands for <strong>‘Adapted Moment Estimation’</strong></p>
+<blockquote>
+<p>β1 is used to compute dW, the first moment</p>
+<p>β2 is used to compute dW^2, the second moment</p>
+<p>This gives rise to the name adapted moment estimation</p>
+</blockquote>
+<h3 id="6-Learning-rate-decay"><a href="#6-Learning-rate-decay" class="headerlink" title="6- Learning rate decay"></a><strong>6- Learning rate decay</strong></h3><p>Slowly reduce learning rate α</p>
+<p><strong>Implement:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">α = (1 / (1 + decay_rate * epoch_num) ) * α0</span><br></pre></td></tr></table></figure>
+
+<p>There’re also other ways to calculate, like</p>
+<p>exponential decay</p>
+<blockquote>
+<p>α = 0.95 ^ epoch_num * α0</p>
+</blockquote>
+<p>and</p>
+<blockquote>
+<p>α = k / sqrt(epoch_num) * α0</p>
+<p>α = k / sqrt(t) * α0</p>
+</blockquote>
+<p>or discrete staircase(decrease by one half after a fixed number of steps).</p>
+<p>You may also use manual decay.</p>
+<h3 id="7-The-problem-of-local-optima"><a href="#7-The-problem-of-local-optima" class="headerlink" title="7- The problem of local optima"></a><strong>7- The problem of local optima</strong></h3><p>Most points of zero gradient are saddle points, because</p>
+<blockquote>
+<p>In an n dimensional space, to be a local optima, it has to have all dimensions bending upwards or all bending downwards. This possibility is (2^-n), which is really small. </p>
+</blockquote>
+<p>So you see that if your neural network is <strong>reasonably large, have lots of parameters, and J is defined over a relatively high dimensional space</strong>, it’s very unlikely to stuck in a bad local optima.</p>
+<br>
+
+<p><strong>Problem of plateaus</strong></p>
+<p>A plateau is a region where the derivative is close to 0 for a long time. In this case, optimization algorithms mentioned above like ‘Adam’ can really help speed up the learning.</p>
+<h1 id="Programming-Assignment"><a href="#Programming-Assignment" class="headerlink" title="Programming Assignment"></a><strong>Programming Assignment</strong></h1><hr>
+<p>Mini-batch gradient descent:</p>
+<blockquote>
+<ul>
+<li><strong>Shuffle</strong>: Create a shuffled version of the training set (X, Y) as shown below. Each column of X and Y represents a training example. Note that the random shuffling is done synchronously between X and Y. Such that after the shuffling the ith column of X is the example corresponding to the ith label in Y. The shuffling step ensures that examples will be split randomly into different mini-batches.</li>
+<li><strong>Partition</strong>: Partition the shuffled (X, Y) into mini-batches of size <code>mini_batch_size</code> (here 64). Note that the number of training examples is not always divisible by <code>mini_batch_size</code>. The last mini batch might be smaller.</li>
+</ul>
+</blockquote>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'inkbin'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/07/01/Study-notes-for-Optimization-algorithms/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/07/01/Study-notes-for-Optimization-algorithms/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//inkbin.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy; <a href="https://inkbin.github.io" style="border-bottom: none;">InkBin's Blog</a></li>
+                <li>Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Theme: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+                <span id="busuanzi_container_site_uv">有<span id="busuanzi_value_site_uv"></span>个小伙伴来过</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>
