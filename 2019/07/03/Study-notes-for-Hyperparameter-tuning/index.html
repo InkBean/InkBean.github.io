@@ -221,6 +221,12 @@
 <p>1 - β = 10 ^ r</p>
 <p>β = 1 - 10 ^ r</p>
 </blockquote>
+<br>
+
+<p>Just something trivial but I noticed that in reality it will not actually be distributed uniformly in, for instance, (0.0001, 0.001). </p>
+<blockquote>
+<p>e.g. 10^-3.3 ≈ 0.0005, so there would be more values in the range of (0.0001, 0.0005) than in (0.0005, 0.001). </p>
+</blockquote>
 <h3 id="3-Hyperparameters-tuning-in-practice-Pandas-vs-Caviar"><a href="#3-Hyperparameters-tuning-in-practice-Pandas-vs-Caviar" class="headerlink" title="3- Hyperparameters tuning in practice: Pandas vs. Caviar"></a><strong>3- Hyperparameters tuning in practice: Pandas vs. Caviar</strong></h3><p>Re-test hyperparameters occasionally because they do get stale. </p>
 <p><strong>Panda approach:</strong></p>
 <p>A Panda usually has only one(or very small number of) child at a time. </p>
@@ -267,7 +273,7 @@
 <p>Z~[l] = γ * Z_norm[l] + β // β decides what the mean is</p>
 </blockquote>
 <p><strong>Implement:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for t = 1:num_mini_batches</span><br><span class="line">		Computes forward_propagation on X&#123;t&#125;</span><br><span class="line">				In each hidden layer, use BN to replace Z[l] with Z~[l]</span><br><span class="line">				</span><br><span class="line">		Use back_propagation to compute dW[l], db[l](or disregard this value), dγ[l], dβ[l]</span><br><span class="line">		</span><br><span class="line">		Update_parameters</span><br><span class="line">				W[l] = W[l] - α * dW[l]</span><br><span class="line">				β[l] = β[l] - α * dβ[l]</span><br><span class="line">				γ[l] = γ[l] - α * dγ[l]</span><br><span class="line">				// You may also update the parameters using gradient descent with momentum, RMSprop, 						Adam, etc.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">for t = 1:num_mini_batches</span><br><span class="line">		Computes forward_propagation on X&#123;t&#125;</span><br><span class="line">				In each hidden layer, use BN to replace Z[l] with Z~[l]</span><br><span class="line">				</span><br><span class="line">		Use back_propagation to compute dW[l], db[l](or disregard this value), dγ[l], dβ[l]</span><br><span class="line">		</span><br><span class="line">		Update_parameters</span><br><span class="line">				W[l] = W[l] - α * dW[l]</span><br><span class="line">				β[l] = β[l] - α * dβ[l]</span><br><span class="line">				γ[l] = γ[l] - α * dγ[l]</span><br><span class="line">				// You may also update the parameters using gradient descent </span><br><span class="line">				   with momentum, RMSprop, Adam, etc.</span><br></pre></td></tr></table></figure>
 
 <h3 id="3-Why-does-Batch-Norm-work"><a href="#3-Why-does-Batch-Norm-work" class="headerlink" title="3- Why does Batch Norm work?"></a><strong>3- Why does Batch Norm work?</strong></h3><p>“Covariate shift”</p>
 <p>If X changes, you might need to retrain your learning algorithm.</p>
@@ -384,8 +390,8 @@ $('.btn_click_load').click(function() {
 -->
 <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'http://yoursite.com/2019/07/02/Study-notes-for-Hyperparameter-tuning/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://yoursite.com/2019/07/02/Study-notes-for-Hyperparameter-tuning/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://yoursite.com/2019/07/03/Study-notes-for-Hyperparameter-tuning/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/07/03/Study-notes-for-Hyperparameter-tuning/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 
