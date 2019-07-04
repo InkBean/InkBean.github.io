@@ -279,13 +279,25 @@
 <p>α, β</p>
 <p>β = 0.9 usually works very well (average over the last approximately 10 gradients)</p>
 </blockquote>
-<h3 id="4-RMSprop"><a href="#4-RMSprop" class="headerlink" title="4- RMSprop"></a><strong>4- RMSprop</strong></h3><p>Root mean square prop</p>
+<h3 id="4-RMSprop"><a href="#4-RMSprop" class="headerlink" title="4- RMSprop"></a><strong>4- RMSprop</strong></h3><p>Root mean square prop allows you to use a faster learning rate.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SdW = 0</span><br><span class="line">Sdb = 0</span><br><span class="line">On iteration t:</span><br><span class="line">		Compute dW, db on the current mini-batch</span><br><span class="line">		SdW = β2 * SdW + (1 - β2) * dW ^ 2</span><br><span class="line">		Sdb = β2 * Sdb + (1 - β2) * db ^ 2</span><br><span class="line">		// the square of dW, db above are element wise squaring operation</span><br><span class="line">		// use the notation &apos;β2&apos; to distinguish it from the &apos;β&apos; in momentum</span><br><span class="line">		</span><br><span class="line">		W = W - α * dW / (sqrt(SdW) + ε)</span><br><span class="line">		b = b - α * db / (sqrt(Sdb) + ε) </span><br><span class="line">		// Usually set ε = 10^-8, make sure the denominator isn&apos;t 0 or a super small number</span><br></pre></td></tr></table></figure>
 
-<p>Allow you to use a faster learning rate.</p>
+<p>dW denotes the the <strong>amount of which W changes</strong> each time, but <strong>NOT</strong> how big the gradient descent step is.</p>
+<p>Average of <strong>dW ^ 2</strong> (in this case we are taking the moving averages of dW ^ 2, SdW) </p>
+<p>gives <strong>σ^2</strong>, the <strong>variance of W</strong>. </p>
+<ul>
+<li><p>If dW ^ 2 is big, <strong>i.e.</strong> if W oscillates too much / varies a lot each time, then SdW will be a big value.</p>
+<p>Then if we divide dW by (sqrt(SdW) + ε), a big value, it penalizes dW, because it doesn’t seem to  go in the correct direction. This will in turn <strong>reduce the oscillation of W</strong>.</p>
+</li>
+<li><p>If dW ^ 2 is small, <strong>i.e.</strong> if W barely changes each time, then SdW will be small. </p>
+<p>Then if we divide dW by (sqrt(SdW) + ε), a small value, it boosts dW because it seems to go in the correct direction.</p>
+</li>
+</ul>
+<p>As you see, increase in dW results in penalizing the effect of dW, which prevents it from influencing W too much. By contrast, a small dW makes W learns/get optimized faster. </p>
+<p>Since it ensures that W wouldn’t oscillates too much, you can apply a bigger learning rate with a much less worry of overshooting.</p>
 <br>
 
-<p>这块还得再好好看看…补充性地看了一些材料感觉还是差点</p>
+<p>If this part seems confusing, you may also want to take a look at how Rprop works to get a better intuition of RMSprop(since the latter is developed from the former).</p>
 <h3 id="5-Adam-optimization-algorithm"><a href="#5-Adam-optimization-algorithm" class="headerlink" title="5- Adam optimization algorithm"></a><strong>5- Adam optimization algorithm</strong></h3><p>It’s an algorithm that combines momentum and RMSprop.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">VdW = 0, SdW = 0</span><br><span class="line">Vdb = 0, Sdb = 0</span><br><span class="line">On iteration t:</span><br><span class="line">		Compute dW, db on the current mini-batch</span><br><span class="line">		VdW = β1 * VdW + (1 - β1) * dW </span><br><span class="line">		Vdb = β1 * Vdb + (1 - β1) * db </span><br><span class="line">		// Momentum</span><br><span class="line">		</span><br><span class="line">		SdW = β2 * dW + (1 - β2) * dW ^ 2</span><br><span class="line">		Sdb = β2 * Sdb + (1 - β2) * db ^ 2</span><br><span class="line">		// RMSprop</span><br><span class="line">		</span><br><span class="line">		VdW_corrected = VdW / (1 - β1^t)</span><br><span class="line">		Vdb_corrected = Vdb / (1 - β1^t)</span><br><span class="line">		// Bias correction</span><br><span class="line">		</span><br><span class="line">		W = W - α * VdW_corrected / (sqrt(SdW) + ε)</span><br><span class="line">		b = b - α * Vdb_corrected / (sqrt(Sdb) + ε)</span><br></pre></td></tr></table></figure>
 
@@ -402,8 +414,8 @@ $('.btn_click_load').click(function() {
 -->
 <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'http://yoursite.com/2019/07/01/Study-notes-for-Optimization-algorithms/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://yoursite.com/2019/07/01/Study-notes-for-Optimization-algorithms/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://yoursite.com/2019/07/02/Study-notes-for-Optimization-algorithms/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/07/02/Study-notes-for-Optimization-algorithms/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 

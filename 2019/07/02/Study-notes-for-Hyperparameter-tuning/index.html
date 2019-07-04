@@ -160,9 +160,168 @@
             <div class="typo" style="padding: 3rem;">
                 <p>Week 3 in Andrew Ng’s <a href https: www.coursera.org learn deep-neural-network home welcome"">Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization</a> on Coursera.</p>
 <h1 id="Hyperparameter-tuning"><a href="#Hyperparameter-tuning" class="headerlink" title="Hyperparameter tuning"></a><strong>Hyperparameter tuning</strong></h1><hr>
-<h3 id="1-Tuning-process"><a href="#1-Tuning-process" class="headerlink" title="1- Tuning process"></a><strong>1- Tuning process</strong></h3><h3 id="2-Using-an-appropriate-scale-to-pick-hyperparameters"><a href="#2-Using-an-appropriate-scale-to-pick-hyperparameters" class="headerlink" title="2- Using an appropriate scale to pick hyperparameters"></a><strong>2- Using an appropriate scale to pick hyperparameters</strong></h3><h3 id="3-Hyperparameters-tuning-in-practice-Pandas-vs-Caviar"><a href="#3-Hyperparameters-tuning-in-practice-Pandas-vs-Caviar" class="headerlink" title="3- Hyperparameters tuning in practice: Pandas vs. Caviar"></a><strong>3- Hyperparameters tuning in practice: Pandas vs. Caviar</strong></h3><h1 id="Batch-normalization"><a href="#Batch-normalization" class="headerlink" title="Batch normalization"></a><strong>Batch normalization</strong></h1><hr>
-<h3 id="1-Normalizing-activations-in-a-network"><a href="#1-Normalizing-activations-in-a-network" class="headerlink" title="1- Normalizing activations in a network"></a><strong>1- Normalizing activations in a network</strong></h3><h3 id="2-Fitting-Batch-Norm-in-a-neural-network"><a href="#2-Fitting-Batch-Norm-in-a-neural-network" class="headerlink" title="2- Fitting Batch Norm in a neural network"></a><strong>2- Fitting Batch Norm in a neural network</strong></h3><h3 id="3-Why-does-Batch-Norm-work"><a href="#3-Why-does-Batch-Norm-work" class="headerlink" title="3- Why does Batch Norm work?"></a><strong>3- Why does Batch Norm work?</strong></h3><h3 id="4-Batch-Norm-at-test-time"><a href="#4-Batch-Norm-at-test-time" class="headerlink" title="4- Batch Norm at test time"></a><strong>4- Batch Norm at test time</strong></h3><h1 id="Multi-class-classification"><a href="#Multi-class-classification" class="headerlink" title="Multi-class classification"></a><strong>Multi-class classification</strong></h1><hr>
-<h3 id="1-Softmax-regression"><a href="#1-Softmax-regression" class="headerlink" title="1- Softmax regression**"></a>1- Softmax regression**</h3><h3 id="2-Training-a-softmax-classifier"><a href="#2-Training-a-softmax-classifier" class="headerlink" title="2- Training a softmax classifier"></a><strong>2- Training a softmax classifier</strong></h3><h1 id="Introduction-to-programming-frameworks"><a href="#Introduction-to-programming-frameworks" class="headerlink" title="Introduction to programming frameworks"></a><strong>Introduction to programming frameworks</strong></h1><hr>
+<h3 id="1-Tuning-process"><a href="#1-Tuning-process" class="headerlink" title="1- Tuning process"></a><strong>1- Tuning process</strong></h3><p>Different hyperparameters have different degree of influence on your NN. You may prioritize tuning the more important ones. </p>
+<p>Most important</p>
+<blockquote>
+<p>α - Learning rate</p>
+</blockquote>
+<p>second in importance</p>
+<blockquote>
+<p>β = 0.9 Momentum </p>
+<p>Mini-batch size</p>
+<p># Hidden units</p>
+</blockquote>
+<p>then</p>
+<blockquote>
+<p># Layers</p>
+<p>Learning rate decay</p>
+</blockquote>
+<br>
+
+<p>Usually we just use the default values when using ‘Adam’ optimization algorithm.</p>
+<blockquote>
+<p>β1 = 0.9, β2 = 0.999, ε = 10 ^ -8 </p>
+</blockquote>
+<br>
+
+<p>When you try to tune the hyperparameters</p>
+<blockquote>
+<p>Set the hyperparameter values by random. Do not use a grid.</p>
+<p>Zoom in a smaller region of hyperparameters that works relatively well.</p>
+<p>Sample more densely in the region.</p>
+</blockquote>
+<h3 id="2-Using-an-appropriate-scale-to-pick-hyperparameters"><a href="#2-Using-an-appropriate-scale-to-pick-hyperparameters" class="headerlink" title="2- Using an appropriate scale to pick hyperparameters"></a><strong>2- Using an appropriate scale to pick hyperparameters</strong></h3><p>α  = 0.0001, … , 1</p>
+<p>Instead of searching on a <strong>linear scale</strong>, you may want to do that on a <strong>log scale.</strong></p>
+<p>That is, </p>
+<blockquote>
+<p>divide the range to</p>
+<p>(0.0001, 0.001), (0.001, 0.01), (0.01, 0.1) (0.1, 1)</p>
+<p>then sample uniformly.</p>
+</blockquote>
+<p>To implement this in python:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">r = -4 * np.random.randn() // so r will be in the range of [-4, 0]</span><br><span class="line">α = 10 ** r</span><br></pre></td></tr></table></figure>
+
+<p>Generally, if you want to sample on log-scale between 10^a and 10^b</p>
+<blockquote>
+<p>Set r uniformly at random between (a, b)</p>
+<p>α = 10 ^ r</p>
+</blockquote>
+<br>
+
+<p>For instance, if we want to tune the hyperparameter for exponentially weighted averages, β </p>
+<blockquote>
+<p>β = 0.9, … , 0.999</p>
+</blockquote>
+<p>You may think in the other way</p>
+<blockquote>
+<p>1 - β = 0.1, … , 0.001</p>
+</blockquote>
+<blockquote>
+<p>Set r uniformly at random between (-3, -1)</p>
+<p>1 - β = 10 ^ r</p>
+<p>β = 1 - 10 ^ r</p>
+</blockquote>
+<h3 id="3-Hyperparameters-tuning-in-practice-Pandas-vs-Caviar"><a href="#3-Hyperparameters-tuning-in-practice-Pandas-vs-Caviar" class="headerlink" title="3- Hyperparameters tuning in practice: Pandas vs. Caviar"></a><strong>3- Hyperparameters tuning in practice: Pandas vs. Caviar</strong></h3><p>Re-test hyperparameters occasionally because they do get stale. </p>
+<p><strong>Panda approach:</strong></p>
+<p>A Panda usually has only one(or very small number of) child at a time. </p>
+<blockquote>
+<p>Babysit one model (when you don’t have a lot of computational capacity)</p>
+</blockquote>
+<p><strong>Caviar strategy:</strong></p>
+<p>Lay a lot of eggs but don’t pay too much attention to any one of them. </p>
+<blockquote>
+<p>Train multiple models at the same time</p>
+</blockquote>
+<h1 id="Batch-normalization"><a href="#Batch-normalization" class="headerlink" title="Batch normalization"></a><strong>Batch normalization</strong></h1><hr>
+<h3 id="1-Normalizing-activations-in-a-network"><a href="#1-Normalizing-activations-in-a-network" class="headerlink" title="1- Normalizing activations in a network"></a><strong>1- Normalizing activations in a network</strong></h3><p>Normalizing inputs to speed up learning</p>
+<blockquote>
+<p>μ = 1 / m * (sum of X over the m examples)</p>
+<p>X = X - μ</p>
+<p>σ^2 = 1 / M * (sum of X^2 over the m examples) This multiplication is element wise</p>
+<p>X =  X / σ^2</p>
+</blockquote>
+<br>
+
+<p>Similarly, we can normalize Z[l] to train W[l] and b[l] faster. </p>
+<blockquote>
+<p>By analogy, we may think of normalizing A[l] instead of Z[l], but in practice we normalize Z[l] more often</p>
+</blockquote>
+<p><strong>Inplement:</strong></p>
+<blockquote>
+<p>μ = 1 / m * (sum of Z[l] over the m examples)</p>
+<p>Z[l] = Z[l] - μ</p>
+<p>σ^2 = 1 / M * (sum of Z[l]^2 over the m examples) //This multiplication is element wise</p>
+<p>Z_norm[l] =  Z[l] / sqrt(σ^2 + ε)  // we have ε for numerical stability, just in case σ is 0.</p>
+<p>Z~[l] = <strong>γ</strong> * Z_norm[l] + <strong>β</strong> // <strong>γ</strong> and <strong>β</strong> are learnable parameters</p>
+<p>if γ = sqrt(σ^2 + ε)  and β = μ, then Z~[l] = Z[l], the original one.</p>
+</blockquote>
+<p>You have two explicit parameters <strong>γ</strong> and <strong>β</strong> so that you can manually control the mean and variance, make them have fixed values.</p>
+<h3 id="2-Fitting-Batch-Norm-in-a-neural-network"><a href="#2-Fitting-Batch-Norm-in-a-neural-network" class="headerlink" title="2- Fitting Batch Norm in a neural network"></a><strong>2- Fitting Batch Norm in a neural network</strong></h3><p>We now have W[l], b[l], γ[l], β[l] as the parameters</p>
+<blockquote>
+<p>Previously we would compute Z[l] = W[l] * A[l-1] + b[l]</p>
+<p>In normalization, b[l] will be subtracted out in the process of mean normalization</p>
+<p>Since BN zeros out the mean, there’s <strong>no point of including b[l]</strong></p>
+<p>So you instead computes</p>
+<p>Z[l] = W[l] * A[l-1] </p>
+<p>Then computes Z_norm[l] as usual</p>
+<p>Z~[l] = γ * Z_norm[l] + β // β decides what the mean is</p>
+</blockquote>
+<p><strong>Implement:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for t = 1:num_mini_batches</span><br><span class="line">		Computes forward_propagation on X&#123;t&#125;</span><br><span class="line">				In each hidden layer, use BN to replace Z[l] with Z~[l]</span><br><span class="line">				</span><br><span class="line">		Use back_propagation to compute dW[l], db[l](or disregard this value), dγ[l], dβ[l]</span><br><span class="line">		</span><br><span class="line">		Update_parameters</span><br><span class="line">				W[l] = W[l] - α * dW[l]</span><br><span class="line">				β[l] = β[l] - α * dβ[l]</span><br><span class="line">				γ[l] = γ[l] - α * dγ[l]</span><br><span class="line">				// You may also update the parameters using gradient descent with momentum, RMSprop, 						Adam, etc.</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Why-does-Batch-Norm-work"><a href="#3-Why-does-Batch-Norm-work" class="headerlink" title="3- Why does Batch Norm work?"></a><strong>3- Why does Batch Norm work?</strong></h3><p>“Covariate shift”</p>
+<p>If X changes, you might need to retrain your learning algorithm.</p>
+<br>
+
+<p>BN reduces the variance of the hidden units shifting around.</p>
+<p>It constrained mean and variance of the layers, which limits the amount of impact to which updating the parameters of the previous layers has to the current layer.</p>
+<p>Values of each layer be more stable, which in turn makes the input values of each layer(Z[l-1] / A[l - 1]), more stable. </p>
+<br>
+
+<p><strong>Batch Norm as regularization:</strong></p>
+<p>The process of changing Z[l] to Z~[l] adds some noise to Z[l], which is similar to dropout that adds some noise to each hidden layer’s activations. It therefores has a <strong>slight</strong> regularization effect.</p>
+<p>As mini-batch size gets bigger, the noises and therefore the regularization effect get reduced.</p>
+<h3 id="4-Batch-Norm-at-test-time"><a href="#4-Batch-Norm-at-test-time" class="headerlink" title="4- Batch Norm at test time"></a><strong>4- Batch Norm at test time</strong></h3><p>Previously you calculate μ and σ^2 on each mini-batch. </p>
+<p>Now you may estimate μ and σ^2 using <strong>exponentially weighted averages</strong> across the mini-batches.</p>
+<blockquote>
+<p>For each mini-batch X{1}, X{2}, X{3}… you have</p>
+<p>μ{1}[l], μ{2}[l], μ{3}[l]… for layer l</p>
+<p>Use the values above to calculate Vμ[l]</p>
+<p>Similarly, compyte Vσ^2[l]</p>
+<p>Compute Z_norm using the exponentially weighted averages above.</p>
+</blockquote>
+<h1 id="Multi-class-classification"><a href="#Multi-class-classification" class="headerlink" title="Multi-class classification"></a><strong>Multi-class classification</strong></h1><hr>
+<h3 id="1-Softmax-regression"><a href="#1-Softmax-regression" class="headerlink" title="1- Softmax regression"></a><strong>1- Softmax regression</strong></h3><p>C = # Classes</p>
+<p>n[L] = C</p>
+<p>Z[L] = W[L] * A[L-1] + b[L]</p>
+<p><strong>Activation function:</strong></p>
+<blockquote>
+<p>t = e ^ Z[l] // it has the same dimensions as Z[l]</p>
+<p>A[l] = t / (sum of t)</p>
+</blockquote>
+<p>Each element of A[L](i) ranges from (0, 1), representing the possibility class (i) given input X.</p>
+<h3 id="2-Training-a-softmax-classifier"><a href="#2-Training-a-softmax-classifier" class="headerlink" title="2- Training a softmax classifier"></a><strong>2- Training a softmax classifier</strong></h3><p>The name <strong>‘Softmax’</strong> comes from contrasting <strong>‘hardmax’</strong>, which puts 1 to the element that has the highest possibilities and zeros everywhere else.</p>
+<p>Softmax regression generalizes logistic regression to C classes.</p>
+<p>If C = 2, softmax basically reduces to logistic regression. </p>
+<p><strong>Loss function:</strong></p>
+<blockquote>
+<p>L(Yhat, Y) = - sum of Yj * log( Yhatj )</p>
+<p>​                 = log(Yhatp ) </p>
+<p>// p denotes the element in Y that has value 1, which represents the correct class</p>
+<p>So you want to make Yhatp as big(as close to 1) as possible </p>
+</blockquote>
+<p>Cost function is computed in the same way as usual</p>
+<blockquote>
+<p>J = (1 / m) * sum of L(Yhat, Y) over the training set.</p>
+</blockquote>
+<br>
+
+<p>Initialize dZ[L]  = Yhat - Y</p>
+<br>
+
+<hr>
+<h2 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a><strong>Tensorflow</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">coefficients = np.array([ [<span class="number">1</span>], [<span class="number">-10</span>], [<span class="number">25</span>]])</span><br><span class="line"></span><br><span class="line">w = tf.Variable([<span class="number">0</span>], dtype = tf.float32)</span><br><span class="line">x = tf.placeholder(tf.float32, [<span class="number">3</span>,<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">cost = x[<span class="number">0</span>][<span class="number">0</span>] * w **<span class="number">2</span> + x[<span class="number">1</span>][<span class="number">0</span>] * w + x[<span class="number">2</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">train = tf.train.GradientDescentOptimizer(<span class="number">0.01</span>).minimize(cost)</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line">session = tf.session() <span class="comment"># with tf.session() as session:</span></span><br><span class="line">session.run(init)</span><br><span class="line"></span><br><span class="line">print(session.run(w))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    session.run(train, feed_dictionary = &#123;x:coefficients&#125;)</span><br><span class="line">print(session.run(w))</span><br></pre></td></tr></table></figure>
+
 
             </div>
 
