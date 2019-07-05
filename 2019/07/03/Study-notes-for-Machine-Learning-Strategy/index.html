@@ -159,6 +159,321 @@
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
                 <p>Andrew Ng’s <a href https: www.coursera.org learn machine-learning-projects?specialization="deep-learning" "">Structuring Machine Learning Projects</a> on Coursera.</p>
+<br>
+
+<h2 id="Orthogonalization"><a href="#Orthogonalization" class="headerlink" title="Orthogonalization"></a><strong>Orthogonalization</strong></h2><p>Chain of assumptions in ML</p>
+<blockquote>
+<p>Fit training set well on cost function</p>
+<p>Knob: Bigger network, Adam…</p>
+<p>Fit dev set well on cost function</p>
+<p>Knob: Regularization, bigger training set…</p>
+<p>Fit test set well on cost function</p>
+<p>Knob: Bigger dev set…</p>
+<p>Performs well in real world</p>
+<p>Knob: Change dev set or cost function…</p>
+</blockquote>
+<p>One knob just solves one problem.</p>
+<h2 id="Setting-up-your-goal"><a href="#Setting-up-your-goal" class="headerlink" title="Setting up your goal"></a><strong>Setting up your goal</strong></h2><p><strong>Single number evaluation metric:</strong></p>
+<p>When you have two evaluation metrics, e.g. precision and recall, it’s hard to decide on which algorithm performs better.</p>
+<p>We need a single evaluation metric to combine precision and recall. </p>
+<blockquote>
+<p>F1 score, “Average” of precision and recall | not exactly though</p>
+<p>(1 / (1 / Precision) + (1 / Recall) )</p>
+<p>The equation is also called the “Harmonic mean”</p>
+</blockquote>
+<br>
+
+<p><strong>Satisficing and Optimizing metric:</strong></p>
+<p>For instance,</p>
+<blockquote>
+<p>You may want to maximize accuracy, subject to running time &lt;= 100ms</p>
+<p>so in this case,</p>
+<p>accuracy is an optimizing metric</p>
+<p>running time is satisficing metric</p>
+</blockquote>
+<p>N metrics: pick 1 as Optimizing, and N-1 as Satisficing.</p>
+<br>
+
+<p><strong>Training/dev/test distributions:</strong></p>
+<p>Keep in mind that dev and test set should come from the <strong>same</strong> distribution,</p>
+<p>and</p>
+<blockquote>
+<p>Choose a dev set and test set to reflect data you expect to get in the future and consider important to do well on</p>
+</blockquote>
+<br>
+
+<p><strong>Size of the dev and test sets:</strong></p>
+<p>For instance, if you have 1,000,000 examples</p>
+<p>you may have 98% of them for the train set, and 1% each for dev/test sets.</p>
+<blockquote>
+<p>Set your test set to be big enough to give you a high confidence in the overall performance of your system.</p>
+</blockquote>
+<p>Sometimes, not having a test set might be ok, but it’s not recommended.</p>
+<br>
+
+<p><strong>When to change dev/test sets and metrics:</strong></p>
+<p>Try define a new metric when your current metric doesn’t capture your preference accurately.</p>
+<blockquote>
+<p><strong>e.g.</strong> Place a higher weight for mistakes you really don’t want to make, such as</p>
+<p>misclassifying pornographic images as cat images. </p>
+</blockquote>
+<p>Orthogonalization for cat pictures</p>
+<blockquote>
+<ol>
+<li>Place a target</li>
+<li>Worry separately about how to do well on this metric(<strong>i.e.</strong> how to aim/shoot at the target)</li>
+</ol>
+</blockquote>
+<p>If doing well on your dev/test sets doesn’t correspond to good performance on your actual application, change your metric and/or dev/test sets.</p>
+<p>It’s recommended to set up a dev set and evaluation metric early, and perhaps change them later on, rather than training for a long time without having the dev set and metric set up.</p>
+<h2 id="Comparing-to-human-level-performance"><a href="#Comparing-to-human-level-performance" class="headerlink" title="Comparing to human level performance"></a><strong>Comparing to human level performance</strong></h2><p><strong>Why human-level performance?</strong></p>
+<p>Bayes optimal error: best possible error</p>
+<blockquote>
+<p>Very best theoretical function for mapping from x to y</p>
+</blockquote>
+<p>Progress is fast until the learning algorithm surpasses human level performance.</p>
+<blockquote>
+<ol>
+<li><p>Human level error is sometimes close to Bayes error.</p>
+</li>
+<li><p>Have many tools to use before it surpasses human level performance.</p>
+<p>- get labeled data from human</p>
+<p>- gain insights from manual error analysis</p>
+<p>- better analysis of bias/variance</p>
+</li>
+</ol>
+</blockquote>
+<br>
+
+<p><strong>Avoid bias:</strong></p>
+<p>Here’s a <a href="https://inkbean.github.io/2019/06/29/Study-notes-for-Practical-aspects-of-deep-learning/#" target="_blank" rel="noopener">reference</a> you may want to refer to.</p>
+<blockquote>
+<p>If training error is much bigger than human error, focus on reducing bias</p>
+<p>If training error is close to human error but dev set error is quite a bit bigger than the training error, focus on reducing variance.</p>
+</blockquote>
+<p>Human level error is a proxy of Bayes error in quite a lot of cases like computer vision.</p>
+<blockquote>
+<p>The concept of the <strong>avoidable bias:</strong></p>
+<p>The difference between the Bayes error or approximation of Bayes error and training error.</p>
+<p>You may not want to get below avoidable bias since it may cause overfitting. </p>
+</blockquote>
+<br>
+
+<p><strong>Understanding human-level performance:</strong></p>
+<p>If you define Human-level error as proxy of Bayes error, then </p>
+<blockquote>
+<p>It should be the error that humans can achieve as good as possible, rather than that of a typical human. </p>
+</blockquote>
+<p>Once the training error gets close to human-level error, it can be hard to know the exact value of Bayes error, therefore hard to diagnose how to make your training set fit better.</p>
+<p>Sometimes Bayes error is not 0%. It’s always not reasonable to compare your training error to 0%.</p>
+<br>
+
+<p><strong>Surpassing human-level performance:</strong></p>
+<p>Problems where ML significantly surpasses human-level performance</p>
+<blockquote>
+<p>- Online advertising</p>
+<p>- Product recommendations</p>
+<p>- Logistics(predicting transit time)</p>
+<p>- Loan approval</p>
+</blockquote>
+<p>ML learns from structured data, and these above are not natural perception problems. </p>
+<p>In some cases though ML may surpass human-level performance in natural perception problems. </p>
+<br>
+
+<p><strong>Improve your model performance:</strong></p>
+<p>The two fundamental assumptions of supervised learning</p>
+<blockquote>
+<p>Fit training set pretty well: achieve low avoidable bias</p>
+<p>Generalize well to the dev/test set: variance isn’t too bad</p>
+</blockquote>
+<p>To reduce avoidable bias:</p>
+<blockquote>
+<p>Train a bigger model</p>
+<p>Train longer / use a better optimization algorithm such as Adam, RMSprop…</p>
+<p>Try other NN architectures(RNN, CNN…) / tune hyperparameters</p>
+</blockquote>
+<p>To reduce variance:</p>
+<blockquote>
+<p>Get more data</p>
+<p>Regularization techniques such as L2, dropout, data augmentation…</p>
+<p>Try other NN architectures(RNN, CNN…) / tune hyperparameters</p>
+</blockquote>
+<h2 id="Error-analysis"><a href="#Error-analysis" class="headerlink" title="Error analysis"></a><strong>Error analysis</strong></h2><p><strong>Carrying out error analysis</strong></p>
+<blockquote>
+<p>Look at dev examples to evaluate ideas.</p>
+<p>Evaluate multiple ideas in parrallel.</p>
+<p>Identify what’s the most promising direction to focus on.</p>
+</blockquote>
+<p>Label the categories of mistakes on a spread sheet.</p>
+<br>
+
+<p><strong>Cleaning up incorrectly labeled data</strong></p>
+<p>DL learning algorithms are quite robust to random errors in the training set. But they’re less robust to systematic errors. e.g. consistently label white dogs in particular as cats.</p>
+<p>For dev sets, you may add an ‘incorrectly labeled’ column to the error spread sheet mentioned above. Count the percentage of errors due to incorrect labels.</p>
+<p>To decide if it’s worth going in, you may</p>
+<blockquote>
+<p>look at the overall dev set error, errors due to incorrect labels, and errors due to other causes.</p>
+</blockquote>
+<p>Goal of dev set is to help you decide between classifier A &amp; B.</p>
+<p>If you want to correct the incorrectly labeled data, you may </p>
+<blockquote>
+<p>Apply the same process to both dev and test sets to make sure that they continue to come from the same distribution.</p>
+<p>Consider examining examples your algorithm got right as well as those it got wrong. This is not always done since it’s quite time consuming.</p>
+<p>Train and dev/test sets may now come from different distributions.</p>
+</blockquote>
+<br>
+
+<p><strong>Build your first system quickly, then iterate</strong></p>
+<blockquote>
+<ol>
+<li>Setup dev/test set metric</li>
+<li>Build initial system quickly(This allows you to identify the direction worth diving in more quickly).</li>
+<li>Use bias/variance analysis &amp; error analysis to prioritize next steps</li>
+</ol>
+</blockquote>
+<h2 id="Mismatched-training-and-dev-test-set"><a href="#Mismatched-training-and-dev-test-set" class="headerlink" title="Mismatched training and dev/test set"></a><strong>Mismatched training and dev/test set</strong></h2><p><strong>Training and testing on different distributions</strong></p>
+<br>
+
+<p><strong>Bias and Variance with mismatched distributions</strong></p>
+<blockquote>
+<p>Human error = 0.5%</p>
+<p>Training error = 1%</p>
+<p>Dev error = 10%</p>
+<p>It may not necessarily be the case that it has high variance if there’s a mismatched distribution. For instance, it may just be that the dev set is much harder than the training sets. </p>
+</blockquote>
+<p>Then, how do we identify the problems?</p>
+<p>Training-dev set: </p>
+<blockquote>
+<p>have the same distribution as the training set, but not used for training.</p>
+<p>won’t run backprop on this part</p>
+</blockquote>
+<p>If training-dev set error is much smaller than the dev set error, then you know that there’s a <strong>data mismatch problem</strong>.</p>
+<p>Look at the differences between the errors below to see what problem you have. </p>
+<p><strong>e.g.</strong> Avoidable bias, variance, data mismatch problem, overfitting to dev set.</p>
+<blockquote>
+<ol>
+<li>Human level error</li>
+<li>Training set error</li>
+<li>Training-dev set error</li>
+<li>Dev set error</li>
+<li>Test set error</li>
+</ol>
+</blockquote>
+<p>If the data in dev/test sets are much easier than the training/training-dev sets, dev/test set errors can be lower than training/training-dev sets error.</p>
+<br>
+
+<p><strong>Addressing data mismatch</strong></p>
+<p>Carry out a manual analysis to try to understand the differences between training and dev/test sets.</p>
+<p><strong>e.g.</strong> dev set examples are noisy</p>
+<br>
+
+<p>We can make training data more similar to dev/test sets; or to collect more data similar to dev/test sets.</p>
+<p><strong>e.g.</strong> simulate noisy in-car data</p>
+<br>
+
+<p>Artificial data synthesis:</p>
+<p><strong>e.g.</strong> synthesize clean audio clips and car noise. // but might overfit to the synthesized training set</p>
+<h2 id="Learning-from-multiple-tasks"><a href="#Learning-from-multiple-tasks" class="headerlink" title="Learning from multiple tasks"></a><strong>Learning from multiple tasks</strong></h2><p><strong>Transfer learning</strong></p>
+<p><strong>e.g.</strong> Transfer from image recognition to radiology diagnosis</p>
+<blockquote>
+<p>If the new dataset is small, you can initialize only the last layer’s weights randomly, then retrain just this layer of the NN on the new dataset.</p>
+<p>If large dataset, you can retrain all the layers.</p>
+</blockquote>
+<p>Being trained on image recognition can help radiology diagnosis learn a bit faster. (The former let the network gain the capability of identifying dots, lines, etc. that can be helpful for the latter.)</p>
+<p>Sometimes you can create several new layers on top of the NN you transferred from.</p>
+<p>When transfer learning make sense:</p>
+<blockquote>
+<p>Transfer from Task A to Task B </p>
+<ol>
+<li><p>Task A and B have the same input X.</p>
+</li>
+<li><p>A lot more data for Task A than Task B.</p>
+</li>
+<li><p>Low level features from Task A could be helpful for learning B</p>
+</li>
+</ol>
+</blockquote>
+<br>
+
+<p><strong>Multi-task learning</strong></p>
+<p>Often used in computer vision.</p>
+<p><strong>e.g.</strong> Autonomous vehicle</p>
+<p>Detect pedestrians, cars, stop signs, traffic light.</p>
+<p>Loss:</p>
+<blockquote>
+<p>sum over all the nodes instead of just one.</p>
+</blockquote>
+<p>Unlike softmax regression, this can have multiple labels. </p>
+<p>It calculates that for each of the classes, does that class appear in the image, rather than which single one of them appears.</p>
+<p>Sometimes, for the data you collected, not all classes are labeled as 0/1. In this case, when computing the cost, you should sum values of J with only 0/1 label. </p>
+<p>When multi-task learning make sense:</p>
+<blockquote>
+<p>Training on a set of tasks that could benefit from having <strong>shared lower-level features</strong>.</p>
+<p>Usually: the amount of data for each class is quite <strong>similar</strong></p>
+<p>Can train a <strong>big enough</strong> neural network to do well on all the tasks. </p>
+</blockquote>
+<p>Transfer learning is used much more often than multi-task learning though.</p>
+<h2 id="End-to-end-deep-learning"><a href="#End-to-end-deep-learning" class="headerlink" title="End-to-end deep learning"></a><strong>End-to-end deep learning</strong></h2><p><strong>What is end-to-end deep learning?</strong></p>
+<p><strong>e.g.</strong> Speech recognition</p>
+<p>From X(audio) to Y(transcript)</p>
+<blockquote>
+<p>audio - features - phonemes - words - transcript</p>
+<p>audio ——————————————— transcript</p>
+<p>end-to-end deep learning bypasses the intermediate steps, but it needs a lot of data to make it work well</p>
+</blockquote>
+<br>
+
+<p>Face recognition is better done in a multi-step approach</p>
+<blockquote>
+<ol>
+<li><p>Detect the person’s face, zoom in to the part of the image, and crop the image so that the face is centered.</p>
+</li>
+<li><p>Use it as input of the NN and identify who the person is.</p>
+<p>Takes in two images and tells you if they’re the same person or not.</p>
+</li>
+</ol>
+</blockquote>
+<p>Two reasons why we separate to two tasks in this case</p>
+<blockquote>
+<ol>
+<li><p>Each of the problems is much simpler.</p>
+</li>
+<li><p>Have a lot more data for each of the two sub-tasks.</p>
+</li>
+</ol>
+</blockquote>
+<br>
+
+<p><strong>Whether to use end-to-end deep learning</strong></p>
+<p>Pros and cons of end-to-end deep learning：</p>
+<blockquote>
+<p><strong>Pros:</strong></p>
+<ul>
+<li><p>Let the data speak </p>
+<p>(In speech recognition, for instance, the itermediate concept “phonemes” may not really be a resonable description of language but just fantasy of linguists, so you may not want to force your ML algorithm to learn how to use “phonemes” as representations)</p>
+</li>
+<li><p>Less hand-designing of components needed</p>
+</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>May need a large amount of data(may be harder to find data for the direct mapping)</li>
+<li>Excludes potentially useful hand-designed components. (If we don’t have enough data, it can be helpful with human injecting knowledge)</li>
+</ul>
+</blockquote>
+<p>Key question:</p>
+<blockquote>
+<p>Do you have <strong>sufficient</strong> data to learn a function of the <strong>complexity needed</strong> to map x to y</p>
+</blockquote>
+<br>
+
+<p>Again, take the example of autonomous vehicle.</p>
+<p>Image, radar, lidar - detect cars, pedestrains - plan own route - steering</p>
+<blockquote>
+<p>Use DL to learn individual components</p>
+<p>Carefully choose X - Y depending on what task you can get data for</p>
+</blockquote>
+<p>Image - steering directly isn’t very promising, at least for now.</p>
 
             </div>
 
