@@ -183,6 +183,9 @@
 <p>Trained CNNs seem to be pretty robust in recognizing images we usually see in real life, but “intentional” slight changes in x can result in big change in yhat(the predicted y), due to vulnerability of linear model.</p>
 <p>Even for reasonably deep neural networks, since the most commonly used activation function — ReLU — is pretty linear(comparing to other functions like Sigmoid), the overall structure of a neural network will tend to be linear generally. </p>
 <p>By making this kind of slight changes on an image of a cat, it fools the detector that it is an iguana. </p>
+<blockquote>
+<p>For a recent project, I got to do the verification task(to prove that I’m not a robot) of object detection when I was trying to download datasets from the website of U.S. Department of Transportation. Lots of websites have this kind of task, but what’s special about this one it that the pictures provided look like adversarial images. さすが政府機関な！</p>
+</blockquote>
 <br>
 
 <p>We certainly want our networks to be more rubust in facing the attack of datasets composed of these carefully made adversarial training examples. A solution is to train a GAN that’s robust in detecting adversarial images, but GANs definitely can do a lot more things other than this.</p>
