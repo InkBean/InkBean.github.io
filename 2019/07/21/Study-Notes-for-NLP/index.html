@@ -153,7 +153,7 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/swf.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/uwt.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Study Notes for &#39;NLP &amp; Word Embeddings&#39;</h2></a>
             </div>
             <!-- Post -->
@@ -162,24 +162,229 @@
 <br>
 
 <h1 id="Introduction-to-Word-Embeddings"><a href="#Introduction-to-Word-Embeddings" class="headerlink" title="Introduction to Word Embeddings"></a><strong>Introduction to Word Embeddings</strong></h1><hr>
-<h3 id="Word-Representation"><a href="#Word-Representation" class="headerlink" title="Word Representation"></a><strong>Word Representation</strong></h3><br>
+<h3 id="Word-Representation"><a href="#Word-Representation" class="headerlink" title="Word Representation"></a><strong>Word Representation</strong></h3><p>For one-hot representation mentioned in the last blog post, </p>
+<blockquote>
+<p>It’s hard for it to generalize across different words, e.g. orange, apple</p>
+<p>If you take any word pair, their inner product = 0</p>
+</blockquote>
+<br>
 
-<h3 id="Using-word-embeddings"><a href="#Using-word-embeddings" class="headerlink" title="Using word embeddings"></a><strong>Using word embeddings</strong></h3><br>
+<p>Featurized representation: word embedding</p>
+<blockquote>
+<p>It represents each word as a vector of features, so the network can find out that e.g. apple and orange have similar values, which allows the network to generalize. </p>
+</blockquote>
+<br>
 
-<h3 id="Properties-of-word-embeddings"><a href="#Properties-of-word-embeddings" class="headerlink" title="Properties of word embeddings"></a><strong>Properties of word embeddings</strong></h3><br>
+<p>Visualize word embeddings</p>
+<blockquote>
+<p>T-SNE: N-D embeddings to 2D plots.</p>
+</blockquote>
+<br>
 
-<h3 id="Embedding-matrix"><a href="#Embedding-matrix" class="headerlink" title="Embedding matrix"></a><strong>Embedding matrix</strong></h3><h1 id="Learning-Word-Embeddings-Word2Vec-amp-GloVe"><a href="#Learning-Word-Embeddings-Word2Vec-amp-GloVe" class="headerlink" title="Learning Word Embeddings: Word2Vec &amp; GloVe"></a><strong>Learning Word Embeddings: Word2Vec &amp; GloVe</strong></h1><hr>
-<h3 id="Learning-word-embeddings"><a href="#Learning-word-embeddings" class="headerlink" title="Learning word embeddings"></a><strong>Learning word embeddings</strong></h3><br>
+<h3 id="Using-word-embeddings"><a href="#Using-word-embeddings" class="headerlink" title="Using word embeddings"></a><strong>Using word embeddings</strong></h3><p>Transfer learning</p>
+<blockquote>
+<ol>
+<li><p>Learn word embeddings from large text corpus. (1 - 100 B words)</p>
+<p>(or download pre-trained embeddings online)</p>
+</li>
+<li><p>Transfer embedding to new task with smaller training set. (say, 100k words)</p>
+</li>
+<li><p>Optional(when the training set is big): continue to fintune the word embeddings with the new data</p>
+</li>
+</ol>
+</blockquote>
+<p>Relation to face encoding</p>
+<blockquote>
+<p>Siamese network - learn a 128(or other numbers) dimensional representation of a face</p>
+</blockquote>
+<br>
 
-<h3 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a><strong>Word2Vec</strong></h3><br>
+<h3 id="Properties-of-word-embeddings"><a href="#Properties-of-word-embeddings" class="headerlink" title="Properties of word embeddings"></a><strong>Properties of word embeddings</strong></h3><p><strong>Analogies:</strong></p>
+<blockquote>
+<p><strong>Man</strong> <strong>→</strong> <strong>Woman</strong> is <strong>King</strong> <strong>→</strong> ? (This should be Queen)</p>
+<p><strong>E.g.</strong> e_man - e_woman ≈ [-2, 0, 0, 0]                // “e_n” denotes word embeddings of n</p>
+<p>Find to word that e_king - e_word ≈ e_man - e_woman</p>
+<p>It turns out that e_king - e_queen ≈ [-2, 0, 0, 0]</p>
+<p>So queen should be the work</p>
+</blockquote>
+<p>Find word w  </p>
+<blockquote>
+<p>so that <strong>e_king - e_w ≈ e_man - e_woman</strong> holds true </p>
+<p>argmax sim(e_w, e_king - e_man + e_woman)        // maximize the similarity</p>
+</blockquote>
+<p><strong>Cosine similarity function:</strong></p>
+<blockquote>
+<p>Sim(u, v) = <strong>(u.T * v) / (||u|| * ||v||)</strong></p>
+<p>This is actually the cosine of the angle between the two vectors.</p>
+<p>Remember the equation in  calculus that <strong>u dot v = ||u|| dot ||v|| * cosineθ</strong></p>
+<p>Different from Eucledian similarity which is (||u|| * ||v||) ^2, Cosine similarity ranges <strong>(-1, 1)</strong>.</p>
+</blockquote>
+<br>
 
-<h3 id="Negative-Sampling"><a href="#Negative-Sampling" class="headerlink" title="Negative Sampling"></a><strong>Negative Sampling</strong></h3><br>
+<h3 id="Embedding-matrix"><a href="#Embedding-matrix" class="headerlink" title="Embedding matrix"></a><strong>Embedding matrix</strong></h3><p><strong>E.g.</strong> If you want to learn a word embedding of 300 features for a vocabulary of 10000,</p>
+<blockquote>
+<p>Learn an embedding matrix of (300, 10000), which is <strong># features</strong> x <strong># vocabulary</strong></p>
+<p>Let’s say that orange is the 6257th element in the vocabulary, so we use O6257 to denote the one hot vector of orange.</p>
+<p>E(300, 10k) * O6257(10k, 1) = <strong>e_6257(300,1)</strong> // e_6257 is the embedding for “orange”</p>
+</blockquote>
+<p>Generally,</p>
+<blockquote>
+<p>E * Oj = e_j = embedding for word j</p>
+</blockquote>
+<p>In practice, we just look at a column of E when looking for the embedding for a particular word, rather than doing the matrix multiplication above. </p>
+<h1 id="Learning-Word-Embeddings-Word2Vec-amp-GloVe"><a href="#Learning-Word-Embeddings-Word2Vec-amp-GloVe" class="headerlink" title="Learning Word Embeddings: Word2Vec &amp; GloVe"></a><strong>Learning Word Embeddings: Word2Vec &amp; GloVe</strong></h1><hr>
+<h3 id="Learning-word-embeddings"><a href="#Learning-word-embeddings" class="headerlink" title="Learning word embeddings"></a><strong>Learning word embeddings</strong></h3><p>Fixed historical window(only look at the previous n words)</p>
+<p>Context: </p>
+<blockquote>
+<p>last 4 words</p>
+<p>I want <strong>a glass of orange</strong> __ to go along with my cereal.</p>
+<p>4 words on left &amp; right</p>
+<p>I want <strong>a glass of orange</strong> __ <strong>to go along with</strong> my cereal.</p>
+<p>Other choices can be: last 1 word, nearby 1 word(skip gram), etc.</p>
+</blockquote>
+<p>To summarize, </p>
+<blockquote>
+<p>We have a <strong>context - target pair</strong>.</p>
+<p><strong>Input the context</strong>(stack the word embeddings of all words in the context to a vector) and <strong>output(softmax) a target word</strong></p>
+</blockquote>
+<br>
 
-<h3 id="GloVe-word-vectors"><a href="#GloVe-word-vectors" class="headerlink" title="GloVe word vectors"></a><strong>GloVe word vectors</strong></h3><h1 id="Applications-using-Word-Embeddings"><a href="#Applications-using-Word-Embeddings" class="headerlink" title="Applications using Word Embeddings"></a><strong>Applications using Word Embeddings</strong></h1><hr>
-<h3 id="Sentiment-Classification"><a href="#Sentiment-Classification" class="headerlink" title="Sentiment Classification"></a><strong>Sentiment Classification</strong></h3><br>
+<h3 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a><strong>Word2Vec</strong></h3><p><strong>Skip-grams:</strong></p>
+<blockquote>
+<p>Given context, predict what the chosen word is in a window</p>
+</blockquote>
+<p><strong>Model:</strong></p>
+<blockquote>
+<p>Vocab size = 10,000</p>
+<p>Context c (“orange”/6257)→ Target t (“juice”/4834)</p>
+<p>Learn to map <strong>x/c</strong> to <strong>y/t</strong></p>
+<p><strong>Softmax:</strong> P(t | c) = e^(θ_t.T * e_c) / (sum over the vocabulary  e^(θ_j * e_c) )</p>
+<p>// θ_t is parameter associated with output t. <strong>θ_t</strong> and <strong>e_c</strong> have the same dimension, and θ_t.T * e_c gives an output of a real number.</p>
+<p><strong>Loss function:</strong> L(yhat, y) = (- sum over the vocabulary) (y_i * log(y_ihat) )</p>
+<p>// y is a one-hot vector, and yhat is the vector of probability of all possible targetwords output by the softmax </p>
+</blockquote>
+<p><strong>Problem:</strong></p>
+<blockquote>
+<p>Computational speed</p>
+</blockquote>
+<p><strong>Hiearchical softmax classifier:</strong></p>
+<blockquote>
+<p>Determine if it’s in the first half or the second half</p>
+<p>Repeat the step until get to the exact word.</p>
+<p>Each node of the tree is just a binary classifier.</p>
+<p>The complexity of this will be <strong>log|v|</strong> instead of <strong>v</strong></p>
+</blockquote>
+<p><strong>How to sample context c?</strong></p>
+<blockquote>
+<p>P(c) isn’t taken entirely at random based on distribution, because besides the really common words like “the”, “of”, you also want to train on less commonly used words like “apple” and “orange”.</p>
+</blockquote>
+<br>
 
-<h3 id="Debiasing-word-embeddings"><a href="#Debiasing-word-embeddings" class="headerlink" title="Debiasing word embeddings"></a><strong>Debiasing word embeddings</strong></h3><hr>
-<p>Cover by <a href="https://www.pixiv.net/member.php?id=7274164" target="_blank" rel="noopener">ソノムラ</a> on Pixiv</p>
+<h3 id="Negative-Sampling"><a href="#Negative-Sampling" class="headerlink" title="Negative Sampling"></a><strong>Negative Sampling</strong></h3><p>Given <strong>a pair of words</strong>, predict if that is a <strong>context - target pair</strong></p>
+<blockquote>
+<p>Generate Positive examples:</p>
+<p>Pick a context word, then pick a target word in the window. Label the target word as 1. </p>
+<p>Generate Negative examples:</p>
+<p>Use the same context word, pick a random word from the vocabulary. Label all the words as 0.</p>
+<p>Repeat for <strong>k</strong> times. k is recommended to be 5 - 20 for smaller dataset, 2-5 for larger datasets. </p>
+</blockquote>
+<p>So we have a task of</p>
+<blockquote>
+<p>Input context - word pair, predict y(if it is a context - target pair) as 0/1. </p>
+</blockquote>
+<p>Instead of doing a 10,000 way softmax like that in the last section, we do a 10,000 binary classification problem for (k+1) times.</p>
+<blockquote>
+<p>P(y = 1 | c, t ) = σ(θ_t * e_c)</p>
+</blockquote>
+<br>
+
+<p><strong>How to choose the k words?</strong></p>
+<blockquote>
+<p>P(w_i) = (f(w_i)^ 3/4) / (sum over the vocabulary) (f(w_j)^ 3/4)</p>
+<p>So it doesn’t follow the original distribution, nor choose the words uniformly at random, but select a distribution in between. </p>
+</blockquote>
+<br>
+
+<h3 id="GloVe-word-vectors"><a href="#GloVe-word-vectors" class="headerlink" title="GloVe word vectors"></a><strong>GloVe word vectors</strong></h3><p>GloVe stands for <strong>Global vectors for word representation</strong></p>
+<p>X_ij = # times word i(target) appear in context of j(context)</p>
+<p>It denotes how often do i and j appear close to each other</p>
+<br>
+
+<p>Model</p>
+<blockquote>
+<p>Minimize difference between </p>
+<p>(10,000 Σ i = 1) (10,000 Σ j = 1) f(x_ij) * (θ_i * e_j + b_i + b_j - log(X_ij))^2</p>
+<p>f(X_ij) = 0 when X_ij = 0, to prevent log(X_ij) go to infinity. </p>
+<p><strong>θ_i</strong> and <strong>e_j</strong> are symmetric, they play a similar role, have the same optimization objective.</p>
+<p>We can initialize <strong>θ_i</strong> and <strong>e_j</strong> both uniformly and </p>
+<p>e_w_final =( e_j + θ_i ) / 2</p>
+</blockquote>
+<p>One thing to note is that we cannot guarantee that individual components are interpretable. A feature can be a combination of multiple things of <strong>e.g.</strong> gender &amp; royal, instead of having them separated.</p>
+<h1 id="Applications-using-Word-Embeddings"><a href="#Applications-using-Word-Embeddings" class="headerlink" title="Applications using Word Embeddings"></a><strong>Applications using Word Embeddings</strong></h1><hr>
+<h3 id="Sentiment-Classification"><a href="#Sentiment-Classification" class="headerlink" title="Sentiment Classification"></a><strong>Sentiment Classification</strong></h3><p>May not have a huge labeled training set, but that’s fine. </p>
+<p>Simple sentiment classification model:</p>
+<blockquote>
+<p>Sum or average the embeddings of the words in a sentence. Put the sum/average into a softmax classifier, which outputs yhat. </p>
+<p>Disadvantage: ignores word order</p>
+</blockquote>
+<p>RNN for sentiment classification:</p>
+<blockquote>
+<p>Feed the embedding vectors into the RNN. At the last time step, predict yhat.</p>
+<p>This is many-to-one. </p>
+</blockquote>
+<br>
+
+<h3 id="Debiasing-word-embeddings"><a href="#Debiasing-word-embeddings" class="headerlink" title="Debiasing word embeddings"></a><strong>Debiasing word embeddings</strong></h3><br>
+
+<p>Gender stereotype</p>
+<p>Man: Computer_Programmer as Woman: Homemaker</p>
+<p>Word embeddings can reflect gender, ethnicity, age, sexual orientation, and other biases of the text used to train the model. </p>
+<br>
+
+<p>Adressing bias in word embeddings:</p>
+<blockquote>
+<ol>
+<li><p>Identify bias direction</p>
+<p>​    e_male - e_female</p>
+<p>​    e_he - e_she</p>
+<p>​    e_boy - e_girl</p>
+<p>​    …</p>
+<p>Average the values above.</p>
+</li>
+<li><p>Neutralize. For any word that’s not definitional(words that’re not like grandmother, grandfather, etc.), project to get rid of bias. </p>
+</li>
+<li><p>Equalize pairs. (the size of pairs is actually quite small)</p>
+<p>​    boy - girl</p>
+<p>​    grandmother - grandfather</p>
+<p>​    …</p>
+<p>You want the only difference between the embeddings is their gender. The distance between a word in a pair and a non-definitional word should be the same as that between the other word in the pair and the non-definitional word. <strong>e.g.</strong> ||e_doctor - e_man|| = ||e_doctor - e_woman||</p>
+</li>
+</ol>
+</blockquote>
+<p>See more details in <a href="https://arxiv.org/abs/1607.06520" target="_blank" rel="noopener">Boliukbasi et al., 2016</a></p>
+<br>
+
+<h1 id="Programming-assignment"><a href="#Programming-assignment" class="headerlink" title="Programming assignment"></a><strong>Programming assignment</strong></h1><hr>
+<h3 id="Analogy"><a href="#Analogy" class="headerlink" title="Analogy"></a><strong>Analogy</strong></h3><p>First, create a cosine similarity function.</p>
+<p>Input three words: a word pair, and a word.</p>
+<p><strong>E.g.</strong> France - Paris, Italy</p>
+<p>We will loop through the vocabulary, to find which word with respect to Italy has the highest cosine similarity with Parish to France. </p>
+<blockquote>
+<p>The word we want to find is <strong>w</strong></p>
+<p>Maximize Sim(e_Paris - e_France, e_w -  e_Italy)</p>
+</blockquote>
+<p>Then we figure out that the output is Rome.</p>
+<br>
+
+<h3 id="Emojify"><a href="#Emojify" class="headerlink" title="Emojify"></a><strong>Emojify</strong></h3><p>This assignment utilizes a many-to-one architecture. It maps the sentence to an emoji. The goal is to select the emoji that appropriately expresses the sentiment of the sentence, fits into the context, so thay you can append it to the end of your sentence when you’re typing. </p>
+<p>Things needed to do:</p>
+<blockquote>
+<p>Convert a sentence to an array, composed of indices of each word with respect to the vocabulary.  </p>
+<p>Create a pre-trained embedding layer, which converts the array of indices to embeddings. </p>
+<p>Feed the embeddings to the LSTM and the rest of the network, output through a softmax function.</p>
+</blockquote>
+<hr>
+<p>Cover by <a href="https://www.pixiv.net/member.php?id=11246082" target="_blank" rel="noopener">Miv4t</a> on Pixiv</p>
 
             </div>
 
