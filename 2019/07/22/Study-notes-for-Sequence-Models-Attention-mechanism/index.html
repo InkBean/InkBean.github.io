@@ -162,26 +162,223 @@
 <br>
 
 <h1 id="Various-sequence-to-sequence-architectures"><a href="#Various-sequence-to-sequence-architectures" class="headerlink" title="Various sequence to sequence architectures"></a><strong>Various sequence to sequence architectures</strong></h1><hr>
-<h3 id="Basic-Models"><a href="#Basic-Models" class="headerlink" title="Basic Models"></a><strong>Basic Models</strong></h3><br>
+<h3 id="Basic-Models"><a href="#Basic-Models" class="headerlink" title="Basic Models"></a><strong>Basic Models</strong></h3><p>Sequence to sequence model:</p>
+<blockquote>
+<p>Encoding network: input the sentence(word by word) and encode them as a vector. </p>
+<p>Decoding network: given the vector output by the encoding network, output the words of yhat one at a time</p>
+<p>By combining them together, you can do machine translation from, say, French to English.</p>
+</blockquote>
+<p>Image captioning:</p>
+<blockquote>
+<p>Get rid of the softmax layer, the last fully connected layer gives a vector representation of the input image.</p>
+<p>The pre-trained network can be the encoding network.</p>
+<p>Feed the vector output to an RNN, which generates the caption one word at a time.</p>
+</blockquote>
+<p>But we don’t just want a randomly chosen sentence but the most likely caption.</p>
+<br>
 
-<h3 id="Picking-the-most-likely-sentence"><a href="#Picking-the-most-likely-sentence" class="headerlink" title="Picking the most likely sentence"></a><strong>Picking the most likely sentence</strong></h3><br>
+<h3 id="Picking-the-most-likely-sentence"><a href="#Picking-the-most-likely-sentence" class="headerlink" title="Picking the most likely sentence"></a><strong>Picking the most likely sentence</strong></h3><p>Machine translation as building a <strong>conditional language model</strong>.</p>
+<blockquote>
+<p>The decoding network looks pretty much identical to the language model.</p>
+<p>The only difference is that the decoding network gets the vector representation from the encoding network, instead of having 0 as input.</p>
+<p>What a language model does is to model the probability of generating a random sentence.</p>
+<p>​        <strong>P(y&lt;1&gt;, y&lt;2&gt;…..y&lt;Ty&gt;)</strong></p>
+<p>What machine translation does is to model the probability of generating a sentence, given a sentence.</p>
+<p>​        <strong>P(y&lt;1&gt;, y&lt;2&gt;…..y&lt;Ty&gt; | x&lt;1&gt;, x&lt;2&gt; … x&lt;Tx&gt;)</strong></p>
+</blockquote>
+<p>Finding the most likely translation.</p>
+<blockquote>
+<p>Not to sample at random in the distribution, but </p>
+<p>​        argmax(y&lt;1&gt;, y&lt;2&gt;…..y&lt;Ty&gt;) P(y&lt;1&gt;, y&lt;2&gt;…..y&lt;Ty&gt; | x&lt;1&gt;, x&lt;2&gt; … x&lt;Tx&gt;)</p>
+</blockquote>
+<p>Why not greedy search?</p>
+<blockquote>
+<p>Greedy search: Pick the most likely first word, given the first word pick the most likely second word… Continue until the last word. </p>
+<p>We want to pick the combionation of y&lt;1&gt;, y&lt;2&gt;…..y&lt;Ty&gt; that maximizes the joint probability.</p>
+<p>It’s not always optimal to just pick one word at a time. 局部最优并不意味着全局最优。</p>
+</blockquote>
+<p>It’s impossible to enumerate all the possible sentences. If you have a 10,000 words vocabulary and want to generate a 10 words long sentence, the number of all possible sentences will be 10,000 ^ 10.</p>
+<p>So the most common thing to do is to use an approximate search algorithm. It’s not guaranteed to find the best one, but usually it does a good enough job.</p>
+<br>
 
-<h3 id="Beam-Search"><a href="#Beam-Search" class="headerlink" title="Beam Search"></a><strong>Beam Search</strong></h3><br>
+<h3 id="Beam-Search"><a href="#Beam-Search" class="headerlink" title="Beam Search"></a><strong>Beam Search</strong></h3><p>Step 1:</p>
+<blockquote>
+<p>Evaluate the probability of the first word. Unlike greedy search that chooses only the maximum, beam search considers multiple alternatives.</p>
+<p>B = 3 </p>
+<p>// Beam width denotes how many words it will consider at a time. If B = 1, then it’s greedy search</p>
+</blockquote>
+<p>Step 2:</p>
+<blockquote>
+<p>For each of the choices chosen in the first step, hard wire it as a part of the input to predict the second word.</p>
+<p>The probability of the second word is <strong>P(y&lt;2&gt; | x, y&lt;1&gt;)</strong></p>
+<p>We want to maximize <strong>P(y&lt;1&gt;, y&lt;2&gt; | x)</strong>, the <strong>joint probability</strong> of y&lt;1&gt; and y&lt;2&gt;</p>
+<p><strong>P(y&lt;1&gt;, y&lt;2&gt; | x) = P(y&lt;1&gt; | x) * P(y&lt;2&gt; | x, y&lt;1&gt;)</strong></p>
+<p>Pick the <strong>3 most likely combinations</strong> out of all the 3 * 10,000 y&lt;1&gt; y&lt;2&gt; combinations. </p>
+<p>Take on to the next steps of beam search. Repeat until the sentence ends.</p>
+<p>Since the beam width is 3, each step we keep 3 copies of the previous part of the network(input x and y&lt;1&gt;… ) </p>
+</blockquote>
+<br>
 
-<h3 id="Refinements-to-Beam-Search"><a href="#Refinements-to-Beam-Search" class="headerlink" title="Refinements to Beam Search"></a><strong>Refinements to Beam Search</strong></h3><br>
+<h3 id="Refinements-to-Beam-Search"><a href="#Refinements-to-Beam-Search" class="headerlink" title="Refinements to Beam Search"></a><strong>Refinements to Beam Search</strong></h3><p><strong>Length normalization:</strong></p>
+<p>The equation we used previously was</p>
+<blockquote>
+<p>arg max_y (Ty Π t = 1) P(y&lt;t&gt; | x, y&lt;1&gt;, ….., y&lt;t&gt;)</p>
+<p>P(y&lt;1&gt;, y&lt;2&gt;…..y&lt;Ty&gt; | x) = P(y&lt;1&gt; | x) * P(y&lt;2&gt; | x, y&lt;1&gt;) * … * P(y&lt;Ty&gt; | x, y&lt;1&gt;, y&lt;2&gt;…..y&lt;Ty - 1&gt;)</p>
+</blockquote>
+<p>The terms above are usually much less than one, which may result in numerical underflow.</p>
+<p>To solve it, we take the <strong>sum</strong> of the <strong>log</strong> of the terms. </p>
+<blockquote>
+<p>arg max_y (Ty <strong>Σ</strong> t = 1) <strong>log</strong>( P(y&lt;t&gt; | x, y&lt;1&gt;, ….., y&lt;t&gt;) )</p>
+</blockquote>
+<p>This works the same in terms of selecting the most likely sentence y. </p>
+<blockquote>
+<p>Maximizing log( P(y | x) ) should be the same as maximizing P(y | x), since the log function is a strictly monotonically increasing function. </p>
+</blockquote>
+<p>It’s a more numerically stable algorithm.</p>
+<br>
 
-<h3 id="Error-analysis-in-Beam-Search"><a href="#Error-analysis-in-Beam-Search" class="headerlink" title="Error analysis in Beam Search"></a><strong>Error analysis in Beam Search</strong></h3><br>
+<p>The algorithm might tend to prefer very short outputs, because the less term it has, the bigger the probability of the sentence will be. So instead of taking the sum/product of the terms, we would normalize the equation.</p>
+<blockquote>
+<p><strong>(1 / Ty ^ α)</strong> *  (Ty Σ t = 1) log( P(y&lt;t&gt; | x, y&lt;1&gt;, ….., y&lt;t&gt;) )</p>
+<p>(1 / Ty ^ α) is a normalization term. </p>
+<p>If α = 1, then it’s full normalization, equivalent to taking the average of each term.</p>
+<p>If α = 0, then we’re not normalizing at all.</p>
+<p>α = 0.7 will be a value in between.</p>
+</blockquote>
+<p>Take the top sentences, run through the equation</p>
+<blockquote>
+<p>(1 / Ty ^ α) (Ty Σ t = 1) log( P(y&lt;t&gt; | x, y&lt;1&gt;, ….., y&lt;t&gt;) )</p>
+</blockquote>
+<p>to see which one that maximizes the normalized probability(or log-likelihood) objective</p>
+<br>
 
-<h3 id="Bleu-Score"><a href="#Bleu-Score" class="headerlink" title="Bleu Score"></a><strong>Bleu Score</strong></h3><br>
+<p>How to choose beam width B?</p>
+<blockquote>
+<p>Large B: better result, slower</p>
+<p>Small B: worse result, faster</p>
+</blockquote>
+<p>Unlike exact search algorithms like BFS(Breadth First Search) or DFS(Depth First Search), Beam Search runs faster but is not guaranteed to find exact maximum for <strong>arg max_y P(y | x)</strong></p>
+<br>
 
-<h3 id="Attention-Model-Intuition"><a href="#Attention-Model-Intuition" class="headerlink" title="Attention Model Intuition"></a><strong>Attention Model Intuition</strong></h3><br>
+<h3 id="Error-analysis-in-Beam-Search"><a href="#Error-analysis-in-Beam-Search" class="headerlink" title="Error analysis in Beam Search"></a><strong>Error analysis in Beam Search</strong></h3><p>When a bad machine translation occurs, which to blame? </p>
+<p>RNN model, or beam search algorithm?</p>
+<b>
 
-<h3 id="Attention-Model"><a href="#Attention-Model" class="headerlink" title="Attention Model"></a><strong>Attention Model</strong></h3><h1 id="Speech-recognition-Audio-data"><a href="#Speech-recognition-Audio-data" class="headerlink" title="Speech recognition - Audio data"></a><strong>Speech recognition - Audio data</strong></h1><hr>
-<h3 id="Speech-recognition"><a href="#Speech-recognition" class="headerlink" title="Speech recognition"></a><strong>Speech recognition</strong></h3><br>
+<p>Say we have a human translation y* for the development set, and a bad machine translation y_hat.</p>
+<p>We know that RNN computes P(y | x)</p>
+<p>We can use the RNN model to compute P(y* | x) and P(y_hat | x ), and see which of these two is bigger. </p>
+<blockquote>
+<p>If P(y* | x) &gt; P(y_hat | x ), then it means that the RNN model works fine, something’s wrong with the beam search algorithm. Beam search fails to give you a more likely sentence.</p>
+<p>If P(y* | x) &lt;= P(y_hat | x ), then it means that something’s wrong with the RNN model. It fails to correctly evaluate which sentence is more likely.</p>
+</blockquote>
+<p>We can carry out this kind of error analysis to each error, and figure out what fraction of erros are due to beam search vs. RNN model.</p>
+<br>
 
-<h3 id="Trigger-Word-Detection"><a href="#Trigger-Word-Detection" class="headerlink" title="Trigger Word Detection"></a><strong>Trigger Word Detection</strong></h3><hr>
+<h3 id="Bleu-Score"><a href="#Bleu-Score" class="headerlink" title="Bleu Score"></a><strong>Bleu Score</strong></h3><p>If there’re multiple great answers, how to measure accuracy?</p>
+<p>Bleu stands for <strong>“Bilingual evaluation understudy”</strong></p>
+<p>Given a machine generated translation. If the translation is pretty close to references provided by human, then it will have a high Bleu Score. </p>
+<blockquote>
+<p>Look at the machine translation in the output and see if each of the words appears in any of the reference sentences.</p>
+</blockquote>
+<p>Modified precision. </p>
+<blockquote>
+<p>Get credit up to the number of times the word appears in the reference sentence. </p>
+</blockquote>
+<p>Bleu score on bigrams(pairs of words appearing next to each other)</p>
+<blockquote>
+<p>count_clip / count</p>
+</blockquote>
+<br>
+
+<p>To evaluate on n-gram </p>
+<blockquote>
+<p>P_n = (sum over the n-grams of y_hat) ( count_clip(n-gram) ) / (sum over n-grams of y_hat) (count(n-grams) )</p>
+</blockquote>
+<br>
+
+<p>We define p_n = Bleu score on n-grams only</p>
+<p>Combined Bleu score</p>
+<blockquote>
+<p>e^ ( (1 / n) (sum over the Bleu scores on (1 to n)grams) )</p>
+<p>This is Euler number to the power of the average of all the (1 to n)grams.</p>
+<p>We should also multiply it by ‘BP’</p>
+<p><strong>Combined Bleu Score = BP * e^ ( (1 / n) (sum over the Bleu scores on (1 to n)grams) )</strong></p>
+<p>BP = brevity penalty</p>
+<p>Penalizes translations that’re too short.</p>
+<p>If MT_output_length &gt; reference_output_length</p>
+<p>​        BP = 1</p>
+<p>Else</p>
+<p>​        BP = e^ (1 - MT_output_length / reference_output_length) </p>
+</blockquote>
+<p>To summarize, Bleu score is a pretty good single number evaluation metric to use. </p>
+<br>
+
+<h3 id="Attention-Model-Intuition"><a href="#Attention-Model-Intuition" class="headerlink" title="Attention Model Intuition"></a><strong>Attention Model Intuition</strong></h3><p>The problem of long sequences:</p>
+<blockquote>
+<p>For a traditional encoding-decoding architecture, </p>
+</blockquote>
+<p>The fact is that when we human translate, we will not look at the whole chunk of thing and then translate the chunk of thing out. Instead, we look at a portion of it at a time, then generate a portion of translation, and repeat that until ending.</p>
+<p>The key mindset is that we want the network to <strong>pay attention to only a part of the sentence</strong> when generating a translation. </p>
+<p>To do that, each input word would have an attention weight. It denotes when computing the n_th word, how much attention should be paid to this word in the input. The network will therefore know what words in the input they should pay attention to when they’re generating a word.</p>
+<br>
+
+<h3 id="Attention-Model"><a href="#Attention-Model" class="headerlink" title="Attention Model"></a><strong>Attention Model</strong></h3><blockquote>
+<p>a&lt;t’&gt; = (a→&lt;t’&gt;, a←&lt;t’&gt;)  // concatenate together</p>
+<p>s&lt;t&gt; = activation to generate the t_th output word. It’s composed of y&lt;t -1&gt; and c&lt;t&gt;</p>
+<p>Input c(context) is the sum of the features of the different time steps weighted by the attention weights.</p>
+</blockquote>
+<br>
+
+<p>Equations:</p>
+<blockquote>
+<p>(Σ t’) (α&lt;1, t’&gt;) = 1            // The weights sum up to be 1</p>
+<p><strong>c&lt;t&gt; = (Σ t’)  (α&lt;1, t’&gt; * a&lt;t’&gt;)</strong></p>
+<p><strong>α&lt;t, t’&gt;</strong> is the amount of attention y&lt;t&gt; should pay to a&lt;t’&gt;</p>
+</blockquote>
+<br>
+
+<p>How to compute attention <strong>α&lt;t, t’&gt;</strong>:</p>
+<blockquote>
+<p><strong>a&lt;t, t’&gt; = e^ (e&lt;t, t’&gt;) / (Tx Σ t’ = 1) e^ (e&lt;t, t’&gt;)</strong>    // to make sure that all attention weights sum up to 1</p>
+<p>To compute <strong>e&lt;t, t’&gt;</strong>, we want to train a small neural network that</p>
+<p>​    inputs <strong>s&lt;t - 1&gt;</strong> and <strong>a&lt;t’&gt;</strong>        //s&lt;t - 1&gt; is network state of the previous time step</p>
+<p>​    outputs <strong>e&lt;t, t’&gt;</strong></p>
+</blockquote>
+<p>It’s quite costly in computation though. The total number of parameters α&lt;t, t’&gt; will be Tx * Ty</p>
+<h1 id="Speech-recognition-Audio-data"><a href="#Speech-recognition-Audio-data" class="headerlink" title="Speech recognition - Audio data"></a><strong>Speech recognition - Audio data</strong></h1><hr>
+<h3 id="Speech-recognition"><a href="#Speech-recognition" class="headerlink" title="Speech recognition"></a><strong>Speech recognition</strong></h3><p>Task</p>
+<blockquote>
+<p>Given x(audio clip), output y(transcript)</p>
+</blockquote>
+<p>Pre-process with a spectrogram:</p>
+<blockquote>
+<p>x-axis = time, y-axis = frequency, color = energy</p>
+</blockquote>
+<br>
+
+<p>Attention model can be used.</p>
+<br>
+
+<p><strong>CTC cost for speech recognition</strong></p>
+<blockquote>
+<p>CTC stands for Connectionist temporal classification</p>
+</blockquote>
+<blockquote>
+<p>Let’s say we have a clause “the quick brown fox”</p>
+<p>we start to recognize “the q”</p>
+<p>When the neural network is forced to generate the same number of output features as that of input, since the # features of the input can be really big(if the 10 seconds audio clip is 100 hertz, there would be 1000 features as input), we can represent the output as </p>
+<p><strong>ttt_h_eee_ _ _ _ ‘ ‘_ _ _ qqq_ _</strong></p>
+<p>// ‘_’ as blank character and ‘ ‘ as space character.</p>
+<p>Basic rule: collapse repeated characters not separated by blank.</p>
+<p>After being collapsed, the output will be “the q”</p>
+</blockquote>
+<br>
+
+<h3 id="Trigger-Word-Detection"><a href="#Trigger-Word-Detection" class="headerlink" title="Trigger Word Detection"></a><strong>Trigger Word Detection</strong></h3><p>Set a target label to be 1 right after the trigger word. Set a few values after the 1 to be 1 as well, </p>
+<p>slightly even out the 1s to 0s</p>
+<hr>
 <p>Cover by <a href="https://www.pixiv.net/member_illust.php?id=420928" target="_blank" rel="noopener">_LM7_</a> on Pixiv</p>
-
+</b>
             </div>
 
             <!-- Post Comments -->
