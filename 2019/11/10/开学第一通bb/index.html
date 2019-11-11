@@ -153,95 +153,33 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/bg.png);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
-                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>GANs</h2></a>
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/nless.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>开学第一通bb</h2></a>
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                <p>Let’s start with ‘adversarial attacks’. </p>
-<p>For example, we have a goal that</p>
-<blockquote>
-<p>Given a network pretrained on ImageNet, find an output image that is a <strong>cat</strong> but still classified as <strong>iguana</strong>.</p>
-</blockquote>
-<p>By this, we mean that we want to generate an image that looks like a cat, but will be <strong>classified by the neural network</strong> as an iguana. </p>
-<p>To rephrase it, we say that we want to</p>
-<blockquote>
-<p>Find an x that yhat is an iguana.</p>
-<p>At the same time, we need to have an x that’s really close to x_cat</p>
-</blockquote>
-<br>
-
-<p>The <strong>loss function</strong> should be composed of two parts:</p>
+                <p>距离发上篇推文的时间也就是开学已经有了两个半月。</p>
 <ul>
-<li>The distance between y_hat and y_iguana</li>
-<li>The distance between x_generated and x_cat</li>
+<li><p>看了songchun zhu教授的文章之后我大概以此给自己找了个不继续在课外自学deep learning的借口。如果只是这样也就罢了，还有多得是的别的东西可以去学。可我到现在为止什么也没做，除了每周做点我已经不想干的暑假research的延续的杂活。上周倒算是又联系上了一个lab，希望能给我重新注入点活力。</p>
+</li>
+<li><p>课内搞得也不怎么样，我或许真的就是这么菜吧。</p>
+</li>
+<li><p>这学期产生了好几次不想继续学CS的念头。说实在话，我觉得我对计算机本身大概确实兴趣不大，只是觉得它能做到的事情很酷。像是软件工程这类东西我倒确实是不想学了。如果我把我的CS Major换成minor之后software engineering的课就再不用上了，关于计算机本身的其他一些课也是。这样还能腾出来一些学分让我修些比如physics, psychology, neuroscience, philosophy之类的minor会更合我意吧。</p>
+</li>
+<li><p>我想做所谓“有意义”的事情，或是能帮助找到“意义”的事情。被这种想法束缚住不知道是件好事还是坏事，谁又知道呢。</p>
+</li>
+<li><p>这学期总算是认识了些人也交了些朋友（相比于上学期完全的socially dead要好多了），室友人也都不错相处的还算好。不过感觉人与人交往还是得忌讳高估自己在别人心里地位。从小到大算是感受到了没有期望就没有失望，自作多情是真的傻逼。佛一点没心没肺一点能开心一点吧。</p>
+</li>
+<li><p>有段时间特别开心，有段时间又特别自闭，现在的心情大概是处于这之间吧。</p>
+</li>
+<li><p>总觉得自己是特别理性的人，但或许并不是这样的吧。</p>
+</li>
+<li><p>又产生了几次想转学的念头。不是深思熟虑后得出的结论，而只是因为想逃避现在身边的人和事和所处的环境。这种念头很快会打消，诸事不顺的时候又会突然蹦出来作为一种潜在的逃避手段。真的蠢。</p>
+</li>
 </ul>
-<p>We want to minimize both. </p>
-<br>
-
-<p><strong>How to generate adversarial images then?</strong></p>
-<p>Trained CNNs seem to be pretty robust in recognizing images we usually see in real life, but “intentional” slight changes in x can result in big change in yhat(the predicted y), due to vulnerability of linear model.</p>
-<p>Even for reasonably deep neural networks, since the most commonly used activation function — ReLU — is pretty linear(comparing to other functions like Sigmoid), the overall structure of a neural network will tend to be linear generally. </p>
-<p>By making this kind of slight changes on an image of a cat, it fools the detector that it is an iguana. </p>
-<blockquote>
-<p>For a recent project, I got to do the verification task(to prove that I’m not a robot) of object detection when I was trying to download datasets from the website of U.S. Department of Transportation. Lots of websites have this kind of task, but what’s special about this one it that the pictures provided look like adversarial images. さすが政府機関な！</p>
-</blockquote>
-<br>
-
-<p>We certainly want our networks to be more rubust in facing the attack of datasets composed of these carefully made adversarial training examples. A solution is to train a GAN that’s robust in detecting adversarial images, but GANs definitely can do a lot more things other than this.</p>
-<h1 id="GANs"><a href="#GANs" class="headerlink" title="GANs"></a><strong>GANs</strong></h1><blockquote>
-<p>Motivation: endowing computers with an understanding of our world</p>
-<p>Goal: collect a lot of data, use it to generate similar data from scratch</p>
-<p>Intuition: number of parameters of the model &lt;&lt; amount of data</p>
-</blockquote>
-<p>The motivation part is pretty interesting.</p>
-<p>I feel that the sort of AI we are able to create right now do not actually “understand” what they’re doing. The example presented above is great: the network classifies a thing as an iguana, but the thing is actually a cat. It makes me feel like even if the network may outperforms cat classification in real images, it performs really bad with adversarial images. From our perspective, the networks don’t seem to capture the concept(or maybe essence) of a cat as human do.</p>
-<p>In order to let the network at least seems to capture the “concept” of cat, we need to force it to understand cat in the way we do. The distribution of cat from the network’s perspective should match that of in reality. </p>
-<p>To do that, we need to train it on the adversarial images. A GANs is made, composed of a <strong>discriminator</strong> and a <strong>generator</strong>. The discriminator is still a network doing classification jobs, but now it’s confronting the adversarial examples, trying to distinguish them from the real ones. The generator is trying to generate things that cannot be distinguished by discriminator, things that fall within the real distribution. </p>
-<p>In general, we define their functionalities as,</p>
-<p><strong>Discriminator:</strong></p>
-<blockquote>
-<p>Given examples that have certain features, figure out the distribution to enhance its classification capability.</p>
-</blockquote>
-<p><strong>Generator:</strong></p>
-<blockquote>
-<p>Given distribution, generate examples that have features needed to fall into the distribution. </p>
-</blockquote>
-<p>The confrontation of the discriminator and generator makes each one of them better. </p>
-<br>
-
-<p>CycleGAN is a very interesting application of GANs.</p>
-<p>It can transform a thing in one category to another. </p>
-<p><strong>E.g.</strong> Apple to orange, horse to zebra, etc.</p>
-<p>In most cases the two categories would often share lots of common features, but there’re also cases that the two categories seem very different. </p>
-<ul>
-<li>A few Japanese researchers created a CycleGAN that can transform a human face to <strong>ramen</strong>, then from ramen back to a human face. 不禁感嘆一下日本人真狂気（中国語警告/甚至不算偽日本語）</li>
-</ul>
-<p>Also, I’ve used “Waifu2x” for quite a few times to enhance the resolution of images I’ve found and the outcomes are great. I believe that this also uses GAN. The pic for the cover of this article is the high resolution version output by “Waifu2x.”</p>
-<p>Btw I just found out what “Waifu2x” means, and hmm….</p>
+<p>收拾收拾心情，生活还得继续。</p>
 <hr>
-<p><em>Some random things but I just wrote it anyway</em></p>
-<p>Continue the topic of “capturing the concept.”</p>
-<p>Even if we create the kind of artificial intelligence that does seem to capture the concept, understand the world as how humans understand, and behave exactly the same as human, it’s still debatable regarding if such a creature really <strong>“knows”</strong> what it is doing. </p>
-<p>There’re a series of questions.</p>
-<ul>
-<li>They may have exactly the same functionality, but does the artificial intelligence run under the same mechanism(does it function as how the neurons work in our brains)?</li>
-<li>Even if the answer to this question is yes, does the AI(conceptually equivalent to the <strong>“philosophical zombie”</strong>) therefore acquire the <strong>first person perspective</strong>? Does it have <strong>“qualia”</strong>? </li>
-<li>If we deny the existence of qualia or <strong>“consciousness”</strong> in such creature, then what’s the reason why carbon based lives are so special? </li>
-</ul>
-<p>Right now it seems that Neuroscience and Cognitive science have a certain degree of common agreement on the existence of “consciousness”, but <strong>the hard problem of consciousness</strong> remains mysterious.</p>
-<br>
-
-<p>I blacked out once(that was stupid and I’m not gonna do that anymore). As my friends told me, I remained physically active until around 2:30 A.M. , but my conscious memory stopped at around 12:00 A.M. They recorded a few short videos of what I was doing when I was drunk, but I didn’t remember any of the things I’ve done, the words I’ve said. </p>
-<p>Based on the video records, I behaved as a drunk person without doubt, but I was also able to conversations that make complete sense. So what happened? Did I just lose the memory, or I acted “unconsciously”? By the latter, I mean that there wasn’t such a thing as <strong>how it feels to live</strong> in the period of time I blacked out. </p>
-<p>Under construction…. I WILL fill it up some time later. </p>
-<br>
-
-<hr>
-<ul>
-<li>On what I’ve learnt from <a href="https://www.youtube.com/embed/ANszao6YQuM" target="_blank" rel="noopener">video lecture 4</a> in CS230 at Stanford. </li>
-<li>Cover by <a href="https://www.pixiv.net/member_illust.php?id=1980643&p=2" target="_blank" rel="noopener">ASK</a> on Pixiv</li>
-</ul>
+<p>Cover by <a href="https://twitter.com/avogado6" target="_blank" rel="noopener">アボガド6</a> onTwitter</p>
 
             </div>
 
@@ -304,8 +242,8 @@ $('.btn_click_load').click(function() {
 -->
 <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'http://yoursite.com/2019/07/17/GANs/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://yoursite.com/2019/07/17/GANs/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://yoursite.com/2019/11/10/开学第一通bb/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/11/10/开学第一通bb/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 
