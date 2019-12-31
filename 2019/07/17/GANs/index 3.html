@@ -1,0 +1,351 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/in.png">
+	<link rel="shortcut icon" href="/img/in.png">
+	
+			    <title>
+    InkBean's Blog
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
+    <meta name="keywords" content="inkbean, Machine Learning, Neural Network, Deep Learning">
+    
+    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	 
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg.jpg') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+			    
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+</head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_coy.css">
+<link rel="stylesheet" href="/css/typo.css">
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">InkBean</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special">
+            <ul class="menu links">
+			<!-- Homepage  主页  --> 
+			<li>
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/Learning/">Learning</a></li><li><a class="category-link" href="/categories/日常/">日常</a></li><li><a class="category-link" href="/categories/玩耍/">玩耍</a>
+	                    </li></ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">归档</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
+	                    </li></ul>
+	        </li>
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="关于">
+		                关于
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/friends/" title="友達">
+		                友達
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+                    
+                    <li>
+                        <a title="github" href="https://github.com/InkBean" target="_blank" rel="noopener">
+                            <i class="icon fa fa-github"></i>
+                        </a>
+                    </li>
+                    
+			</ul>
+</nav>
+
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/bg.png);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>GANs</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p>Let’s start with ‘adversarial attacks’. </p>
+<p>For example, we have a goal that</p>
+<blockquote>
+<p>Given a network pretrained on ImageNet, find an output image that is a <strong>cat</strong> but still classified as <strong>iguana</strong>.</p>
+</blockquote>
+<p>By this, we mean that we want to generate an image that looks like a cat from our perspective, but will be <strong>classified by the neural network</strong> as an iguana. </p>
+<p>To rephrase it, we say that we want to</p>
+<blockquote>
+<p>Find an x that yhat is an iguana.</p>
+<p>At the same time, we need to have an x that’s really close to x_cat</p>
+</blockquote>
+<br>
+
+<p>The <strong>loss function</strong> should be composed of two parts:</p>
+<ul>
+<li>The distance between y_hat and y_iguana</li>
+<li>The distance between x_generated and x_cat</li>
+</ul>
+<p>We want to minimize both. </p>
+<br>
+
+<p><strong>How to generate adversarial images then?</strong></p>
+<p>Trained CNNs seem to be pretty robust in recognizing images we usually see in real life, but “intentional” slight changes in x can result in big change in yhat(the predicted y), due to vulnerability of linear model.</p>
+<p>Even for reasonably deep neural networks, since the most commonly used activation function — ReLU — is pretty linear(comparing to other functions like Sigmoid), the overall structure of a neural network will tend to be linear generally. </p>
+<p>By making this kind of slight changes on an image of a cat, it fools the detector that it is an iguana. </p>
+<blockquote>
+<p>For a recent project, I got to do the verification task(to prove that I’m not a robot) of object detection when I was trying to download datasets from the website of U.S. Department of Transportation. Lots of websites have this kind of task, but what’s special about this one it that the pictures provided look like adversarial images. さすが政府機関な！</p>
+</blockquote>
+<br>
+
+<p>We certainly want our networks to be more rubust in facing the attack of datasets composed of these carefully made adversarial training examples. A solution is to train a GAN that’s robust in detecting adversarial images, but GANs definitely can do a lot more things other than this.</p>
+<h1 id="GANs"><a href="#GANs" class="headerlink" title="GANs"></a><strong>GANs</strong></h1><blockquote>
+<p>Motivation: endowing computers with an understanding of our world</p>
+<p>Goal: collect a lot of data, use it to generate similar data from scratch</p>
+<p>Intuition: number of parameters of the model &lt;&lt; amount of data</p>
+</blockquote>
+<p>The motivation part is pretty interesting.</p>
+<p>I feel that the sort of AI we are able to create right now do not actually “understand” what they’re doing. The example presented above is great: the network classifies a thing as an iguana, but the thing is actually a cat. It makes me feel like even if the network may outperforms cat classification in real images, it performs really bad with adversarial images. From our perspective, the networks don’t seem to capture the concept(or maybe essence) of a cat as human do.</p>
+<p>In order to let the network at least seems to capture the “concept” of cat, we need to force it to understand cat in the way we do. The distribution of cat from the network’s perspective should match that of in reality. </p>
+<p>To do that, we need to train it on the adversarial images. A GANs is made, composed of a <strong>discriminator</strong> and a <strong>generator</strong>. The discriminator is still a network doing classification jobs, but now it’s confronting the adversarial examples, trying to distinguish them from the real ones. The generator is trying to generate things that cannot be distinguished by discriminator, things that fall within the real distribution. </p>
+<p>In general, we define their functionalities as,</p>
+<p><strong>Discriminator:</strong></p>
+<blockquote>
+<p>Given examples that have certain features, figure out the distribution to enhance its classification capability.</p>
+</blockquote>
+<p><strong>Generator:</strong></p>
+<blockquote>
+<p>Given distribution, generate examples that have features needed to fall into the distribution. </p>
+</blockquote>
+<p>The confrontation of the discriminator and generator makes each one of them better. </p>
+<br>
+
+<p>CycleGAN is a very interesting application of GANs.</p>
+<p>It can transform a thing in one category to another. </p>
+<p><strong>E.g.</strong> Apple to orange, horse to zebra, etc.</p>
+<p>In most cases the two categories would often share lots of common features, but there’re also cases that the two categories seem very different. </p>
+<ul>
+<li>A few Japanese researchers created a CycleGAN that can transform a human face to <strong>ramen</strong>, then from ramen back to a human face. 不禁感嘆一下日本人真狂気（中国語警告/甚至不算偽日本語）</li>
+</ul>
+<p>Also, I’ve used “Waifu2x” for quite a few times to enhance the resolution of images I’ve found and the outcomes are great. I believe that this also uses GAN. The pic for the cover of this article is the high resolution version output by “Waifu2x.”</p>
+<p>Btw I just found out what “Waifu2x” means, and hmm….</p>
+<hr>
+<p><em>Some random things but I just wrote it anyway</em></p>
+<p>Continue the topic of “capturing the concept.”</p>
+<p>Even if we create the kind of artificial intelligence that does seem to capture the concept, understand the world as how humans understand, and behave exactly the same as human, it’s still debatable regarding if such a creature really <strong>“knows”</strong> what it is doing. </p>
+<p>There’re a series of questions.</p>
+<ul>
+<li>They may have exactly the same functionality, but does the artificial intelligence run under the same mechanism(does it function as how the neurons work in our brains)?</li>
+<li>Even if the answer to this question is yes, does the AI(conceptually equivalent to the <strong>“philosophical zombie”</strong>) therefore acquire the <strong>first person perspective</strong>? Does it have <strong>“qualia”</strong>? </li>
+<li>If we deny the existence of qualia or <strong>“consciousness”</strong> in such creature, then what’s the reason why carbon based lives are so special? </li>
+</ul>
+<p>Right now it seems that Neuroscience and Cognitive science have a certain degree of common agreement on the existence of “consciousness”, but <strong>the hard problem of consciousness</strong> remains mysterious.</p>
+<br>
+
+<p>I experienced alchoholic black out once(that was so stupid and that would be the last time I ever do it). As my friends told me, I remained physically active until around 2:30 A.M. , but my conscious memory was cut off at around 12:00 A.M. They recorded a few short videos of what I was doing when I was drunk, but I didn’t remember any of the things I’ve done, the words I’ve said. </p>
+<p>Based on the video records, I behaved as a drunk person without doubt, but I was also able to conversations that make complete sense. So what happened? Did I just lose the memory, or I acted “unconsciously”? By the latter, I mean that there wasn’t such a thing as <strong>how it feels to live</strong> in the period of time I blacked out. </p>
+<p>Under construction…. I WILL fill it up some time later. </p>
+<br>
+
+<hr>
+<ul>
+<li>On what I’ve learnt from <a href="https://www.youtube.com/embed/ANszao6YQuM" target="_blank" rel="noopener">video lecture 4</a> in CS230 at Stanford. </li>
+<li>Cover by <a href="https://www.pixiv.net/member_illust.php?id=1980643&p=2" target="_blank" rel="noopener">ASK</a> on Pixiv</li>
+</ul>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">View Comments</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'inkbin'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/07/17/GANs/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/07/17/GANs/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//inkbin.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy; <a href="https://inkbean.github.io" style="border-bottom: none;">InkBean's Blog</a></li>
+                <li>Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Theme: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+                <span id="busuanzi_container_site_uv">有<span id="busuanzi_value_site_uv"></span>个小伙伴来过</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

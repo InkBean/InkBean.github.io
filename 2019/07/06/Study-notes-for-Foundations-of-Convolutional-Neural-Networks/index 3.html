@@ -1,0 +1,493 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/in.png">
+	<link rel="shortcut icon" href="/img/in.png">
+	
+			    <title>
+    InkBean's Blog
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
+    <meta name="keywords" content="inkbean, Machine Learning, Neural Network, Deep Learning">
+    
+    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	 
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg.jpg') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+			    
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+</head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_coy.css">
+<link rel="stylesheet" href="/css/typo.css">
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">InkBean</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special">
+            <ul class="menu links">
+			<!-- Homepage  主页  --> 
+			<li>
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/Learning/">Learning</a></li><li><a class="category-link" href="/categories/日常/">日常</a></li><li><a class="category-link" href="/categories/玩耍/">玩耍</a>
+	                    </li></ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">归档</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
+	                    </li></ul>
+	        </li>
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="关于">
+		                关于
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/friends/" title="友達">
+		                友達
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+                    
+                    <li>
+                        <a title="github" href="https://github.com/InkBean" target="_blank" rel="noopener">
+                            <i class="icon fa fa-github"></i>
+                        </a>
+                    </li>
+                    
+			</ul>
+</nav>
+
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/snt.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Study notes for &#39;Foundations of Convolutional Neural Networks&#39;</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p>Week 1 in Andrew Ng’s <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome" target="_blank" rel="noopener">Convolutional Neural Networks</a> on Coursera.</p>
+<br>
+
+<h3 id="Computer-vision"><a href="#Computer-vision" class="headerlink" title="Computer vision"></a><strong>Computer vision</strong></h3><blockquote>
+<p>Image classification</p>
+<p>Object detection</p>
+<p>Neural style transfer</p>
+<p>etc.</p>
+</blockquote>
+<p>Dimension of input features can get really big.</p>
+<p><strong>e.g.</strong> A picture of 1000 * 1000 has 3 million input features. (1000 * 1000 * 3)</p>
+<br>
+
+<h3 id="Edge-detection-example"><a href="#Edge-detection-example" class="headerlink" title="Edge detection example"></a><strong>Edge detection example</strong></h3><p>In mathematics, <strong>‘*‘</strong> denotes convolution. In python, <strong>‘*‘</strong> also denotes matrix wise multiplication.</p>
+<p>Image * filter = new image </p>
+<blockquote>
+<p>Python: conv_forward()</p>
+<p>Tensorflow: tf.nn.Conv2D()</p>
+<p>Keras: Conv2D()</p>
+</blockquote>
+<p>A vertical edge is a 3 x 3 region where there’re bright pixels on the left and dark pixels on the right.</p>
+<br>
+
+<h3 id="More-edge-detection"><a href="#More-edge-detection" class="headerlink" title="More edge detection"></a><strong>More edge detection</strong></h3><p>Horizontal: </p>
+<blockquote>
+<p>relatively bright on top, relatively dark below</p>
+</blockquote>
+<p>There’re also other kinds of filters such as Sobel filter, Schorr filter, etc.</p>
+<p>You can treat the 9 numbers in the filter matrix as <strong>parameters that can learn</strong>, instead of fixed, hand-coded values such as the numbers in Sobel filter.</p>
+<br>
+
+<h3 id="Padding"><a href="#Padding" class="headerlink" title="Padding"></a><strong>Padding</strong></h3><p>If you have an <strong>n x n</strong> original image, a <strong>f x f</strong> filter, then your output will be <strong>(n - f + 1) x (n - f + 1)</strong></p>
+<p>But you don’t want it to shrink, or throw away information of the edges of the image. </p>
+<p>To solve it, you want to pad the image. </p>
+<blockquote>
+<p>for example, if p = 1, n = 6, f = 3</p>
+<p>the dimensions of the original image therefore becomes (6 + 1 + 1) x (6 + 1 + 1) = 8 x 8</p>
+<p>after convolution, it becomes 6 x 6, which is the same as that of the original image </p>
+</blockquote>
+<p><strong>“Valid Convolution”:</strong></p>
+<blockquote>
+<p>No padding</p>
+<p>n x n * f x f gives you (n - f + 1) x (n - f + 1)</p>
+</blockquote>
+<p><strong>“Same Convolution”:</strong></p>
+<blockquote>
+<p>Output size = Input size</p>
+<p>n x n * f x f gives you (n + 2p - f + 1) x (n + 2p - f + 1)</p>
+<p>n + 2p - f + 1 = n</p>
+<p>p = (f - 1) / 2</p>
+<p>f is usually <strong>odd</strong> so that the filter has a <strong>central position</strong> and <strong>avoids asymmetric padding</strong> </p>
+</blockquote>
+<br>
+
+<h3 id="Strided-convolutions"><a href="#Strided-convolutions" class="headerlink" title="Strided convolutions"></a><strong>Strided convolutions</strong></h3><p>If stride = 2, for example,</p>
+<p>the filter would jump over by 2 steps instead of 1 pixel</p>
+<p><strong>Generally:</strong></p>
+<blockquote>
+<p>n x n * f x f, with padding p and stride s</p>
+<p>the output dimension would be <strong>[ (n + 2p -f) / s + 1 ]</strong> by  <strong>[ (n + 2p -f) / s + 1 ) ]</strong></p>
+<p>[z] denotes floor(z), in case (n + 2p - f) isn’t an integer.</p>
+<p>You don’t want the filter to interfere with regions outside of the image or image + padding</p>
+</blockquote>
+<p>Technical note on cross-correlation and convolution:</p>
+<blockquote>
+<p>In math textbooks, you mirror the filter both on vertical and horizontal axis, before doing the multiplication.</p>
+<p>By convention, in DL, we don’t bother to do the step of flipping it over. What we call “convolution” in DL is actually “cross-correlation” in mathematics, but by convention we just call it “convolution” and it works just fine.</p>
+</blockquote>
+<br>
+
+<h3 id="Convolutions-over-volume"><a href="#Convolutions-over-volume" class="headerlink" title="Convolutions over volume"></a><strong>Convolutions over volume</strong></h3><p>Convolutions on RGB image</p>
+<blockquote>
+<p><strong>Height</strong> x <strong>Width</strong> x <strong># Channels</strong></p>
+</blockquote>
+<p>The <strong># Channels</strong>(or sometimes also called <strong>depth</strong>) of the image and the filter must be the same.</p>
+<p>It’s potentially possible to have a filter that cares about only one of red, blue, and green.</p>
+<p>What if we want to detect edges of both horizontal and vertical?</p>
+<blockquote>
+<p>Convolve with 2 filters, resulting in two outputs and then stack them up.</p>
+</blockquote>
+<p><strong>In general:</strong></p>
+<blockquote>
+<p>n x n x nc * f x f x nc = (n - f + 1) x (n - f + 1) x nc’, assuming no padding and no stride</p>
+<p>nc’ denotes the number of filters you use.</p>
+</blockquote>
+<br>
+
+<h3 id="One-layer-of-a-Convolutional-Network"><a href="#One-layer-of-a-Convolutional-Network" class="headerlink" title="One layer of a Convolutional Network"></a><strong>One layer of a Convolutional Network</strong></h3><p>Recall that</p>
+<blockquote>
+<p>Z[1] = W[1] * X + b[1]</p>
+<p>A[1] = g[1](Z[1]) </p>
+</blockquote>
+<p>In CNN</p>
+<blockquote>
+<p>Filter plays a role similar to W[1]</p>
+<p>You would also add a bias term(a real number) to the output image, which plays a role similar to b[1]</p>
+</blockquote>
+<br>
+
+<p>Number of parameters in one layer:</p>
+<blockquote>
+<p>You have fixed number of parameters regardless of the size of your input.</p>
+<p><strong>e.g.</strong> If you have 10 filters in size of 3 x 3 x 3, you will have </p>
+<p>(3 * 3 * 3 + 1) * 10 = 280 parameters</p>
+</blockquote>
+<br>
+
+<p><strong>Summary of notation:</strong></p>
+<blockquote>
+<p>If layer l is a convolution layer</p>
+<p>f[l] = filter size</p>
+<p>p[l] = padding</p>
+<p>s[l] = stride</p>
+<p>nc[l] = number of filters </p>
+<p>Each filter is : <strong>f[l]</strong> x <strong>f[l]</strong> x <strong>nc[l - 1]</strong></p>
+<p>Activations: <strong>a[l]</strong> = <strong>nH[l]</strong> x <strong>nW[l]</strong> x <strong>nc[l]</strong></p>
+<p>If we have <strong>m</strong> training examples, then activations will be: </p>
+<p>A[l] = <strong>m</strong> x <strong>nH[l]</strong> x <strong>nW[l]</strong> x <strong>nc[l]</strong></p>
+<p>Weights: <strong>f[l]</strong> x <strong>f[l]</strong> x <strong>nc[l - 1]</strong> x <strong>nc[l]</strong>         // nc[l] denotes # filters in layer l</p>
+<p> bias: 1 x 1 x 1 x <strong>nc[l]</strong></p>
+<p>Input: <strong>nH[l - 1]</strong> x <strong>nW[l - 1]</strong> x <strong>nc[l - 1]</strong></p>
+<p>Output: <strong>nH[l]</strong> x <strong>nW[l]</strong> x <strong>nc[l]</strong></p>
+</blockquote>
+<br>
+
+<h3 id="Simple-Convolutional-Network-Example"><a href="#Simple-Convolutional-Network-Example" class="headerlink" title="Simple Convolutional Network Example"></a><strong>Simple Convolutional Network Example</strong></h3><blockquote>
+<p>Take the last activation and flatten it to a big vector.</p>
+<p>Fit the vector in a logistic/softmax activation function to get the final yhat.</p>
+</blockquote>
+<p>One general trend is:</p>
+<blockquote>
+<p>As we go deeper, the number of height and width gradually <strong>decrease</strong>, while the number of channels gradually <strong>increase</strong>.</p>
+</blockquote>
+<br>
+
+<p>Types of Layer in a convolutional network:</p>
+<blockquote>
+<ul>
+<li><strong>Convolution (Conv)</strong></li>
+<li><strong>Pooling (Pool)</strong></li>
+<li><strong>Fully connected (FC)</strong></li>
+</ul>
+</blockquote>
+<br>
+
+<h3 id="Pooling-Layers"><a href="#Pooling-Layers" class="headerlink" title="Pooling Layers"></a><strong>Pooling Layers</strong></h3><p><strong>Max pooling:</strong></p>
+<blockquote>
+<p>Take the max over a f x f region, as if you’re taking a filter size of f.</p>
+</blockquote>
+<p>Hyperparameters:</p>
+<blockquote>
+<p>f(filter size) and s(stride)</p>
+<p>f = 2 and s = 2 are common choices.</p>
+</blockquote>
+<p>There’s <strong>no parameters to learn</strong> though. </p>
+<p>performance on each of the channels independently, so applying max pooling won’t change </p>
+<br>
+
+<p>Average pooling:</p>
+<blockquote>
+<p>Take the average over a f x f region</p>
+</blockquote>
+<p>Max pooling is used much more often than average pooling.</p>
+<br>
+
+<h3 id="CNN-example"><a href="#CNN-example" class="headerlink" title="CNN example"></a><strong>CNN example</strong></h3><p>Input</p>
+<blockquote>
+<p>32 x 32 x 3</p>
+</blockquote>
+<p>↓ (f = 5, s = 1, 6 filters)</p>
+<p>Conv1 </p>
+<blockquote>
+<p>28 x 28 x 6</p>
+</blockquote>
+<p>↓ ( Max pool, f = 2, s = 2)</p>
+<p>Pool1 </p>
+<blockquote>
+<p>14 x 14 x 6</p>
+</blockquote>
+<br>
+
+<p>By convention, treat (Conv1 and Pool1) as Layer 1.</p>
+<br>
+
+<p>↓  (f = 5, s = 1, 16 filters)</p>
+<p>Conv2</p>
+<blockquote>
+<p>10 x 10 x 10</p>
+</blockquote>
+<p>↓ ( Max pool, f = 2, s = 2)</p>
+<p>Pool2</p>
+<blockquote>
+<p>5 x 5 x 16</p>
+</blockquote>
+<p>Since 5 x 5 x 16 = 400,</p>
+<p>we fatten it to a </p>
+<blockquote>
+<p>400 x 1vector.</p>
+</blockquote>
+<p>↓  ( W[3] = (120, 400), b[3] = (120, 1) )</p>
+<p>FC3</p>
+<blockquote>
+<p>120 x 1</p>
+</blockquote>
+<p>↓ ( W[4] = (84, 120), b[4] = (84, 1) )</p>
+<blockquote>
+<p>84 x 1</p>
+</blockquote>
+<p>↓ Softmax</p>
+<blockquote>
+<p>10 outputs</p>
+</blockquote>
+<br>
+
+<p>The conv layers tend to have fewer parameters than FC layers, and pooling layers have no parameters. </p>
+<h3 id="Why-convolutions"><a href="#Why-convolutions" class="headerlink" title="Why convolutions?"></a><strong>Why convolutions?</strong></h3><p>Even though the number of features big, number of parameters of each Conv layer is relatively small.</p>
+<p><strong>Parameter sharing:</strong></p>
+<blockquote>
+<p>A feature detector (such as vertical feature detector) that’s useful in one part of the image is also useful in other parts of the image.</p>
+</blockquote>
+<p><strong>Sparsity of connections:</strong></p>
+<blockquote>
+<p>In each layer, each output value depends only on a small number of input.</p>
+</blockquote>
+<hr>
+<p>Cover by <a href="https://www.pixiv.net/member.php?id=3143520" target="_blank" rel="noopener">snatti</a> on Pixiv.</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">View Comments</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'inkbin'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/07/06/Study-notes-for-Foundations-of-Convolutional-Neural-Networks/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/07/06/Study-notes-for-Foundations-of-Convolutional-Neural-Networks/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//inkbin.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy; <a href="https://inkbean.github.io" style="border-bottom: none;">InkBean's Blog</a></li>
+                <li>Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Theme: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+                <span id="busuanzi_container_site_uv">有<span id="busuanzi_value_site_uv"></span>个小伙伴来过</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

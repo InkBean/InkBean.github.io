@@ -1,0 +1,413 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/in.png">
+	<link rel="shortcut icon" href="/img/in.png">
+	
+			    <title>
+    InkBean's Blog
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
+    <meta name="keywords" content="inkbean, Machine Learning, Neural Network, Deep Learning">
+    
+    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	 
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg.jpg') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+			    
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+</head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_coy.css">
+<link rel="stylesheet" href="/css/typo.css">
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">InkBean</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special">
+            <ul class="menu links">
+			<!-- Homepage  主页  --> 
+			<li>
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/Learning/">Learning</a></li><li><a class="category-link" href="/categories/日常/">日常</a></li><li><a class="category-link" href="/categories/玩耍/">玩耍</a>
+	                    </li></ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">归档</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
+	                    </li></ul>
+	        </li>
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="关于">
+		                关于
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/friends/" title="友達">
+		                友達
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+                    
+                    <li>
+                        <a title="github" href="https://github.com/InkBean" target="_blank" rel="noopener">
+                            <i class="icon fa fa-github"></i>
+                        </a>
+                    </li>
+                    
+			</ul>
+</nav>
+
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/sck.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Deep Reinforcement Learning</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <h1 id="Deep-Reinforcement-Learning"><a href="#Deep-Reinforcement-Learning" class="headerlink" title="Deep Reinforcement Learning"></a><strong>Deep Reinforcement Learning</strong></h1><hr>
+<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a><strong>Motivation</strong></h3><p>AlphaGo</p>
+<p>Supervised Learning:</p>
+<blockquote>
+<p>Input: state on the board</p>
+<p>Output: move of the professional player</p>
+</blockquote>
+<p>Problem:</p>
+<blockquote>
+<p>1- We have 3^(19 * 19) ≈ 10^170 possible states, which is too big</p>
+<p>2- Ground truth probably wrongly defined(player can be wrong)</p>
+<p>3- We will likely not generalized. Here we want a <strong>strategy</strong>, not a pattern that deep learning networks learn.</p>
+</blockquote>
+<p>We want a long-term reward.</p>
+<br>
+
+<p>When to apply RL?</p>
+<blockquote>
+<p>Delayed labels</p>
+<p>Making sequences of decions</p>
+</blockquote>
+<p>What is RL?</p>
+<blockquote>
+<p>Automatically learn to make good sequences of decision</p>
+</blockquote>
+<p>Examples of RL applications</p>
+<blockquote>
+<p>Robotics</p>
+<p>Games</p>
+<p>Advertisements</p>
+</blockquote>
+<br>
+
+<h3 id="Recycling-is-good-an-introduction-to-RL"><a href="#Recycling-is-good-an-introduction-to-RL" class="headerlink" title="Recycling is good: an introduction to RL"></a><strong>Recycling is good: an introduction to RL</strong></h3><p>We want to learn <strong>optimal action</strong> at each state.</p>
+<p>Q-table:</p>
+<blockquote>
+<p>Horizontal axis = action</p>
+<p>Vertical axis = state.</p>
+<p>Each element represents the score of the action taken at the state.</p>
+</blockquote>
+<br>
+
+<p>Bellman equation(optimality equation)</p>
+<blockquote>
+<p><strong>Q<em>(s, a) = r + γ \</em> max (Q*(s’, a’)).</strong> We want the optimal Q, which is Q*. </p>
+<p>//r is immediate reward. </p>
+<p>//Incorporate time-step, reduce rewards as time passes. γ is the parameter to do this.</p>
+<p>Policy: <strong>π(s) = arg max Q*(s, a)</strong></p>
+<p>Telling us what the best strategy is.</p>
+</blockquote>
+<p>One problem is that the Q-table will be too big.</p>
+<br>
+
+<h3 id="Deep-Q-Learning"><a href="#Deep-Q-Learning" class="headerlink" title="Deep Q-Learning"></a><strong>Deep Q-Learning</strong></h3><p>Find a Q-function(neural network) to replace Q-table.</p>
+<p>Input a state, output actions and select the maximum.</p>
+<p>Unlike supervised learning we’ve been focusing on in deep learning, here we don’t have ready-made labels now. </p>
+<br>
+
+<p>Loss function:</p>
+<blockquote>
+<p>L = (y - Q(s, a))^2</p>
+</blockquote>
+<p>We know that the optimal Q follows the equation, but now we do not have Q*, which is Optimal Q, to compute y. However, we can still make use of the Bellman equation to approximate y.</p>
+<blockquote>
+<p>y = r + γ * max (Q(s’, a’))</p>
+<p>Here we use Q instead of Q* since we don’t have it.</p>
+</blockquote>
+<br>
+
+<p>Here’s a scenario.</p>
+<p>When left score &gt; right score</p>
+<blockquote>
+<p>L = (y - Q(s, ←))^2</p>
+</blockquote>
+<blockquote>
+<p>y = r← + γ * max (Q(s_next←’, a’))</p>
+<p>r← denotes immediate reward after taking action ← in state s</p>
+<p>γ * max (Q(s_next←’, a’)) denotes discounted maximum future reward when you’re in state s_next←</p>
+</blockquote>
+<p>The labels are moving. They’re not static labels. </p>
+<p>We want to train the network so that the Q function gets closer to our best guess. In turn, a better Q function makes the best guess better. </p>
+<br>
+
+<p>During training, Q will be fixed for many iterations.</p>
+<br>
+
+<p>DQN implementation:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Initialize your Q-network parameters</span><br><span class="line">Loop over episodes: // 1 game from start to end</span><br><span class="line">	Start from initial state s</span><br><span class="line">	Loop over time steps:</span><br><span class="line">		Forward propagate s in the Q-networks</span><br><span class="line">		Execute action a that has the maximum(Q(s, a))</span><br><span class="line">		Observe reward r and next state s&apos;</span><br><span class="line">		Compute targets y by forward propagating states s&apos; in the network, then compute loss</span><br><span class="line">		Update parameters with gradient descent</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="Application-of-Deep-Q-Learning-Breakout-Atari"><a href="#Application-of-Deep-Q-Learning-Breakout-Atari" class="headerlink" title="Application of Deep Q-Learning: Breakout(Atari)"></a><strong>Application of Deep Q-Learning: Breakout(Atari)</strong></h3><p>Goal: </p>
+<blockquote>
+<p>Play breakout, detroy all the breaks</p>
+<p>Q-network</p>
+<p>​        Input: The pixels of <strong>multiple last successive frames</strong>. It’s because based on the image it’s hard to know if the ball is going up or down</p>
+<p>​        Output: Q-values ( Q(s, ←),  Q(s, →), Q(s, -) )</p>
+</blockquote>
+<p>Pre-processing</p>
+<blockquote>
+<p>1- Φ(s): take the last several frames</p>
+<p>2- reduce the size of input(remove color, etc.), like what we may do in image processing</p>
+</blockquote>
+<br>
+
+<p>Some training challenges:</p>
+<blockquote>
+<p>Keep track of terminal step</p>
+<p>Experience replay</p>
+<p>Epsilon greedy action choice(Exploration/Exploitation tradeoff)</p>
+</blockquote>
+<br>
+
+<p>Replay memory</p>
+<blockquote>
+<p>E1: Φ(s) → a → r → Φ(s’)</p>
+<p>E2: Φ(s’) → a → r → Φ(s’’)</p>
+<p>E3: Φ(s’’) → a → r → Φ(s’’’)</p>
+<p>Previously: E1 →  E2 → E3</p>
+<p>Training: E1 → sample(E1, E2) → sample(E1, E2, E3)</p>
+<p>We want to decorrelate the examples. </p>
+</blockquote>
+<br>
+
+<p>Exploration/Exploitation</p>
+<blockquote>
+<p>If we always choose the best action based on the Q-function we currently have, we may miss the action that doens’t currently not have the highest score but inreality the best(or a better option than the “best” based on the current Q-function).</p>
+<p>To avoid simply exploiting in one direction, we want to explore other possibilities, other choices of actions that currently aren’t regarded as the best ones. </p>
+</blockquote>
+<br>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Initialize your Q-network parameters</span><br><span class="line">Initialize replay memory D</span><br><span class="line"></span><br><span class="line">Loop over episodes: // 1 game from start to end</span><br><span class="line">	Start from initial state Φ(s)</span><br><span class="line">	Create a boolean to detect terminal states: terminal = False</span><br><span class="line">	Loop over time steps:</span><br><span class="line">		- With probability ε, take random action a. // Epsilon Greedy action</span><br><span class="line">		- Otherwise,</span><br><span class="line">    	- Forward propagate s in the Q-networks</span><br><span class="line">			- Execute action a that has the maximum(Q(Φ(s), a))</span><br><span class="line">		- Use s&apos; to get Φ(s&apos;)										// Pre-processing</span><br><span class="line">		- Add(Φ(s), a, r, Φ(s&apos;)) to the replay memory D</span><br><span class="line">    - Sample random mini-batches of transitions from D.</span><br><span class="line">		- Observe reward r and next state Φ(s&apos;)</span><br><span class="line">		- Check if y is terminal state. Compute targets y by forward propagating </span><br><span class="line">		states Φ(s&apos;) in the network, then compute loss		</span><br><span class="line">		- Update parameters with gradient descent</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="Advanced-Topics"><a href="#Advanced-Topics" class="headerlink" title="Advanced Topics"></a><strong>Advanced Topics</strong></h3><p>Policy gradient methods</p>
+<p>PPO</p>
+<p>TRPO</p>
+<br>
+
+<h3 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a><strong>题外话</strong></h3><p>高三的时候出于某个原因我去问了几个我高中的外教“你知不知道AlphaGo”这个问题，结果回答是清一色的”No“。这让我挺惊讶的，因为这大概算是一个大众都能听懂的的AI的大新闻了。</p>
+<hr>
+<ul>
+<li>On what I’ve learnt from <a href="https://www.youtube.com/embed/NP2XqpgTJyo" target="_blank" rel="noopener">video lecture 9</a> in CS230 at Stanford. </li>
+<li>Cover by <a href="https://www.pixiv.net/member.php?id=47488" target="_blank" rel="noopener">飴村</a> on Pixiv</li>
+</ul>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">View Comments</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'inkbin'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/07/23/Deep-Reinforcement-Learning/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/07/23/Deep-Reinforcement-Learning/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//inkbin.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy; <a href="https://inkbean.github.io" style="border-bottom: none;">InkBean's Blog</a></li>
+                <li>Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Theme: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+                <span id="busuanzi_container_site_uv">有<span id="busuanzi_value_site_uv"></span>个小伙伴来过</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>
