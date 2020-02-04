@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="/css/mic_main.css">
     <link rel="stylesheet" href="/css/dropdownMenu.css">
-    <meta name="keywords" content="inkbean, Machine Learning, Neural Network, Deep Learning">
+    <meta name="keywords" content="inkbean, Machine Learning, Deep Learning">
     
     	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 	 
@@ -96,7 +96,7 @@
 	            <a href="#s1">分类</a>
 	                    <ul class="submenu">
 	                        <li>
-	                        <a class="category-link" href="/categories/Learning/">Learning</a></li><li><a class="category-link" href="/categories/日常/">日常</a></li><li><a class="category-link" href="/categories/玩耍/">玩耍</a>
+	                        <a class="category-link" href="/categories/Learning/">Learning</a></li><li><a class="category-link" href="/categories/Study-Notes/">Study Notes</a></li><li><a class="category-link" href="/categories/日常/">日常</a></li><li><a class="category-link" href="/categories/玩耍/">玩耍</a>
 	                    </li></ul>
 	        </li>
 	        
@@ -154,12 +154,11 @@
 
         <div id="main">
             <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/owi.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
-                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Study notes for &#39;Hyperparameter tuning&#39;</h2></a>
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Hyperparameter tuning</h2></a>
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                <p>Week 3 in Andrew Ng’s <a href="https://www.coursera.org/learn/deep-neural-network/home/welcome" target="_blank" rel="noopener">Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization</a> on Coursera.</p>
-<h1 id="Hyperparameter-tuning"><a href="#Hyperparameter-tuning" class="headerlink" title="Hyperparameter tuning"></a><strong>Hyperparameter tuning</strong></h1><hr>
+                <h1 id="Hyperparameter-tuning"><a href="#Hyperparameter-tuning" class="headerlink" title="Hyperparameter tuning"></a><strong>Hyperparameter tuning</strong></h1><hr>
 <h3 id="1-Tuning-process"><a href="#1-Tuning-process" class="headerlink" title="1- Tuning process"></a><strong>1- Tuning process</strong></h3><p>Different hyperparameters have different degree of influence on your NN. You may prioritize tuning the more important ones. </p>
 <p>Most important</p>
 <blockquote>
@@ -329,6 +328,7 @@
 <h2 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a><strong>Tensorflow</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">coefficients = np.array([ [<span class="number">1</span>], [<span class="number">-10</span>], [<span class="number">25</span>]])</span><br><span class="line"></span><br><span class="line">w = tf.Variable([<span class="number">0</span>], dtype = tf.float32)</span><br><span class="line">x = tf.placeholder(tf.float32, [<span class="number">3</span>,<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">cost = x[<span class="number">0</span>][<span class="number">0</span>] * w **<span class="number">2</span> + x[<span class="number">1</span>][<span class="number">0</span>] * w + x[<span class="number">2</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">train = tf.train.GradientDescentOptimizer(<span class="number">0.01</span>).minimize(cost)</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line">session = tf.session() <span class="comment"># with tf.session() as session:</span></span><br><span class="line">session.run(init)</span><br><span class="line"></span><br><span class="line">print(session.run(w))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    session.run(train, feed_dictionary = &#123;x:coefficients&#125;)</span><br><span class="line">print(session.run(w))</span><br></pre></td></tr></table></figure>
 
 <hr>
+<p>Week 3 in Andrew Ng’s <a href="https://www.coursera.org/learn/deep-neural-network/home/welcome" target="_blank" rel="noopener">Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization</a> on Coursera.</p>
 <p>Cover by <a href="https://www.pixiv.net/member.php?id=772547" target="_blank" rel="noopener">loundraw</a> on Pixiv.</p>
 
             </div>
