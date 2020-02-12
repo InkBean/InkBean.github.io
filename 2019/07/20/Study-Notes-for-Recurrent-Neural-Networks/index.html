@@ -106,7 +106,7 @@
 	            <a href="#s1">Archives</a>
 	                    <ul class="submenu">
 	                        <li>
-	                        <a class="archive-link" href="/archives/2019/12/">December 2019</a></li><li><a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
+	                        <a class="archive-link" href="/archives/2020/02/">February 2020</a></li><li><a class="archive-link" href="/archives/2019/12/">December 2019</a></li><li><a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
 	                    </li></ul>
 	        </li>
 	        
@@ -158,146 +158,135 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                <h1 id="Recurrent-Neural-Networks"><a href="#Recurrent-Neural-Networks" class="headerlink" title="Recurrent Neural Networks"></a><strong>Recurrent Neural Networks</strong></h1><hr>
-<h3 id="Notation"><a href="#Notation" class="headerlink" title="Notation"></a><strong>Notation</strong></h3><p>x(i)&lt;t&gt; = the t_th feature of the i_th training example</p>
+                <h1 id="recurrent-neural-networks"><strong>Recurrent Neural Networks</strong></h1>
+<hr>
+<h3 id="notation"><strong>Notation</strong></h3>
+<p>x(i)&lt;t&gt; = the t_th feature of the i_th training example</p>
 <p>Tx(i) = the length of the sequence of the training example</p>
 <p>y(i)&lt;t&gt; = the t_th feature of the i_th output sequence</p>
 <p>Ty(i) = the length of the sequence of the output</p>
-<br>
-
+<p><br></p>
 <p><strong>Vocabulary/Dictionary:</strong></p>
 <blockquote>
-<p>A vector that stores the words in indexes </p>
+<p>A vector that stores the words in indexes</p>
 </blockquote>
-<p>Use one hot representations to represent the words. </p>
-<br>
-
-<h3 id="Recurrent-Neural-Network-Model"><a href="#Recurrent-Neural-Network-Model" class="headerlink" title="Recurrent Neural Network Model"></a><strong>Recurrent Neural Network Model</strong></h3><p>Why not a standard neural network?</p>
+<p>Use one hot representations to represent the words.</p>
+<p><br></p>
+<h3 id="recurrent-neural-network-model"><strong>Recurrent Neural Network Model</strong></h3>
+<p>Why not a standard neural network?</p>
 <p>Problems:</p>
 <blockquote>
 <p>Inputs, outputs can be different lengths in different examples</p>
-<p>Doesn’t share features learnt across different positions of text</p>
+<p>Doesn't share features learnt across different positions of text</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p>RNN:</p>
 <blockquote>
 <p>Each time, feed in x&lt;t&gt; then output y&lt;t&gt;.</p>
 <p>At each time step, it passes the activations to the next time step.</p>
 <p>Same parameter Wax, Waa, Way for each step.</p>
 </blockquote>
-<p>Though it makes use of earlier words, the weakness of this unidirectional architecture is that doesn’t make use of later words in the sequence.</p>
-<br>
-
+<p>Though it makes use of earlier words, the weakness of this unidirectional architecture is that doesn't make use of later words in the sequence.</p>
+<p><br></p>
 <p>To forward propagate,</p>
 <blockquote>
 <p>a&lt;0&gt; = 0</p>
-<p>a&lt;1&gt; = g( Waa * a&lt;0&gt; + Wax * x&lt;1&gt; + ba )    // tanh is a pretty common choice, ReLU is sometimes used</p>
-<p>yhat&lt;1&gt; = g( Wya * a&lt;1&gt; + by)        // the activation function here depends on the output task</p>
+<p>a&lt;1&gt; = g( Waa * a&lt;0&gt; + Wax * x&lt;1&gt; + ba ) // tanh is a pretty common choice, ReLU is sometimes used</p>
+<p>yhat&lt;1&gt; = g( Wya * a&lt;1&gt; + by) // the activation function here depends on the output task</p>
 </blockquote>
 <p>More generally,</p>
 <blockquote>
-<ol>
-<li><p>a&lt;t&gt; = g( Waa * a&lt;t - 1&gt; + Wax * x&lt;t&gt; + ba )</p>
-</li>
-<li><p>yhat&lt;t&gt; = g( Wya * a&lt;t&gt; + by )</p>
-</li>
+<ol type="1">
+<li><p>a&lt;t&gt; = g( Waa * a&lt;t - 1&gt; + Wax * x&lt;t&gt; + ba )</p></li>
+<li><p>yhat&lt;t&gt; = g( Wya * a&lt;t&gt; + by )</p></li>
 </ol>
 <p>We can simplify the notation of the 1st step to</p>
 <p>a&lt;t&gt; = g( Wa * [a&lt;t - 1&gt;, x] + ba)</p>
-<p>​    <strong>Wa</strong> is made by stacking <strong>Waa</strong> and <strong>Wax</strong> side by side horizontally</p>
-<p>​    <strong>[a&lt;t - 1&gt;, x]</strong> = <strong>a&lt;t - 1&gt;</strong> and <strong>x</strong> stacked together vertically</p>
+<p>​ <strong>Wa</strong> is made by stacking <strong>Waa</strong> and <strong>Wax</strong> side by side horizontally</p>
+<p>​ <strong>[a&lt;t - 1&gt;, x]</strong> = <strong>a&lt;t - 1&gt;</strong> and <strong>x</strong> stacked together vertically</p>
 <p>The 2nd step to</p>
 <p>yhat&lt;t&gt; = g( Wy * a&lt;t&gt; + by )</p>
 </blockquote>
-<p>To summarize, </p>
+<p>To summarize,</p>
 <blockquote>
 <p><strong>a&lt;t&gt; = g( Wa * [a&lt;t - 1&gt;, x] + ba)</strong></p>
 <p><strong>yhat&lt;t&gt; = g( Wy * a&lt;t&gt; + by )</strong></p>
 </blockquote>
-<br>
-
-<h3 id="Back-propagation-through-time"><a href="#Back-propagation-through-time" class="headerlink" title="Back propagation through time"></a><strong>Back propagation through time</strong></h3><blockquote>
+<p><br></p>
+<h3 id="back-propagation-through-time"><strong>Back propagation through time</strong></h3>
+<blockquote>
 <p>L&lt;t&gt; (yhat&lt;t&gt;, y&lt;t&gt;) = y&lt;t&gt; * log(yhat&lt;t&gt;) - (1 - y&lt;t&gt;) * log( 1 - yhat&lt;t&gt;)</p>
 <p>L(yhat, y) = sum over the L&lt;t&gt;(yhat&lt;t&gt;, y&lt;t&gt;)</p>
 </blockquote>
-<br>
-
-<h3 id="Different-types-of-RNNs"><a href="#Different-types-of-RNNs" class="headerlink" title="Different types of RNNs"></a><strong>Different types of RNNs</strong></h3><p><strong>Many-to-many architecture</strong></p>
+<p><br></p>
+<h3 id="different-types-of-rnns"><strong>Different types of RNNs</strong></h3>
+<p><strong>Many-to-many architecture</strong></p>
 <p>When Tx = Ty</p>
 <p><strong>E.g.</strong> Name entity recognition</p>
 <p>When Tx ≠ Ty</p>
 <p><strong>E.g.</strong> Machine translation: An encoder that takes an input and a decoder that generates output translation in a different language.</p>
-<br>
-
+<p><br></p>
 <p><strong>Many-to-one architecture</strong></p>
 <p><strong>E.g.</strong> Sentiment classification: x = text, y = number</p>
-<br>
-
+<p><br></p>
 <p><strong>One-to-one architecture</strong></p>
 <p>Basically just a standard generic NN</p>
-<br>
-
+<p><br></p>
 <p><strong>One-to-many architecture</strong></p>
 <p><strong>E.g.</strong> Music generation</p>
-<br>
-
-<h3 id="Language-model-and-sequence-generation"><a href="#Language-model-and-sequence-generation" class="headerlink" title="Language model and sequence generation"></a><strong>Language model and sequence generation</strong></h3><p>Language modeling</p>
+<p><br></p>
+<h3 id="language-model-and-sequence-generation"><strong>Language model and sequence generation</strong></h3>
+<p>Language modeling</p>
 <blockquote>
 <p>Tells P(sentence), the probability of a sentence appearing</p>
 </blockquote>
-<p>Output sentences that’re likely</p>
+<p>Output sentences that're likely</p>
 <p><strong>Training set:</strong> a large corpus(body/set) of English text</p>
 <p>Process</p>
 <blockquote>
 <p>Take a sentence, tokenize each word(convert each word to a one-hot vector)</p>
-<p>Sometimes a “EOS”(End of sentence) is also appended to denote where the sentence ends. </p>
+<p>Sometimes a &quot;EOS&quot;(End of sentence) is also appended to denote where the sentence ends.</p>
 </blockquote>
-<p>What if a word isn’t included in your vocabulary appears in a sentence?</p>
+<p>What if a word isn't included in your vocabulary appears in a sentence?</p>
 <blockquote>
 <p>Take the word and replace it with a unique token UNK(Unknown words)</p>
 </blockquote>
-<br>
-
-<p>Each step, it outputs what’s the chance of a word appearing, given the previous words. </p>
+<p><br></p>
+<p>Each step, it outputs what's the chance of a word appearing, given the previous words.</p>
 <p><strong>Loss function:</strong></p>
 <blockquote>
 <p>L&lt;t&gt;(yhat&lt;t&gt;, y&lt;t&gt;) = sum over all the categories (y&lt;t&gt; * log(yhat&lt;t&gt;))</p>
 <p>L = sum over all L&lt;t&gt;(yhat&lt;t&gt;, y&lt;t&gt;)</p>
 </blockquote>
 <p>The probability of a three word sentence</p>
-<p>P(y&lt;1&gt;, y&lt;2&gt;, y&lt;3&gt;) = P(y&lt;1&gt;) * P(y&lt;2&gt; | y&lt;1&gt;) * P(y&lt;3&gt; | y&lt;1&gt;, y&lt;2&gt;) </p>
-<br>
-
-<h3 id="Sampling-novel-sequences"><a href="#Sampling-novel-sequences" class="headerlink" title="Sampling novel sequences"></a><strong>Sampling novel sequences</strong></h3><p>Sampling:</p>
+<p>P(y&lt;1&gt;, y&lt;2&gt;, y&lt;3&gt;) = P(y&lt;1&gt;) * P(y&lt;2&gt; | y&lt;1&gt;) * P(y&lt;3&gt; | y&lt;1&gt;, y&lt;2&gt;)</p>
+<p><br></p>
+<h3 id="sampling-novel-sequences"><strong>Sampling novel sequences</strong></h3>
+<p>Sampling:</p>
 <p>Generate a randomly chosen sentence, np.sample.choice</p>
-<br>
-
+<p><br></p>
 <p>You can also create a character-level language model</p>
 <blockquote>
-<p>Advantage: won’t worry about UNK</p>
+<p>Advantage: won't worry about UNK</p>
 <p>Disadvantage: much longer sequences, more computational expensive to train</p>
 </blockquote>
-<br>
-
-<p>Now you can build an RNN to look at a corpus of English text, and build a language model, then sample from the language model you’ve trained.</p>
-<p>Sequence generation: </p>
+<p><br></p>
+<p>Now you can build an RNN to look at a corpus of English text, and build a language model, then sample from the language model you've trained.</p>
+<p>Sequence generation:</p>
 <p><strong>E.g.</strong> Shapespeare poems</p>
-<br>
-
-<h3 id="Vanishing-gradients-with-RNNs"><a href="#Vanishing-gradients-with-RNNs" class="headerlink" title="Vanishing gradients with RNNs"></a><strong>Vanishing gradients with RNNs</strong></h3><p>A basic RNN finds it hard to capture long-term dependency</p>
-<br>
-
-<p>Exploding gradient: </p>
+<p><br></p>
+<h3 id="vanishing-gradients-with-rnns"><strong>Vanishing gradients with RNNs</strong></h3>
+<p>A basic RNN finds it hard to capture long-term dependency</p>
+<p><br></p>
+<p>Exploding gradient:</p>
 <p>Just apply gradient clipping(re-scale)</p>
-<br>
-
-<h3 id="Gated-Recurrent-Units-GRU"><a href="#Gated-Recurrent-Units-GRU" class="headerlink" title="Gated Recurrent Units(GRU)"></a><strong>Gated Recurrent Units(GRU)</strong></h3><p>c = memory cell</p>
+<p><br></p>
+<h3 id="gated-recurrent-unitsgru"><strong>Gated Recurrent Units(GRU)</strong></h3>
+<p>c = memory cell</p>
 <p>The <strong>cat</strong>, which already ate……., <strong>was</strong> full.</p>
 <p>For instance, it remembers that the cat was singular</p>
 <p>c&lt;t&gt; = a&lt;t&gt;</p>
-<br>
-
+<p><br></p>
 <p><strong>c~&lt;t&gt;</strong> is a candidate for replacing c&lt;t&gt;</p>
 <blockquote>
 <p>c~&lt;t&gt; = tanh( Wc * [c&lt;t - 1&gt;, x&lt;t&gt;] + bc )</p>
@@ -308,63 +297,61 @@
 <p>Γu = σ(Wu * [a&lt;t - 1&gt;, x&lt;t&gt;] + bu) // sigmoid function</p>
 <p>Γu pretty much equals to 0 or 1 for most of the time.</p>
 </blockquote>
-<p>When Γu is 0, set c&lt;t&gt; equal to the old value(c&lt;t - 1&gt;). </p>
+<p>When Γu is 0, set c&lt;t&gt; equal to the old value(c&lt;t - 1&gt;).</p>
 <blockquote>
-<p>c&lt;t&gt; = Γu <strong><strong>* c~&lt;t&gt; + (1 - Γu) *</strong></strong> c&lt;t - 1&gt;</p>
-<p>The <strong>‘*’</strong> here is element-wise. </p>
+<p>c&lt;t&gt; = Γu ***** c~&lt;t&gt; + (1 - Γu) ***** c&lt;t - 1&gt;</p>
+<p>The **'*'** here is element-wise.</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p><strong>To summarize,</strong></p>
 <blockquote>
 <p>c~&lt;t&gt; = tanh( Wc * [ Γr * c&lt;t - 1&gt;, x&lt;t&gt;] + bc )</p>
 <p>Γu = σ(Wu * [c&lt;t - 1&gt;, x&lt;t&gt;] + bu)</p>
 <p>Γr = σ(Wr * [c&lt;t - 1&gt;, x&lt;t&gt;] + br) // Γr is to determine the relevance of c&lt;t - 1&gt;</p>
-<p>c&lt;t&gt; = Γu <strong><strong>* c~&lt;t&gt; + (1 - Γu) *</strong></strong> c&lt;t - 1&gt;</p>
+<p>c&lt;t&gt; = Γu ***** c~&lt;t&gt; + (1 - Γu) ***** c&lt;t - 1&gt;</p>
 <p>a&lt;t&gt; = c&lt;t&gt;</p>
 </blockquote>
 <p>For the signal to backpropagate without vanishing, we need c&lt;t&gt; to be highly dependant on c&lt;t−1&gt;.</p>
-<br>
-
-<h3 id="Long-Short-Term-Memory-LSTM"><a href="#Long-Short-Term-Memory-LSTM" class="headerlink" title="Long Short Term Memory(LSTM)"></a><strong>Long Short Term Memory(LSTM)</strong></h3><blockquote>
+<p><br></p>
+<h3 id="long-short-term-memorylstm"><strong>Long Short Term Memory(LSTM)</strong></h3>
+<blockquote>
 <p>c~&lt;t&gt; = tanh( Wc * [ a&lt;t - 1&gt;, x&lt;t&gt;] + bc )</p>
-<p>Γu = σ(Wu * [a&lt;t - 1&gt;, x&lt;t&gt;] + bu)            Update Gate</p>
-<p>Γf = σ(Wf * [a&lt;t - 1&gt;, x&lt;t&gt;] + bf)                 Forget Gate</p>
-<p>Γo = σ(Wo * [a&lt;t - 1&gt;, x&lt;t&gt;] + bo)                Output Gate</p>
-<p>c&lt;t&gt; = Γu * c~&lt;t&gt; + Γf * c&lt;t - 1&gt; //    Γf gives an option of keeping c&lt;t - 1&gt;</p>
+<p>Γu = σ(Wu * [a&lt;t - 1&gt;, x&lt;t&gt;] + bu) Update Gate</p>
+<p>Γf = σ(Wf * [a&lt;t - 1&gt;, x&lt;t&gt;] + bf) Forget Gate</p>
+<p>Γo = σ(Wo * [a&lt;t - 1&gt;, x&lt;t&gt;] + bo) Output Gate</p>
+<p>c&lt;t&gt; = Γu * c~&lt;t&gt; + Γf * c&lt;t - 1&gt; // Γf gives an option of keeping c&lt;t - 1&gt;</p>
 <p>a&lt;t&gt; = Γo * tanh( c&lt;t&gt; )</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p>Peephole connection:</p>
 <blockquote>
 <p>Sometimes c&lt;t - 1&gt; will also be put into the matrix to calculate the gates.</p>
 </blockquote>
-<br>
-
-<h3 id="Bidirectional-RNN-BRNN"><a href="#Bidirectional-RNN-BRNN" class="headerlink" title="Bidirectional RNN(BRNN)"></a><strong>Bidirectional RNN</strong>(BRNN)</h3><p>Getting information from the future</p>
+<p><br></p>
+<h3 id="bidirectional-rnnbrnn"><strong>Bidirectional RNN</strong>(BRNN)</h3>
+<p>Getting information from the future</p>
 <p>Acyclic graph</p>
 <blockquote>
 <p>yhat&lt;t&gt; = g( Wy * [a→&lt;t&gt;, a←&lt;t&gt;] + by )</p>
-<p>This allows the output to take both <strong>information from the past ** and that from the present</strong>.</p>
+<p>This allows the output to take both <strong>information from the past </strong> and that from the present**.</p>
 </blockquote>
 <p>Disadvantage:</p>
 <blockquote>
-<p>Need to take account of the entire speech utterance. </p>
+<p>Need to take account of the entire speech utterance.</p>
 </blockquote>
-<br>
-
-<h3 id="Deep-RNNs"><a href="#Deep-RNNs" class="headerlink" title="Deep RNNs"></a><strong>Deep RNNs</strong></h3><p>a[l]&lt;t&gt; denotes activation in the l_th layer of the  t_th word. </p>
+<p><br></p>
+<h3 id="deep-rnns"><strong>Deep RNNs</strong></h3>
+<p>a[l]&lt;t&gt; denotes activation in the l_th layer of the t_th word.</p>
 <blockquote>
 <p>a[l]&lt;t&gt; = g( Wa * [ a[l]&lt;t - 1&gt;, a[l - 1]&lt;t&gt; ] + ba[l])</p>
 </blockquote>
-<p>For RNNs, </p>
+<p>For RNNs,</p>
 <blockquote>
-<p>Deep recurrent layers isn’t very common, 3 layers is already quite deep. </p>
-<p>It’s because they have temporal dimension which already makes the network really big. </p>
+<p>Deep recurrent layers isn't very common, 3 layers is already quite deep.</p>
+<p>It's because they have temporal dimension which already makes the network really big.</p>
 </blockquote>
 <hr>
-<p>Week 1 in Andrew Ng’s <a href="https://www.coursera.org/learn/nlp-sequence-models/home/welcome" target="_blank" rel="noopener">Sequence Models</a> on Coursera.</p>
+<p>Week 1 in Andrew Ng's <a href="https://www.coursera.org/learn/nlp-sequence-models/home/welcome" target="_blank" rel="noopener">Sequence Models</a> on Coursera.</p>
 <p>Cover by <a href="https://www.pixiv.net/member_illust.php?id=189732" target="_blank" rel="noopener">爽々</a> on Pixiv</p>
 
             </div>

@@ -106,7 +106,7 @@
 	            <a href="#s1">Archives</a>
 	                    <ul class="submenu">
 	                        <li>
-	                        <a class="archive-link" href="/archives/2019/12/">December 2019</a></li><li><a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
+	                        <a class="archive-link" href="/archives/2020/02/">February 2020</a></li><li><a class="archive-link" href="/archives/2019/12/">December 2019</a></li><li><a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
 	                    </li></ul>
 	        </li>
 	        
@@ -158,126 +158,135 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                <h1 id="Programming-assignment"><a href="#Programming-assignment" class="headerlink" title="Programming assignment"></a><strong>Programming assignment</strong></h1><p>This week’s programming assignment walked me through the process of implementing a <strong>L-layer deep neural network.</strong> Refer to the notes taken for the video lectures in the next section of this blog post to better understand the mechanism of the PA. </p>
-<h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology:"></a><strong>Methodology:</strong></h2><blockquote>
-<ol>
+                <h1 id="programming-assignment"><strong>Programming assignment</strong></h1>
+<p>This week's programming assignment walked me through the process of implementing a <strong>L-layer deep neural network.</strong> Refer to the notes taken for the video lectures in the next section of this blog post to better understand the mechanism of the PA.</p>
+<h2 id="methodology"><strong>Methodology:</strong></h2>
+<blockquote>
+<ol type="1">
 <li>Initialize parameters / Define hyperparameters</li>
-<li>Loop for num_iterations:<br>a. Forward propagation<br>b. Compute cost function<br>c. Backward propagation<br>d. Update parameters (using parameters, and grads from backprop) </li>
+<li>Loop for num_iterations:
+<ol type="a">
+<li>Forward propagation</li>
+<li>Compute cost function</li>
+<li>Backward propagation</li>
+<li>Update parameters (using parameters, and grads from backprop)</li>
+</ol></li>
 <li>Use trained parameters to predict labels</li>
 </ol>
 </blockquote>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture:"></a><strong>Architecture:</strong></h2><p><strong>Forward propagation:</strong></p>
+<h2 id="architecture"><strong>Architecture:</strong></h2>
+<p><strong>Forward propagation:</strong></p>
 <p>Repeat the process of Linear-ReLU from the 1st layer to the L-1 layer.</p>
 <blockquote>
 <p>Z[l] = np.dot(W[l], A[l - 1]) + b</p>
 <p>A[l] = relu(Z[l])</p>
 </blockquote>
-<p>Then for the Lth layer, do the same thing except for changing the activation function from “ReLU”  “Sigmoid”. </p>
-<p>In each layer, cache the value of A_prev, W, and b as linear_cache and the value of Z as activation cache, for future use in the backward propagation part. </p>
+<p>Then for the Lth layer, do the same thing except for changing the activation function from &quot;ReLU&quot; &quot;Sigmoid&quot;.</p>
+<p>In each layer, cache the value of A_prev, W, and b as linear_cache and the value of Z as activation cache, for future use in the backward propagation part.</p>
 <p><strong>Compute cost:</strong></p>
 <p>Compute the loss.</p>
 <p><strong>Backward propagation:</strong></p>
-<p>Compute the partial derivative of A in the Lth layer with respect to the loss function. </p>
-<p>Use dAL, Y, and the caches obtained from the forward propagation part to loop over the layers and compute dA_prev, dW, db for each layer. </p>
+<p>Compute the partial derivative of A in the Lth layer with respect to the loss function.</p>
+<p>Use dAL, Y, and the caches obtained from the forward propagation part to loop over the layers and compute dA_prev, dW, db for each layer.</p>
 <p><strong>Update parameters:</strong></p>
-<p>Loop through the layers and update the parameters W and b. </p>
-<br>
-
+<p>Loop through the layers and update the parameters W and b.</p>
+<p><br></p>
 <p><em>Below are notes taken for the video lectures.</em></p>
 <hr>
-<br>
-
-<h1 id="Notations-for-a-deep-neural-network"><a href="#Notations-for-a-deep-neural-network" class="headerlink" title="Notations for a deep neural network"></a><strong>Notations for a deep neural network</strong></h1><blockquote>
+<p><br></p>
+<h1 id="notations-for-a-deep-neural-network"><strong>Notations for a deep neural network</strong></h1>
+<blockquote>
 <p>l (lower case L) denotes number of layers</p>
 <p>n[l] = number of units in layer l</p>
 <p>a[l] = activations in layer l</p>
-<p>​       = g[l](z[l]) </p>
+<p>​ = g[l](z[l])</p>
 <p>w[l] = weights to compute z[l]</p>
 <p>b[l] = biases to compute z[l]</p>
 <p>x = a[0]</p>
 <p>a[L] = yhat</p>
 </blockquote>
-<p><strong>P.S.</strong> Note that the []s above are all superscripts. </p>
-<h1 id="Forward-propagation-in-a-deep-network"><a href="#Forward-propagation-in-a-deep-network" class="headerlink" title="Forward propagation in a deep network"></a><strong>Forward propagation in a deep network</strong></h1><p>General rule(vectorized)</p>
+<p><strong>P.S.</strong> Note that the []s above are all superscripts.</p>
+<h1 id="forward-propagation-in-a-deep-network"><strong>Forward propagation in a deep network</strong></h1>
+<p>General rule(vectorized)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Z[l] = W[l] * A[l - 1] + b[l]</span><br><span class="line">A[l] = g[l](Z[l])</span><br></pre></td></tr></table></figure>
-
-<p>Though we do want to get rid of explicit for loops whenever we can, when implementing forward propagation, we still have to write one, looping over the l layers. </p>
-<h1 id="Get-your-matrix-dimensions-right"><a href="#Get-your-matrix-dimensions-right" class="headerlink" title="Get your matrix dimensions right"></a><strong>Get your matrix dimensions right</strong></h1><blockquote>
+<p>Though we do want to get rid of explicit for loops whenever we can, when implementing forward propagation, we still have to write one, looping over the l layers.</p>
+<h1 id="get-your-matrix-dimensions-right"><strong>Get your matrix dimensions right</strong></h1>
+<blockquote>
 <p>W[l] = (n[l], n[l - 1])</p>
-<p>b[l] = (n[l], 1) </p>
+<p>b[l] = (n[l], 1)</p>
 <p>Z[l] = (n[l], m)</p>
 <p>A[l] = (n[l], m)</p>
 </blockquote>
 <hr>
-<p> The derivatives of the functions have the same dimensions as those of the original functions</p>
+<p>The derivatives of the functions have the same dimensions as those of the original functions</p>
 <blockquote>
-<p>dW[l] = (n[l], n[l - 1]) </p>
-<p>db[l] = (n[l], 1) </p>
+<p>dW[l] = (n[l], n[l - 1])</p>
+<p>db[l] = (n[l], 1)</p>
 <p>dZ[l] = (n[l], m)</p>
 <p>dA[l] = (n[l], m)</p>
 </blockquote>
-<h1 id="Why-deep-representations"><a href="#Why-deep-representations" class="headerlink" title="Why deep representations?"></a><strong>Why deep representations?</strong></h1><p><strong>e.g.</strong> Face recognition</p>
-<p>1st layer: what’re the edges in the picture</p>
+<h1 id="why-deep-representations"><strong>Why deep representations?</strong></h1>
+<p><strong>e.g.</strong> Face recognition</p>
+<p>1st layer: what're the edges in the picture</p>
 <p>2nd layer: group edges to detect different parts of faces</p>
 <p>3rd layer: put together different parts of faces</p>
-<br>
-
-<p>It’s a simple to complex hiearchical, compositional representation.</p>
+<p><br></p>
+<p>It's a simple to complex hiearchical, compositional representation.</p>
 <p>Shallower layers detect simpler things, then the deeper layers put together the simpler things detected.</p>
-<br>
-
+<p><br></p>
 <p><strong>Circuit theory</strong></p>
 <blockquote>
-<p>Informally: there’re functions you can compute with a “small” L-layer deep neural network that shallower networks require exponentially more hidden units to compute</p>
+<p>Informally: there're functions you can compute with a &quot;small&quot; L-layer deep neural network that shallower networks require exponentially more hidden units to compute</p>
 </blockquote>
-<h1 id="Building-blocks-of-deep-neural-networks"><a href="#Building-blocks-of-deep-neural-networks" class="headerlink" title="Building blocks of deep neural networks"></a><strong>Building blocks of deep neural networks</strong></h1><p>In layer l</p>
+<h1 id="building-blocks-of-deep-neural-networks"><strong>Building blocks of deep neural networks</strong></h1>
+<p>In layer l</p>
 <p><strong>Forward:</strong></p>
 <blockquote>
 <p>Input a[l - 1]</p>
 <p>Calculate with parameters W[l] and b[l]</p>
 <p>Output a[l]; <strong><em>cache a[l], z[l], W[l] and b[l]</em></strong></p>
 </blockquote>
-<p><strong>*Backward:</strong> </p>
+<p>*<strong>Backward:</strong></p>
 <blockquote>
 <p>input da[l], z[l]</p>
 <p>Calculate with parameters W[l] and b[l]</p>
-<p>Output da[l - 1], dW[l], db[l]         // dZ[l] will be calculated in between as an intermediate matrix. </p>
+<p>Output da[l - 1], dW[l], db[l] // dZ[l] will be calculated in between as an intermediate matrix.</p>
 </blockquote>
-<p>Repeat this process over the l layers. </p>
-<h1 id="Forward-and-backward-propagation"><a href="#Forward-and-backward-propagation" class="headerlink" title="Forward and backward propagation"></a><strong>Forward and backward propagation</strong></h1><p><strong>Forward:</strong></p>
+<p>Repeat this process over the l layers.</p>
+<h1 id="forward-and-backward-propagation"><strong>Forward and backward propagation</strong></h1>
+<p><strong>Forward:</strong></p>
 <blockquote>
-<p>Z[l] = W[l]  A[l - 1] + b[l]</p>
+<p>Z[l] = W[l] A[l - 1] + b[l]</p>
 <p>A[l] = g[l](Z[l])</p>
 </blockquote>
 <hr>
-<br>
-
+<p><br></p>
 <p><strong>Backward:</strong></p>
 <blockquote>
-<p>dZ[l] = ( W[l + 1] * dZ[l + 1] ) ***** g’[l](Z[l])</p>
-<p>​         =dA[l] <strong><em>** g’[l](Z[l])             // the bold **’</em>‘</strong> here denotes element wise multiplication</p>
-<p>dW[l] = (1 / m)  *  ( dZ[l] * A[l] ) </p>
+<p>dZ[l] = ( W[l + 1] * dZ[l + 1] ) ***** g'[l](Z[l])</p>
+<p>​ =dA[l] ***** g'[l](Z[l]) // the bold **'*'** here denotes element wise multiplication</p>
+<p>dW[l] = (1 / m) * ( dZ[l] * A[l] )</p>
 <p>// actually, notice that A[l] is used so it should be cache in the forward propagation process as well</p>
 <p>db[l] = (1 / m) * np.sum(dZ[l], axis = 1, keepdims = True)</p>
 <p>dA[l - 1] = (W[l].T * dZ[l])</p>
 </blockquote>
 <p>dA[L], which is dA of the final/output layer, is calculated as follows</p>
 <blockquote>
-<p>dA[L] = - ( Y / A )  + (1 - Y) / (1 - A ) </p>
+<p>dA[L] = - ( Y / A ) + (1 - Y) / (1 - A )</p>
 </blockquote>
 <p>This is obtained by taking the derivative of the <strong>Cross-entropy Loss Function</strong></p>
 <blockquote>
-<p>( Y * log(A)  + (1 - Y) *  log(1 - A) )</p>
+<p>( Y * log(A) + (1 - Y) * log(1 - A) )</p>
 </blockquote>
-<h1 id="Parameters-vs-Hyperparameters"><a href="#Parameters-vs-Hyperparameters" class="headerlink" title="Parameters vs Hyperparameters"></a><strong>Parameters vs Hyperparameters</strong></h1><p><strong>Parameters:</strong></p>
+<h1 id="parameters-vs-hyperparameters"><strong>Parameters vs Hyperparameters</strong></h1>
+<p><strong>Parameters:</strong></p>
 <blockquote>
 <p>W[1], b[1], W[2], b[2] …</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p><strong>Hyperparameters:</strong></p>
 <blockquote>
-<ol>
+<ol type="1">
 <li>Learning rate - alpha</li>
 <li>Number of iterations</li>
 <li>Number of hidden layers - L</li>
@@ -286,18 +295,18 @@
 </ol>
 </blockquote>
 <p>The hyperparameters are those that somehow determine the final values of the parameters W and b.</p>
-<p>There’re also other hyperparameters.</p>
-<p><strong>e.g.</strong> Momentum, mini batch size, regularization…</p>
-<h1 id="What-does-deep-learning-have-to-do-with-the-human-brain"><a href="#What-does-deep-learning-have-to-do-with-the-human-brain" class="headerlink" title="What does deep learning have to do with the human brain?"></a><strong>What does deep learning have to do with the human brain?</strong></h1><blockquote>
-<p>Still, even neuroscientists today don’t quite understand what even a single neuron is doing.</p>
+<p>There're also other hyperparameters.</p>
+<p><strong>e.g.</strong> Momentum, mini batch size, regularization...</p>
+<p># <strong>What does deep learning have to do with the human brain?</strong></p>
+<blockquote>
+<p>Still, even neuroscientists today don't quite understand what even a single neuron is doing.</p>
 </blockquote>
-<p>Andrew mentioned that he became less and less prone to the analogy of human brain and neural network. </p>
-<br>
-
-<p>When I was taking a class in Cognitive Science, I found that “Connectionism”, which is an idea to explain the underlying mental phenomena behind human brain, resonates with neural network. A neuron has two states, either it fires or not. What decides the state is if it receives a signal that’s strong enough to activate it. The process of calculating the strength of the signal is analogous to forward propagation, and that of adjusting the activation threshold and weights of a neuron is analogous to backward propagation. </p>
-<p>I personally felt that this did make an intuitive sense when I was reading it, but for now I also somehow feel like it’s oversimplified. Hope to study and investigate more on this myself in the future. Part of the reason why I didn’t give up studying Computer Science upon the completion of my first year in college is that I thought deep learning could be a very useful tool in studying the human brain, in the respect of both itself as an analogy and its functionality. </p>
+<p>Andrew mentioned that he became less and less prone to the analogy of human brain and neural network.</p>
+<p><br></p>
+<p>When I was taking a class in Cognitive Science, I found that &quot;Connectionism&quot;, which is an idea to explain the underlying mental phenomena behind human brain, resonates with neural network. A neuron has two states, either it fires or not. What decides the state is if it receives a signal that's strong enough to activate it. The process of calculating the strength of the signal is analogous to forward propagation, and that of adjusting the activation threshold and weights of a neuron is analogous to backward propagation.</p>
+<p>I personally felt that this did make an intuitive sense when I was reading it, but for now I also somehow feel like it's oversimplified. Hope to study and investigate more on this myself in the future. Part of the reason why I didn't give up studying Computer Science upon the completion of my first year in college is that I thought deep learning could be a very useful tool in studying the human brain, in the respect of both itself as an analogy and its functionality.</p>
 <hr>
-<p>Week 4 in Andrew Ng’s <a href="https://www.coursera.org/learn/neural-networks-deep-learning/home/welcome" target="_blank" rel="noopener">‘Neural Networks and Deep Learning’</a> on Coursera.</p>
+<p>Week 4 in Andrew Ng's <a href="https://www.coursera.org/learn/neural-networks-deep-learning/home/welcome" target="_blank" rel="noopener">'Neural Networks and Deep Learning'</a> on Coursera.</p>
 <p>Cover by <a href="https://www.pixiv.net/member.php?id=772547" target="_blank" rel="noopener">loundraw</a> on Pixiv.</p>
 
             </div>

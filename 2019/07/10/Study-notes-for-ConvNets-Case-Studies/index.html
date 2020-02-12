@@ -106,7 +106,7 @@
 	            <a href="#s1">Archives</a>
 	                    <ul class="submenu">
 	                        <li>
-	                        <a class="archive-link" href="/archives/2019/12/">December 2019</a></li><li><a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
+	                        <a class="archive-link" href="/archives/2020/02/">February 2020</a></li><li><a class="archive-link" href="/archives/2019/12/">December 2019</a></li><li><a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
 	                    </li></ul>
 	        </li>
 	        
@@ -158,8 +158,10 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                <h1 id="Case-studies"><a href="#Case-studies" class="headerlink" title="Case studies"></a><strong>Case studies</strong></h1><hr>
-<h3 id="Classical-networks"><a href="#Classical-networks" class="headerlink" title="Classical networks"></a><strong>Classical networks</strong></h3><p><strong>Lenet - 5:</strong></p>
+                <h1 id="case-studies"><strong>Case studies</strong></h1>
+<hr>
+<h3 id="classical-networks"><strong>Classical networks</strong></h3>
+<p><strong>Lenet - 5:</strong></p>
 <p>Recognize hand-written digits(gray scale).</p>
 <p>This example is pretty similar to the architecture mentioned last week.</p>
 <p>Used Sigmoid and Tanh</p>
@@ -169,40 +171,39 @@
 <p><strong>VGG16:</strong></p>
 <p>Conv = 3 x 3 filter, s = 1, same</p>
 <p>Max-Pool = 2 x 2 filter, s = 2</p>
-<br>
-
-<h3 id="ResNets"><a href="#ResNets" class="headerlink" title="ResNets"></a><strong>ResNets</strong></h3><p>Residual Networks</p>
+<p><br></p>
+<h3 id="resnets"><strong>ResNets</strong></h3>
+<p>Residual Networks</p>
 <p>Main path:</p>
 <blockquote>
-<p>a[l] → Linear → ReLU → a[l + 1]  → Linear → ReLU →a[l + 2]</p>
+<p>a[l] → Linear → ReLU → a[l + 1] → Linear → ReLU →a[l + 2]</p>
 </blockquote>
 <p>previously, we calculate a[l + 2] by</p>
 <blockquote>
 <p>a[l + 2] = g[l + 2](z[l + 2])</p>
 </blockquote>
-<p>but now we have a “shortcut”/“skip” connection</p>
+<p>but now we have a &quot;shortcut&quot;/&quot;skip&quot; connection</p>
 <blockquote>
 <p>a[l + 2] = g[l + 2](z[l + 2] + <strong>a[l]</strong>)</p>
 <p><strong>a[l]</strong> is injected after the linear block, before the non-linearity</p>
 <p>for every two layers, we have this change and form a residual block</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p>Motivation:</p>
-<p>In practice, having more layers doesn’t necessarily decrease the training error. As #layers increases, the training error will go down and then turn to go up at some point. Having a ResNet prevents this from happening even if a very deep neural network is trained.</p>
-<br>
-
-<h3 id="Why-ResNets-work"><a href="#Why-ResNets-work" class="headerlink" title="Why ResNets work"></a><strong>Why ResNets work</strong></h3><blockquote>
-<p>a[l + 2] = g[l + 2](W[l + 1] * a[l + 1] + b[l + 1] + a[l]) = g[l + 2](z[l +2] + a[l]) </p>
+<p>In practice, having more layers doesn't necessarily decrease the training error. As #layers increases, the training error will go down and then turn to go up at some point. Having a ResNet prevents this from happening even if a very deep neural network is trained.</p>
+<p><br></p>
+<h3 id="why-resnets-work"><strong>Why ResNets work</strong></h3>
+<blockquote>
+<p>a[l + 2] = g[l + 2](W[l + 1] * a[l + 1] + b[l + 1] + a[l]) = g[l + 2](z[l +2] + a[l])</p>
 <p>W and b can be really small as we apply weight decay(L2 regularization)</p>
 <p>Assuming W = b = 0 in this case</p>
 <p>a[l + 2] = a[l]</p>
-<p>It makes learning the identity function easier and doesn’t hurt performance</p>
+<p>It makes learning the identity function easier and doesn't hurt performance</p>
 </blockquote>
-<p>Notice that we add z[l + 2] and a[l], which assumes that they have the same dimension(that’s why we may apply lots of same convolution layers). If they do not, we may multiply a[l] by a matrix W which makes it have the same dimension as z[l + 2]</p>
-<br>
-
-<h3 id="Networks-in-Networks-and-1-x-1-Convolution"><a href="#Networks-in-Networks-and-1-x-1-Convolution" class="headerlink" title="Networks in Networks and 1 x 1 Convolution"></a><strong>Networks in Networks and 1 x 1 Convolution</strong></h3><p>e.g.</p>
+<p>Notice that we add z[l + 2] and a[l], which assumes that they have the same dimension(that's why we may apply lots of same convolution layers). If they do not, we may multiply a[l] by a matrix W which makes it have the same dimension as z[l + 2]</p>
+<p><br></p>
+<h3 id="networks-in-networks-and-1-x-1-convolution"><strong>Networks in Networks and 1 x 1 Convolution</strong></h3>
+<p>e.g.</p>
 <blockquote>
 <p>Input a 28 x 28 x 192</p>
 <p>1 x 1 x 192, 32 filters</p>
@@ -210,9 +211,9 @@
 <p>end up 28 x 28 x 32(nH, nW, nC)</p>
 <p>It adds non-lineartiy to the network, and allows you to change #channels without changing height and width.</p>
 </blockquote>
-<br>
-
-<h3 id="Inception-Network-Motivation"><a href="#Inception-Network-Motivation" class="headerlink" title="Inception Network Motivation"></a><strong>Inception Network Motivation</strong></h3><p>Motivation:</p>
+<p><br></p>
+<h3 id="inception-network-motivation"><strong>Inception Network Motivation</strong></h3>
+<p>Motivation:</p>
 <blockquote>
 <p>Want to do the convolutions and pooling, but we run into <strong>the problem of computational cost</strong></p>
 </blockquote>
@@ -226,55 +227,57 @@
 <p>28 x 28 x 16 * 5 x 5 x 16(32 filters) ≈ 10.0 Million</p>
 <p>Reduce from 120Million to 12.4Million approximately.</p>
 </blockquote>
-<br>
-
-<h3 id="Inception-Network"><a href="#Inception-Network" class="headerlink" title="Inception Network"></a><strong>Inception Network</strong></h3><p>Inception Module</p>
+<p><br></p>
+<h3 id="inception-network"><strong>Inception Network</strong></h3>
+<p>Inception Module</p>
 <blockquote>
 <p>What it does is to put all of the modules(convolution, pooling) together and concatenate them all.</p>
 </blockquote>
-<p>You may also have some side branches(using softmax) to predict the results, to show that the predictions by the hidden layers aren’t too bad. This also has a regularizing effect</p>
-<p>Fun fact: </p>
+<p>You may also have some side branches(using softmax) to predict the results, to show that the predictions by the hidden layers aren't too bad. This also has a regularizing effect</p>
+<p>Fun fact:</p>
 <blockquote>
 <p>Got inspiration from <em>Inception</em></p>
-<p>Cited the meme “We need to go deeper”</p>
+<p>Cited the meme &quot;We need to go deeper&quot;</p>
 </blockquote>
-<h1 id="Practical-advices-for-using-ConvNets"><a href="#Practical-advices-for-using-ConvNets" class="headerlink" title="Practical advices for using ConvNets"></a><strong>Practical advices for using ConvNets</strong></h1><hr>
-<h3 id="Using-Open-Source-Implementation"><a href="#Using-Open-Source-Implementation" class="headerlink" title="Using Open-Source Implementation"></a><strong>Using Open-Source Implementation</strong></h3><p>Github lol.</p>
-<br>
-
-<h3 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a><strong>Transfer Learning</strong></h3><p>You can freeze some(shallower) layers and train the later layers.</p>
+<h1 id="practical-advices-for-using-convnets"><strong>Practical advices for using ConvNets</strong></h1>
+<hr>
+<h3 id="using-open-source-implementation"><strong>Using Open-Source Implementation</strong></h3>
+<p>Github lol.</p>
+<p><br></p>
+<h3 id="transfer-learning"><strong>Transfer Learning</strong></h3>
+<p>You can freeze some(shallower) layers and train the later layers.</p>
 <p>If you have more data, the number of layers you freeze might be smaller, the number of layers you train on top can be bigger. Or you may just use the whole thing (the network you cloned) as initialization.</p>
-<br>
-
-<h3 id="Data-augmentation"><a href="#Data-augmentation" class="headerlink" title="Data augmentation"></a><strong>Data augmentation</strong></h3><p>For CV problems, we just want as many data as possible.</p>
+<p><br></p>
+<h3 id="data-augmentation"><strong>Data augmentation</strong></h3>
+<p>For CV problems, we just want as many data as possible.</p>
 <p>Data augmentation can help.</p>
 <p><strong>Common augmentation method:</strong></p>
 <blockquote>
 <p>Mirroring</p>
-<p>Random cropping(isn’t perfect but works well in practice)</p>
+<p>Random cropping(isn't perfect but works well in practice)</p>
 <p>Rotation, sheering etc. may also be used</p>
 <p>Color shifting is also a commonly used technique</p>
-<p>Take different values of R,G,B(<strong>e.g.</strong> +20, -20, +20) </p>
+<p>Take different values of R,G,B(<strong>e.g.</strong> +20, -20, +20)</p>
 <p>The identity of label y should stay the same</p>
 <p>Make your learning algorithm more rubust to color changes.</p>
 <p>Advanced:</p>
 <ul>
-<li>PCA, adds a lot to R and B but little to G(taught in Andrew’s ML class)</li>
+<li>PCA, adds a lot to R and B but little to G(taught in Andrew's ML class)</li>
 </ul>
 </blockquote>
 <p>A CPU thread to load data and do image distortion. This and training can run in parrallel.</p>
-<br>
-
-<h3 id="State-of-Computer-Vision"><a href="#State-of-Computer-Vision" class="headerlink" title="State of Computer Vision"></a><strong>State of Computer Vision</strong></h3><p>Data vs. hand-engineering</p>
-<p>More hand-engineering when we don’t have a lot of data.</p>
+<p><br></p>
+<h3 id="state-of-computer-vision"><strong>State of Computer Vision</strong></h3>
+<p>Data vs. hand-engineering</p>
+<p>More hand-engineering when we don't have a lot of data.</p>
 <p><strong>Two sources of knowledge</strong></p>
 <blockquote>
-<ol>
+<ol type="1">
 <li>Labeled data</li>
 <li>hand engineered features/network architecture/other components</li>
 </ol>
 </blockquote>
-<p>Tips for doing well on benchmark/ winning competitions.(don’t often use them in production though)</p>
+<p>Tips for doing well on benchmark/ winning competitions.(don't often use them in production though)</p>
 <blockquote>
 <p>Ensembling</p>
 <ul>
@@ -292,7 +295,7 @@
 <p>Use pre-trained models and fine-tune on your dataset</p>
 </blockquote>
 <hr>
-<p>Week 2 in Andrew Ng’s <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome" target="_blank" rel="noopener">Convolutional Neural Networks</a> on Coursera.</p>
+<p>Week 2 in Andrew Ng's <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome" target="_blank" rel="noopener">Convolutional Neural Networks</a> on Coursera.</p>
 <p>Cover by <a href="https://www.pixiv.net/member_illust.php?id=59205" target="_blank" rel="noopener">悠里</a> on Pixiv.</p>
 
             </div>

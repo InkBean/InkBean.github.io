@@ -106,7 +106,7 @@
 	            <a href="#s1">Archives</a>
 	                    <ul class="submenu">
 	                        <li>
-	                        <a class="archive-link" href="/archives/2019/12/">December 2019</a></li><li><a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
+	                        <a class="archive-link" href="/archives/2020/02/">February 2020</a></li><li><a class="archive-link" href="/archives/2019/12/">December 2019</a></li><li><a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
 	                    </li></ul>
 	        </li>
 	        
@@ -158,8 +158,10 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                <h1 id="Deep-Reinforcement-Learning"><a href="#Deep-Reinforcement-Learning" class="headerlink" title="Deep Reinforcement Learning"></a><strong>Deep Reinforcement Learning</strong></h1><hr>
-<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a><strong>Motivation</strong></h3><p>AlphaGo</p>
+                <h1 id="deep-reinforcement-learning"><strong>Deep Reinforcement Learning</strong></h1>
+<hr>
+<h3 id="motivation"><strong>Motivation</strong></h3>
+<p>AlphaGo</p>
 <p>Supervised Learning:</p>
 <blockquote>
 <p>Input: state on the board</p>
@@ -172,8 +174,7 @@
 <p>3- We will likely not generalized. Here we want a <strong>strategy</strong>, not a pattern that deep learning networks learn.</p>
 </blockquote>
 <p>We want a long-term reward.</p>
-<br>
-
+<p><br></p>
 <p>When to apply RL?</p>
 <blockquote>
 <p>Delayed labels</p>
@@ -189,119 +190,108 @@
 <p>Games</p>
 <p>Advertisements</p>
 </blockquote>
-<br>
-
-<h3 id="Recycling-is-good-an-introduction-to-RL"><a href="#Recycling-is-good-an-introduction-to-RL" class="headerlink" title="Recycling is good: an introduction to RL"></a><strong>Recycling is good: an introduction to RL</strong></h3><p>We want to learn <strong>optimal action</strong> at each state.</p>
+<p><br></p>
+<h3 id="recycling-is-good-an-introduction-to-rl"><strong>Recycling is good: an introduction to RL</strong></h3>
+<p>We want to learn <strong>optimal action</strong> at each state.</p>
 <p>Q-table:</p>
 <blockquote>
 <p>Horizontal axis = action</p>
 <p>Vertical axis = state.</p>
 <p>Each element represents the score of the action taken at the state.</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p>Bellman equation(optimality equation)</p>
 <blockquote>
-<p><strong>Q<em>(s, a) = r + γ \</em> max (Q*(s’, a’)).</strong> We want the optimal Q, which is Q*. </p>
-<p>//r is immediate reward. </p>
+<p>**Q*(s, a) = r + γ * max (Q*(s', a')).** We want the optimal Q, which is Q*.</p>
+<p>//r is immediate reward.</p>
 <p>//Incorporate time-step, reduce rewards as time passes. γ is the parameter to do this.</p>
-<p>Policy: <strong>π(s) = arg max Q*(s, a)</strong></p>
+<p>Policy: **π(s) = arg max Q*(s, a)**</p>
 <p>Telling us what the best strategy is.</p>
 </blockquote>
 <p>One problem is that the Q-table will be too big.</p>
-<br>
-
-<h3 id="Deep-Q-Learning"><a href="#Deep-Q-Learning" class="headerlink" title="Deep Q-Learning"></a><strong>Deep Q-Learning</strong></h3><p>Find a Q-function(neural network) to replace Q-table.</p>
+<p><br></p>
+<h3 id="deep-q-learning"><strong>Deep Q-Learning</strong></h3>
+<p>Find a Q-function(neural network) to replace Q-table.</p>
 <p>Input a state, output actions and select the maximum.</p>
-<p>Unlike supervised learning we’ve been focusing on in deep learning, here we don’t have ready-made labels now. </p>
-<br>
-
+<p>Unlike supervised learning we've been focusing on in deep learning, here we don't have ready-made labels now.</p>
+<p><br></p>
 <p>Loss function:</p>
 <blockquote>
 <p>L = (y - Q(s, a))^2</p>
 </blockquote>
 <p>We know that the optimal Q follows the equation, but now we do not have Q*, which is Optimal Q, to compute y. However, we can still make use of the Bellman equation to approximate y.</p>
 <blockquote>
-<p>y = r + γ * max (Q(s’, a’))</p>
-<p>Here we use Q instead of Q* since we don’t have it.</p>
+<p>y = r + γ * max (Q(s', a'))</p>
+<p>Here we use Q instead of Q* since we don't have it.</p>
 </blockquote>
-<br>
-
-<p>Here’s a scenario.</p>
+<p><br></p>
+<p>Here's a scenario.</p>
 <p>When left score &gt; right score</p>
 <blockquote>
 <p>L = (y - Q(s, ←))^2</p>
 </blockquote>
 <blockquote>
-<p>y = r← + γ * max (Q(s_next←’, a’))</p>
+<p>y = r← + γ * max (Q(s_next←', a'))</p>
 <p>r← denotes immediate reward after taking action ← in state s</p>
-<p>γ * max (Q(s_next←’, a’)) denotes discounted maximum future reward when you’re in state s_next←</p>
+<p>γ * max (Q(s_next←', a')) denotes discounted maximum future reward when you're in state s_next←</p>
 </blockquote>
-<p>The labels are moving. They’re not static labels. </p>
-<p>We want to train the network so that the Q function gets closer to our best guess. In turn, a better Q function makes the best guess better. </p>
-<br>
-
+<p>The labels are moving. They're not static labels.</p>
+<p>We want to train the network so that the Q function gets closer to our best guess. In turn, a better Q function makes the best guess better.</p>
+<p><br></p>
 <p>During training, Q will be fixed for many iterations.</p>
-<br>
-
+<p><br></p>
 <p>DQN implementation:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Initialize your Q-network parameters</span><br><span class="line">Loop over episodes: // 1 game from start to end</span><br><span class="line">	Start from initial state s</span><br><span class="line">	Loop over time steps:</span><br><span class="line">		Forward propagate s in the Q-networks</span><br><span class="line">		Execute action a that has the maximum(Q(s, a))</span><br><span class="line">		Observe reward r and next state s&apos;</span><br><span class="line">		Compute targets y by forward propagating states s&apos; in the network, then compute loss</span><br><span class="line">		Update parameters with gradient descent</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h3 id="Application-of-Deep-Q-Learning-Breakout-Atari"><a href="#Application-of-Deep-Q-Learning-Breakout-Atari" class="headerlink" title="Application of Deep Q-Learning: Breakout(Atari)"></a><strong>Application of Deep Q-Learning: Breakout(Atari)</strong></h3><p>Goal: </p>
+<p><br></p>
+<h3 id="application-of-deep-q-learning-breakoutatari"><strong>Application of Deep Q-Learning: Breakout(Atari)</strong></h3>
+<p>Goal:</p>
 <blockquote>
 <p>Play breakout, detroy all the breaks</p>
 <p>Q-network</p>
-<p>​        Input: The pixels of <strong>multiple last successive frames</strong>. It’s because based on the image it’s hard to know if the ball is going up or down</p>
-<p>​        Output: Q-values ( Q(s, ←),  Q(s, →), Q(s, -) )</p>
+<p>​ Input: The pixels of <strong>multiple last successive frames</strong>. It's because based on the image it's hard to know if the ball is going up or down</p>
+<p>​ Output: Q-values ( Q(s, ←), Q(s, →), Q(s, -) )</p>
 </blockquote>
 <p>Pre-processing</p>
 <blockquote>
 <p>1- Φ(s): take the last several frames</p>
 <p>2- reduce the size of input(remove color, etc.), like what we may do in image processing</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p>Some training challenges:</p>
 <blockquote>
 <p>Keep track of terminal step</p>
 <p>Experience replay</p>
 <p>Epsilon greedy action choice(Exploration/Exploitation tradeoff)</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p>Replay memory</p>
 <blockquote>
-<p>E1: Φ(s) → a → r → Φ(s’)</p>
-<p>E2: Φ(s’) → a → r → Φ(s’’)</p>
-<p>E3: Φ(s’’) → a → r → Φ(s’’’)</p>
-<p>Previously: E1 →  E2 → E3</p>
+<p>E1: Φ(s) → a → r → Φ(s')</p>
+<p>E2: Φ(s') → a → r → Φ(s'')</p>
+<p>E3: Φ(s'') → a → r → Φ(s''')</p>
+<p>Previously: E1 → E2 → E3</p>
 <p>Training: E1 → sample(E1, E2) → sample(E1, E2, E3)</p>
-<p>We want to decorrelate the examples. </p>
+<p>We want to decorrelate the examples.</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p>Exploration/Exploitation</p>
 <blockquote>
-<p>If we always choose the best action based on the Q-function we currently have, we may miss the action that doens’t currently not have the highest score but inreality the best(or a better option than the “best” based on the current Q-function).</p>
-<p>To avoid simply exploiting in one direction, we want to explore other possibilities, other choices of actions that currently aren’t regarded as the best ones. </p>
+<p>If we always choose the best action based on the Q-function we currently have, we may miss the action that doens't currently not have the highest score but inreality the best(or a better option than the &quot;best&quot; based on the current Q-function).</p>
+<p>To avoid simply exploiting in one direction, we want to explore other possibilities, other choices of actions that currently aren't regarded as the best ones.</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Initialize your Q-network parameters</span><br><span class="line">Initialize replay memory D</span><br><span class="line"></span><br><span class="line">Loop over episodes: // 1 game from start to end</span><br><span class="line">	Start from initial state Φ(s)</span><br><span class="line">	Create a boolean to detect terminal states: terminal = False</span><br><span class="line">	Loop over time steps:</span><br><span class="line">		- With probability ε, take random action a. // Epsilon Greedy action</span><br><span class="line">		- Otherwise,</span><br><span class="line">    	- Forward propagate s in the Q-networks</span><br><span class="line">			- Execute action a that has the maximum(Q(Φ(s), a))</span><br><span class="line">		- Use s&apos; to get Φ(s&apos;)										// Pre-processing</span><br><span class="line">		- Add(Φ(s), a, r, Φ(s&apos;)) to the replay memory D</span><br><span class="line">    - Sample random mini-batches of transitions from D.</span><br><span class="line">		- Observe reward r and next state Φ(s&apos;)</span><br><span class="line">		- Check if y is terminal state. Compute targets y by forward propagating </span><br><span class="line">		states Φ(s&apos;) in the network, then compute loss		</span><br><span class="line">		- Update parameters with gradient descent</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h3 id="Advanced-Topics"><a href="#Advanced-Topics" class="headerlink" title="Advanced Topics"></a><strong>Advanced Topics</strong></h3><p>Policy gradient methods</p>
+<p><br></p>
+<h3 id="advanced-topics"><strong>Advanced Topics</strong></h3>
+<p>Policy gradient methods</p>
 <p>PPO</p>
 <p>TRPO</p>
-<br>
-
-<h3 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a><strong>题外话</strong></h3><p>高三的时候出于某个原因我去问了几个我高中的外教“你知不知道AlphaGo”这个问题，结果回答是清一色的”No“。这让我挺惊讶的，因为这大概算是一个大众都能听懂的的AI的大新闻了。</p>
+<p><br></p>
+<h3 id="题外话"><strong>题外话</strong></h3>
+<p>高三的时候出于某个原因我去问了几个我高中的外教“你知不知道AlphaGo”这个问题，结果回答是清一色的”No“。这让我挺惊讶的，因为这大概算是一个大众都能听懂的的AI的大新闻了。</p>
 <hr>
 <ul>
-<li>On what I’ve learnt from <a href="https://www.youtube.com/embed/NP2XqpgTJyo" target="_blank" rel="noopener">video lecture 9</a> in CS230 at Stanford. </li>
+<li>On what I've learnt from <a href="https://www.youtube.com/embed/NP2XqpgTJyo" target="_blank" rel="noopener">video lecture 9</a> in CS230 at Stanford.</li>
 <li>Cover by <a href="https://www.pixiv.net/member.php?id=47488" target="_blank" rel="noopener">飴村</a> on Pixiv</li>
 </ul>
 

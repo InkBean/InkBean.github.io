@@ -106,7 +106,7 @@
 	            <a href="#s1">Archives</a>
 	                    <ul class="submenu">
 	                        <li>
-	                        <a class="archive-link" href="/archives/2019/12/">December 2019</a></li><li><a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
+	                        <a class="archive-link" href="/archives/2020/02/">February 2020</a></li><li><a class="archive-link" href="/archives/2019/12/">December 2019</a></li><li><a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
 	                    </li></ul>
 	        </li>
 	        
@@ -158,7 +158,8 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                <h3 id="Computer-vision"><a href="#Computer-vision" class="headerlink" title="Computer vision"></a><strong>Computer vision</strong></h3><blockquote>
+                <h3 id="computer-vision"><strong>Computer vision</strong></h3>
+<blockquote>
 <p>Image classification</p>
 <p>Object detection</p>
 <p>Neural style transfer</p>
@@ -166,121 +167,119 @@
 </blockquote>
 <p>Dimension of input features can get really big.</p>
 <p><strong>e.g.</strong> A picture of 1000 * 1000 has 3 million input features. (1000 * 1000 * 3)</p>
-<br>
-
-<h3 id="Edge-detection-example"><a href="#Edge-detection-example" class="headerlink" title="Edge detection example"></a><strong>Edge detection example</strong></h3><p>In mathematics, <strong>‘*‘</strong> denotes convolution. In python, <strong>‘*‘</strong> also denotes matrix wise multiplication.</p>
-<p>Image * filter = new image </p>
+<p><br></p>
+<h3 id="edge-detection-example"><strong>Edge detection example</strong></h3>
+<p>In mathematics, <strong>'*'</strong> denotes convolution. In python, <strong>'*'</strong> also denotes matrix wise multiplication.</p>
+<p>Image * filter = new image</p>
 <blockquote>
 <p>Python: conv_forward()</p>
 <p>Tensorflow: tf.nn.Conv2D()</p>
 <p>Keras: Conv2D()</p>
 </blockquote>
-<p>A vertical edge is a 3 x 3 region where there’re bright pixels on the left and dark pixels on the right.</p>
-<br>
-
-<h3 id="More-edge-detection"><a href="#More-edge-detection" class="headerlink" title="More edge detection"></a><strong>More edge detection</strong></h3><p>Horizontal: </p>
+<p>A vertical edge is a 3 x 3 region where there're bright pixels on the left and dark pixels on the right.</p>
+<p><br></p>
+<h3 id="more-edge-detection"><strong>More edge detection</strong></h3>
+<p>Horizontal:</p>
 <blockquote>
 <p>relatively bright on top, relatively dark below</p>
 </blockquote>
-<p>There’re also other kinds of filters such as Sobel filter, Schorr filter, etc.</p>
+<p>There're also other kinds of filters such as Sobel filter, Schorr filter, etc.</p>
 <p>You can treat the 9 numbers in the filter matrix as <strong>parameters that can learn</strong>, instead of fixed, hand-coded values such as the numbers in Sobel filter.</p>
-<br>
-
-<h3 id="Padding"><a href="#Padding" class="headerlink" title="Padding"></a><strong>Padding</strong></h3><p>If you have an <strong>n x n</strong> original image, a <strong>f x f</strong> filter, then your output will be <strong>(n - f + 1) x (n - f + 1)</strong></p>
-<p>But you don’t want it to shrink, or throw away information of the edges of the image. </p>
-<p>To solve it, you want to pad the image. </p>
+<p><br></p>
+<h3 id="padding"><strong>Padding</strong></h3>
+<p>If you have an <strong>n x n</strong> original image, a <strong>f x f</strong> filter, then your output will be <strong>(n - f + 1) x (n - f + 1)</strong></p>
+<p>But you don't want it to shrink, or throw away information of the edges of the image.</p>
+<p>To solve it, you want to pad the image.</p>
 <blockquote>
 <p>for example, if p = 1, n = 6, f = 3</p>
 <p>the dimensions of the original image therefore becomes (6 + 1 + 1) x (6 + 1 + 1) = 8 x 8</p>
-<p>after convolution, it becomes 6 x 6, which is the same as that of the original image </p>
+<p>after convolution, it becomes 6 x 6, which is the same as that of the original image</p>
 </blockquote>
-<p><strong>“Valid Convolution”:</strong></p>
+<p><strong>&quot;Valid Convolution&quot;:</strong></p>
 <blockquote>
 <p>No padding</p>
 <p>n x n * f x f gives you (n - f + 1) x (n - f + 1)</p>
 </blockquote>
-<p><strong>“Same Convolution”:</strong></p>
+<p><strong>&quot;Same Convolution&quot;:</strong></p>
 <blockquote>
 <p>Output size = Input size</p>
 <p>n x n * f x f gives you (n + 2p - f + 1) x (n + 2p - f + 1)</p>
 <p>n + 2p - f + 1 = n</p>
 <p>p = (f - 1) / 2</p>
-<p>f is usually <strong>odd</strong> so that the filter has a <strong>central position</strong> and <strong>avoids asymmetric padding</strong> </p>
+<p>f is usually <strong>odd</strong> so that the filter has a <strong>central position</strong> and <strong>avoids asymmetric padding</strong></p>
 </blockquote>
-<br>
-
-<h3 id="Strided-convolutions"><a href="#Strided-convolutions" class="headerlink" title="Strided convolutions"></a><strong>Strided convolutions</strong></h3><p>If stride = 2, for example,</p>
+<p><br></p>
+<h3 id="strided-convolutions"><strong>Strided convolutions</strong></h3>
+<p>If stride = 2, for example,</p>
 <p>the filter would jump over by 2 steps instead of 1 pixel</p>
 <p><strong>Generally:</strong></p>
 <blockquote>
 <p>n x n * f x f, with padding p and stride s</p>
-<p>the output dimension would be <strong>[ (n + 2p -f) / s + 1 ]</strong> by  <strong>[ (n + 2p -f) / s + 1 ) ]</strong></p>
-<p>[z] denotes floor(z), in case (n + 2p - f) isn’t an integer.</p>
-<p>You don’t want the filter to interfere with regions outside of the image or image + padding</p>
+<p>the output dimension would be <strong>[ (n + 2p -f) / s + 1 ]</strong> by <strong>[ (n + 2p -f) / s + 1 ) ]</strong></p>
+<p>[z] denotes floor(z), in case (n + 2p - f) isn't an integer.</p>
+<p>You don't want the filter to interfere with regions outside of the image or image + padding</p>
 </blockquote>
 <p>Technical note on cross-correlation and convolution:</p>
 <blockquote>
 <p>In math textbooks, you mirror the filter both on vertical and horizontal axis, before doing the multiplication.</p>
-<p>By convention, in DL, we don’t bother to do the step of flipping it over. What we call “convolution” in DL is actually “cross-correlation” in mathematics, but by convention we just call it “convolution” and it works just fine.</p>
+<p>By convention, in DL, we don't bother to do the step of flipping it over. What we call &quot;convolution&quot; in DL is actually &quot;cross-correlation&quot; in mathematics, but by convention we just call it &quot;convolution&quot; and it works just fine.</p>
 </blockquote>
-<br>
-
-<h3 id="Convolutions-over-volume"><a href="#Convolutions-over-volume" class="headerlink" title="Convolutions over volume"></a><strong>Convolutions over volume</strong></h3><p>Convolutions on RGB image</p>
+<p><br></p>
+<h3 id="convolutions-over-volume"><strong>Convolutions over volume</strong></h3>
+<p>Convolutions on RGB image</p>
 <blockquote>
 <p><strong>Height</strong> x <strong>Width</strong> x <strong># Channels</strong></p>
 </blockquote>
 <p>The <strong># Channels</strong>(or sometimes also called <strong>depth</strong>) of the image and the filter must be the same.</p>
-<p>It’s potentially possible to have a filter that cares about only one of red, blue, and green.</p>
+<p>It's potentially possible to have a filter that cares about only one of red, blue, and green.</p>
 <p>What if we want to detect edges of both horizontal and vertical?</p>
 <blockquote>
 <p>Convolve with 2 filters, resulting in two outputs and then stack them up.</p>
 </blockquote>
 <p><strong>In general:</strong></p>
 <blockquote>
-<p>n x n x nc * f x f x nc = (n - f + 1) x (n - f + 1) x nc’, assuming no padding and no stride</p>
-<p>nc’ denotes the number of filters you use.</p>
+<p>n x n x nc * f x f x nc = (n - f + 1) x (n - f + 1) x nc', assuming no padding and no stride</p>
+<p>nc' denotes the number of filters you use.</p>
 </blockquote>
-<br>
-
-<h3 id="One-layer-of-a-Convolutional-Network"><a href="#One-layer-of-a-Convolutional-Network" class="headerlink" title="One layer of a Convolutional Network"></a><strong>One layer of a Convolutional Network</strong></h3><p>Recall that</p>
+<p><br></p>
+<h3 id="one-layer-of-a-convolutional-network"><strong>One layer of a Convolutional Network</strong></h3>
+<p>Recall that</p>
 <blockquote>
 <p>Z[1] = W[1] * X + b[1]</p>
-<p>A[1] = g[1](Z[1]) </p>
+<p>A[1] = g[1](Z[1])</p>
 </blockquote>
 <p>In CNN</p>
 <blockquote>
 <p>Filter plays a role similar to W[1]</p>
 <p>You would also add a bias term(a real number) to the output image, which plays a role similar to b[1]</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p>Number of parameters in one layer:</p>
 <blockquote>
 <p>You have fixed number of parameters regardless of the size of your input.</p>
-<p><strong>e.g.</strong> If you have 10 filters in size of 3 x 3 x 3, you will have </p>
+<p><strong>e.g.</strong> If you have 10 filters in size of 3 x 3 x 3, you will have</p>
 <p>(3 * 3 * 3 + 1) * 10 = 280 parameters</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p><strong>Summary of notation:</strong></p>
 <blockquote>
 <p>If layer l is a convolution layer</p>
 <p>f[l] = filter size</p>
 <p>p[l] = padding</p>
 <p>s[l] = stride</p>
-<p>nc[l] = number of filters </p>
+<p>nc[l] = number of filters</p>
 <p>Each filter is : <strong>f[l]</strong> x <strong>f[l]</strong> x <strong>nc[l - 1]</strong></p>
 <p>Activations: <strong>a[l]</strong> = <strong>nH[l]</strong> x <strong>nW[l]</strong> x <strong>nc[l]</strong></p>
-<p>If we have <strong>m</strong> training examples, then activations will be: </p>
+<p>If we have <strong>m</strong> training examples, then activations will be:</p>
 <p>A[l] = <strong>m</strong> x <strong>nH[l]</strong> x <strong>nW[l]</strong> x <strong>nc[l]</strong></p>
-<p>Weights: <strong>f[l]</strong> x <strong>f[l]</strong> x <strong>nc[l - 1]</strong> x <strong>nc[l]</strong>         // nc[l] denotes # filters in layer l</p>
-<p> bias: 1 x 1 x 1 x <strong>nc[l]</strong></p>
+<p>Weights: <strong>f[l]</strong> x <strong>f[l]</strong> x <strong>nc[l - 1]</strong> x <strong>nc[l]</strong> // nc[l] denotes # filters in layer l</p>
+<p>bias: 1 x 1 x 1 x <strong>nc[l]</strong></p>
 <p>Input: <strong>nH[l - 1]</strong> x <strong>nW[l - 1]</strong> x <strong>nc[l - 1]</strong></p>
 <p>Output: <strong>nH[l]</strong> x <strong>nW[l]</strong> x <strong>nc[l]</strong></p>
 </blockquote>
-<br>
-
-<h3 id="Simple-Convolutional-Network-Example"><a href="#Simple-Convolutional-Network-Example" class="headerlink" title="Simple Convolutional Network Example"></a><strong>Simple Convolutional Network Example</strong></h3><blockquote>
+<p><br></p>
+<h3 id="simple-convolutional-network-example"><strong>Simple Convolutional Network Example</strong></h3>
+<blockquote>
 <p>Take the last activation and flatten it to a big vector.</p>
 <p>Fit the vector in a logistic/softmax activation function to get the final yhat.</p>
 </blockquote>
@@ -288,8 +287,7 @@
 <blockquote>
 <p>As we go deeper, the number of height and width gradually <strong>decrease</strong>, while the number of channels gradually <strong>increase</strong>.</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p>Types of Layer in a convolutional network:</p>
 <blockquote>
 <ul>
@@ -298,48 +296,45 @@
 <li><strong>Fully connected (FC)</strong></li>
 </ul>
 </blockquote>
-<br>
-
-<h3 id="Pooling-Layers"><a href="#Pooling-Layers" class="headerlink" title="Pooling Layers"></a><strong>Pooling Layers</strong></h3><p><strong>Max pooling:</strong></p>
+<p><br></p>
+<h3 id="pooling-layers"><strong>Pooling Layers</strong></h3>
+<p><strong>Max pooling:</strong></p>
 <blockquote>
-<p>Take the max over a f x f region, as if you’re taking a filter size of f.</p>
+<p>Take the max over a f x f region, as if you're taking a filter size of f.</p>
 </blockquote>
 <p>Hyperparameters:</p>
 <blockquote>
 <p>f(filter size) and s(stride)</p>
 <p>f = 2 and s = 2 are common choices.</p>
 </blockquote>
-<p>There’s <strong>no parameters to learn</strong> though. </p>
-<p>performance on each of the channels independently, so applying max pooling won’t change </p>
-<br>
-
+<p>There's <strong>no parameters to learn</strong> though.</p>
+<p>performance on each of the channels independently, so applying max pooling won't change</p>
+<p><br></p>
 <p>Average pooling:</p>
 <blockquote>
 <p>Take the average over a f x f region</p>
 </blockquote>
 <p>Max pooling is used much more often than average pooling.</p>
-<br>
-
-<h3 id="CNN-example"><a href="#CNN-example" class="headerlink" title="CNN example"></a><strong>CNN example</strong></h3><p>Input</p>
+<p><br></p>
+<h3 id="cnn-example"><strong>CNN example</strong></h3>
+<p>Input</p>
 <blockquote>
 <p>32 x 32 x 3</p>
 </blockquote>
 <p>↓ (f = 5, s = 1, 6 filters)</p>
-<p>Conv1 </p>
+<p>Conv1</p>
 <blockquote>
 <p>28 x 28 x 6</p>
 </blockquote>
 <p>↓ ( Max pool, f = 2, s = 2)</p>
-<p>Pool1 </p>
+<p>Pool1</p>
 <blockquote>
 <p>14 x 14 x 6</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p>By convention, treat (Conv1 and Pool1) as Layer 1.</p>
-<br>
-
-<p>↓  (f = 5, s = 1, 16 filters)</p>
+<p><br></p>
+<p>↓ (f = 5, s = 1, 16 filters)</p>
 <p>Conv2</p>
 <blockquote>
 <p>10 x 10 x 10</p>
@@ -350,11 +345,11 @@
 <p>5 x 5 x 16</p>
 </blockquote>
 <p>Since 5 x 5 x 16 = 400,</p>
-<p>we fatten it to a </p>
+<p>we fatten it to a</p>
 <blockquote>
 <p>400 x 1vector.</p>
 </blockquote>
-<p>↓  ( W[3] = (120, 400), b[3] = (120, 1) )</p>
+<p>↓ ( W[3] = (120, 400), b[3] = (120, 1) )</p>
 <p>FC3</p>
 <blockquote>
 <p>120 x 1</p>
@@ -367,20 +362,20 @@
 <blockquote>
 <p>10 outputs</p>
 </blockquote>
-<br>
-
-<p>The conv layers tend to have fewer parameters than FC layers, and pooling layers have no parameters. </p>
-<h3 id="Why-convolutions"><a href="#Why-convolutions" class="headerlink" title="Why convolutions?"></a><strong>Why convolutions?</strong></h3><p>Even though the number of features big, number of parameters of each Conv layer is relatively small.</p>
+<p><br></p>
+<p>The conv layers tend to have fewer parameters than FC layers, and pooling layers have no parameters.</p>
+<h3 id="why-convolutions"><strong>Why convolutions?</strong></h3>
+<p>Even though the number of features big, number of parameters of each Conv layer is relatively small.</p>
 <p><strong>Parameter sharing:</strong></p>
 <blockquote>
-<p>A feature detector (such as vertical feature detector) that’s useful in one part of the image is also useful in other parts of the image.</p>
+<p>A feature detector (such as vertical feature detector) that's useful in one part of the image is also useful in other parts of the image.</p>
 </blockquote>
 <p><strong>Sparsity of connections:</strong></p>
 <blockquote>
 <p>In each layer, each output value depends only on a small number of input.</p>
 </blockquote>
 <hr>
-<p>Week 1 in Andrew Ng’s <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome" target="_blank" rel="noopener">Convolutional Neural Networks</a> on Coursera.</p>
+<p>Week 1 in Andrew Ng's <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome" target="_blank" rel="noopener">Convolutional Neural Networks</a> on Coursera.</p>
 <p>Cover by <a href="https://www.pixiv.net/member.php?id=3143520" target="_blank" rel="noopener">snatti</a> on Pixiv.</p>
 
             </div>

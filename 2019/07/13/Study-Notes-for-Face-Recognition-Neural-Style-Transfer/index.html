@@ -106,7 +106,7 @@
 	            <a href="#s1">Archives</a>
 	                    <ul class="submenu">
 	                        <li>
-	                        <a class="archive-link" href="/archives/2019/12/">December 2019</a></li><li><a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
+	                        <a class="archive-link" href="/archives/2020/02/">February 2020</a></li><li><a class="archive-link" href="/archives/2019/12/">December 2019</a></li><li><a class="archive-link" href="/archives/2019/11/">November 2019</a></li><li><a class="archive-link" href="/archives/2019/08/">August 2019</a></li><li><a class="archive-link" href="/archives/2019/07/">July 2019</a></li><li><a class="archive-link" href="/archives/2019/06/">June 2019</a>
 	                    </li></ul>
 	        </li>
 	        
@@ -158,8 +158,10 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                <h1 id="Face-Recognition"><a href="#Face-Recognition" class="headerlink" title="Face Recognition"></a><strong>Face Recognition</strong></h1><hr>
-<h3 id="What-is-face-recognition"><a href="#What-is-face-recognition" class="headerlink" title="What is face recognition?"></a><strong>What is face recognition?</strong></h3><p>liveliness detection</p>
+                <h1 id="face-recognition"><strong>Face Recognition</strong></h1>
+<hr>
+<h3 id="what-is-face-recognition"><strong>What is face recognition?</strong></h3>
+<p>liveliness detection</p>
 <p><strong>Face verification</strong></p>
 <blockquote>
 <ul>
@@ -172,82 +174,81 @@
 <ul>
 <li>Has a database of K persons</li>
 <li>Get an input image</li>
-<li>Output ID if the image is any of the K persons(or “not recognized”)</li>
+<li>Output ID if the image is any of the K persons(or &quot;not recognized&quot;)</li>
 </ul>
 </blockquote>
-<br>
-
-<h3 id="One-Shot-Learning"><a href="#One-Shot-Learning" class="headerlink" title="One Shot Learning"></a><strong>One Shot Learning</strong></h3><p>Learn from one example to recognize the person again.</p>
+<p><br></p>
+<h3 id="one-shot-learning"><strong>One Shot Learning</strong></h3>
+<p>Learn from one example to recognize the person again.</p>
 <p>To solve it,</p>
-<p>Learn a “similarity” function</p>
+<p>Learn a &quot;similarity&quot; function</p>
 <blockquote>
 <p>d(img1, img2) = degree of difference between the 2 images</p>
-<p>if d(img1, img2)  &lt;= τ (a certain threshold)</p>
-<p>​        output “same”</p>
-<p>if d(img1, img2)  &gt; τ</p>
-<p>​        output “different”</p>
+<p>if d(img1, img2) &lt;= τ (a certain threshold)</p>
+<p>​ output &quot;same&quot;</p>
+<p>if d(img1, img2) &gt; τ</p>
+<p>​ output &quot;different&quot;</p>
 </blockquote>
-<br>
-
-<h3 id="Siamese-Network"><a href="#Siamese-Network" class="headerlink" title="Siamese Network"></a><strong>Siamese Network</strong></h3><blockquote>
-<p>Input an image x(1) into a ConvNet, have a FC output layer that has 128 units and view this as “encoding of x(1)”, which is an image. </p>
+<p><br></p>
+<h3 id="siamese-network"><strong>Siamese Network</strong></h3>
+<blockquote>
+<p>Input an image x(1) into a ConvNet, have a FC output layer that has 128 units and view this as “encoding of x(1)”, which is an image.</p>
 <p>Input an image x(2) and get the output.</p>
 <p>Compare the two outputs</p>
 <p>d(x(1), x(2)) = eucledian distance between x(1) and x(2)</p>
 <p>Parameters of NN define f(x(i)) / encoding of x(i)</p>
-<p>Learn parameters so that </p>
+<p>Learn parameters so that</p>
 <p>if x(i) and x(j) are the same person, d(x(i), x(j)) is small</p>
 <p>if x(i) and x(j) are different persons, d(x(i), x(j)) is large</p>
 </blockquote>
-<br>
-
-<h3 id="Triplet-Loss"><a href="#Triplet-Loss" class="headerlink" title="Triplet Loss"></a><strong>Triplet Loss</strong></h3><p>Learning objective</p>
+<p><br></p>
+<h3 id="triplet-loss"><strong>Triplet Loss</strong></h3>
+<p>Learning objective</p>
 <blockquote>
 <ul>
-<li><p>Want the distance between the <strong>anchor</strong> and <strong>positive</strong> image be small</p>
-</li>
-<li><p>Want the distance between the <strong>anchor</strong> and <strong>negative</strong> image be large</p>
-</li>
+<li><p>Want the distance between the <strong>anchor</strong> and <strong>positive</strong> image be small</p></li>
+<li><p>Want the distance between the <strong>anchor</strong> and <strong>negative</strong> image be large</p></li>
 </ul>
 </blockquote>
 <p>Looking at 3 images at a time</p>
 <blockquote>
-<p>Anchor as ‘A’, Positive as ‘P’, Negative as ‘N’</p>
+<p>Anchor as 'A', Positive as 'P', Negative as 'N'</p>
 <p>Want d(A, P) &lt;= d(A, N)</p>
 <p>which is equivalent to the equation: d(A, P) - d(A, N) &lt;= 0</p>
-<p>but in pratice, since we don’t want it to output a trivial solution(that both encodings are close to or equal to 0), we need to add an extra parameter <strong>α</strong>, to make sure that the difference between d(A, P) and d(A, N) is sufficiently big. α here is also called <strong>margin parameter.</strong></p>
+<p>but in pratice, since we don't want it to output a trivial solution(that both encodings are close to or equal to 0), we need to add an extra parameter <strong>α</strong>, to make sure that the difference between d(A, P) and d(A, N) is sufficiently big. α here is also called <strong>margin parameter.</strong></p>
 <p><strong>d(A, P) - d(A, N) + α &lt;= 0</strong></p>
 </blockquote>
 <p>Loss function:</p>
 <blockquote>
 <p>Given 3 images A, P, N:</p>
-<p>L(A, P, N)  = max(d(A, P) - d(A, N) + α, 0)</p>
+<p>L(A, P, N) = max(d(A, P) - d(A, N) + α, 0)</p>
 <p>So long as d(A, P) - d(A, N) + α &lt;=0, the loss is 0.</p>
-<p>otherwise, is the equation “d(A, P) - d(A, N) + α &lt;= 0” isn’t satisfied</p>
+<p>otherwise, is the equation &quot;d(A, P) - d(A, N) + α &lt;= 0&quot; isn't satisfied</p>
 <p>Loss = d(A, P) - d(A, N) + α, which is a positive loss.</p>
 </blockquote>
 <p>For the training set, we do need multiple images of the same person.</p>
-<p>After training this network, the “one shot learning” problem can be solved.</p>
+<p>After training this network, the &quot;one shot learning&quot; problem can be solved.</p>
 <p>Choosing triplets A, P, N</p>
 <blockquote>
-<p>Choose triplets that’re hard to train on,</p>
+<p>Choose triplets that're hard to train on,</p>
 <p>that d(A, P) + α &lt;= d(A, N) is hard to be satisfied.</p>
 </blockquote>
-<br>
-
-<h3 id="Face-Verification-and-Binary-Classification"><a href="#Face-Verification-and-Binary-Classification" class="headerlink" title="Face Verification and Binary Classification"></a><strong>Face Verification and Binary Classification</strong></h3><p>Alternatively, we can also input a pair of images and output a logistic regression unit(1 or 0) to evaluate if these are of the same person or not.</p>
+<p><br></p>
+<h3 id="face-verification-and-binary-classification"><strong>Face Verification and Binary Classification</strong></h3>
+<p>Alternatively, we can also input a pair of images and output a logistic regression unit(1 or 0) to evaluate if these are of the same person or not.</p>
 <blockquote>
 <p>Precompute the encoding of the images in the database can save lots of computational power.</p>
 </blockquote>
 <p>Use pairs to train the network.</p>
-<br>
-
-<h1 id="Neural-Style-Transfer"><a href="#Neural-Style-Transfer" class="headerlink" title="Neural Style Transfer"></a><strong>Neural Style Transfer</strong></h1><hr>
-<h3 id="What-is-neural-style-transfer"><a href="#What-is-neural-style-transfer" class="headerlink" title="What is neural style transfer?"></a><strong>What is neural style transfer?</strong></h3><p>Content(C), Style(S), Generated(G)</p>
-<br>
-
-<h3 id="What-are-deep-ConvNets-learning"><a href="#What-are-deep-ConvNets-learning" class="headerlink" title="What are deep ConvNets learning?"></a><strong>What are deep ConvNets learning?</strong></h3><blockquote>
-<p>Pick a unit in layer 1. Fine the nine image patches that maximize the unit’s activation.</p>
+<p><br></p>
+<h1 id="neural-style-transfer"><strong>Neural Style Transfer</strong></h1>
+<hr>
+<h3 id="what-is-neural-style-transfer"><strong>What is neural style transfer?</strong></h3>
+<p>Content(C), Style(S), Generated(G)</p>
+<p><br></p>
+<h3 id="what-are-deep-convnets-learning"><strong>What are deep ConvNets learning?</strong></h3>
+<blockquote>
+<p>Pick a unit in layer 1. Fine the nine image patches that maximize the unit's activation.</p>
 <p>Repeat for other units.</p>
 </blockquote>
 <p>Through this, it can give you a sense of which unit captures what kind of features in the image.</p>
@@ -255,22 +256,19 @@
 <blockquote>
 <p>From shallower to deeper layers, the image patches each unit detects gradually get more complex(from edges to specific objects)</p>
 </blockquote>
-<br>
-
-<h3 id="Cost-Function"><a href="#Cost-Function" class="headerlink" title="Cost Function"></a><strong>Cost Function</strong></h3><p><strong>Neural Style Transfer Cost Function</strong></p>
+<p><br></p>
+<h3 id="cost-function"><strong>Cost Function</strong></h3>
+<p><strong>Neural Style Transfer Cost Function</strong></p>
 <p>J(G) =α * Jcontent(C, G) + β * Jstyle(S, G)</p>
 <blockquote>
 <ul>
 <li><p>Initialize G randomly</p>
-<p>​    G = 100 x 100 x3</p>
-</li>
+<p>​ G = 100 x 100 x3</p></li>
 <li><p>Use gradient descent to minimize J(G)</p>
-<p>It’s updating the pixel values of G.</p>
-</li>
+<p>It's updating the pixel values of G.</p></li>
 </ul>
 </blockquote>
-<br>
-
+<p><br></p>
 <p><strong>Content Cost Function</strong></p>
 <p>J(G) =α * <strong>Jcontent(C, G)</strong> + β * Jstyle(S, G)</p>
 <blockquote>
@@ -282,22 +280,21 @@
 </ul>
 <p>J[l]content(C, G) = (Forbenius norm of (a[l](C) - a[l](G)) ) ^2</p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p><strong>Style Cost Function</strong></p>
 <p>Meaning of the style of an image:</p>
 <blockquote>
-<p>Say we’re using hidden layer l’s activation to measure “style”.</p>
+<p>Say we're using hidden layer l's activation to measure &quot;style&quot;.</p>
 <p>Define style as <strong>correlation between activations across channels</strong>.</p>
-<p>How often they(the high level features) occur or don’t occur together</p>
+<p>How often they(the high level features) occur or don't occur together</p>
 </blockquote>
 <p>Style matrix:</p>
 <blockquote>
 <p>Let a[l]i, j, k = activation at (i, j, k). The dimension of G[l] is <strong>nc[l] x nc[l]</strong></p>
-<p>k and k’ range from 1 to nc[l]</p>
-<p>G[l](S)kk’ = (sum over i, j) * (a[l](S)i, j, k) * (a[l](S)i, j, k’)      // style matrix of image S</p>
-<p>G[l](G)kk’ = (sum over i, j) * (a[l](G)i, j, k) * (a[l](G)i, j, k’)   // style matrix of image G</p>
-<p>In linear algebra, this is also called “gram matrix”</p>
+<p>k and k' range from 1 to nc[l]</p>
+<p>G[l](S)kk' = (sum over i, j) * (a[l](S)i, j, k) * (a[l](S)i, j, k') // style matrix of image S</p>
+<p>G[l](G)kk' = (sum over i, j) * (a[l](G)i, j, k) * (a[l](G)i, j, k') // style matrix of image G</p>
+<p>In linear algebra, this is also called &quot;gram matrix&quot;</p>
 </blockquote>
 <p>For each layer,</p>
 <blockquote>
@@ -308,22 +305,21 @@
 <p>Jstyle(S, G) = (sum over the l layers) (λ[l] * J[l]style(S, G))</p>
 <p>Allows to take both low level and high level features into account when computing the style.</p>
 </blockquote>
-<br>
-
-<h3 id="1D-and-3D-Generalizations"><a href="#1D-and-3D-Generalizations" class="headerlink" title="1D and 3D Generalizations"></a><strong>1D and 3D Generalizations</strong></h3><p>1D:</p>
+<p><br></p>
+<h3 id="d-and-3d-generalizations"><strong>1D and 3D Generalizations</strong></h3>
+<p>1D:</p>
 <blockquote>
-<p>EKG of someone’s heartbeat</p>
+<p>EKG of someone's heartbeat</p>
 <p>e.g. a 14 dimensional thing convolve with a 5 dimensional filter gives a 10 dimensional output</p>
 </blockquote>
-<p>In most cases for 1D data we may use a Recurrent Neural Network though. </p>
-<br>
-
+<p>In most cases for 1D data we may use a Recurrent Neural Network though.</p>
+<p><br></p>
 <p>3D:</p>
 <blockquote>
 <p>e.g. 14 x 14 x 14 x 1(nc[l]) convolve with a 5 x 5 x 5 x 1(nc[l+1]) filter gives a 10 x 10 x 10 volume.</p>
 </blockquote>
 <hr>
-<p>Week 4 in Andrew Ng’s <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome" target="_blank" rel="noopener">Convolutional Neural Networks</a> on Coursera.</p>
+<p>Week 4 in Andrew Ng's <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome" target="_blank" rel="noopener">Convolutional Neural Networks</a> on Coursera.</p>
 <p>Cover by <a href="https://www.pixiv.net/member.php?id=772547" target="_blank" rel="noopener">loundraw</a> on Pixiv.</p>
 
             </div>
