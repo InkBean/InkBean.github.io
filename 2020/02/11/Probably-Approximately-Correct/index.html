@@ -166,15 +166,19 @@
 <p><span class="math inline">\(f\)</span> : Labeling function of <span class="math inline">\(D\)</span></p>
 <p><span class="math inline">\(S\)</span> : Sample</p>
 <p><span class="math inline">\(m\)</span> : Sample size</p>
+<p><span class="math inline">\(L\)</span> : Loss function</p>
 <p><br></p>
-<p>Assume realizability, that is</p>
+<p><strong>Empirical Risk Minimization(ERM)</strong>:</p>
+<p>Find a predictor <span class="math inline">\(h\)</span> that minimizes empirical risk <span class="math inline">\(L_S(h)\)</span>.</p>
+<p>When <strong>realizability</strong> assumption holds, that is</p>
 <ul>
 <li><span class="math inline">\(\exists h_* \in H\)</span> such that <span class="math inline">\(L_{D,f}(h_*) = 0\)</span></li>
 <li>This means that it's possible to have a hypothesis that correctly predicts all the labels in the distribution <span class="math inline">\(D\)</span></li>
 <li>Corollary: <span class="math inline">\(P(L_S(h*) = 0) = 1\)</span>, with any <span class="math inline">\(S\)</span> sampled from <span class="math inline">\(D\)</span></li>
 </ul>
+<p>the predictor <span class="math inline">\(h\)</span> returned by the ERM always has an empirical risk of 0.</p>
 <p><br></p>
-<p>And i.i.d. assumption:</p>
+<p>And <strong><em>i.i.d. assumption</em></strong>:</p>
 <ul>
 <li>i.i.d. stands for &quot;independently and identically distributed&quot;</li>
 <li>i.e. all the examples in the sample follow this assumption with respect to the distribution <span class="math inline">\(D\)</span></li>
@@ -187,10 +191,11 @@
 </ul>
 <p>However, even when we get a pretty representative sample, since it's not the whole of the distribution, it's likely that it doesn't capture all of the detail of the distribution. Again we would give an <strong><em>accuracy parameter</em></strong> of tolerance:</p>
 <ul>
-<li><span class="math inline">\(\epsilon\)</span> , which denotes the error rate of the ERM in the true distribution.</li>
+<li><span class="math inline">\(\epsilon\)</span> , which denotes the error rate of the hypothesis in the true distribution.</li>
 </ul>
 <p><br></p>
 <p>We want to upperbound the probability of getting a <strong>misleading hypothesis</strong>. These hypotheses achieve 0 error on the training set but error &gt; <span class="math inline">\(\epsilon\)</span> on the distribution <span class="math inline">\(D\)</span>.</p>
+<h3 id="proof"><strong>Proof</strong></h3>
 <p>We define <span class="math inline">\(H_B\)</span> as the set of hypothesis that has an error &gt; <span class="math inline">\(\epsilon\)</span> on the distribution.</p>
 <ul>
 <li><span class="math inline">\(H_B\)</span> = {<span class="math inline">\(h \in H : L_{(D,f)}(h) &gt; \epsilon\)</span>}</li>
@@ -205,8 +210,8 @@
 </ul>
 <p>The error of getting an individual bad hypothesis is</p>
 <ul>
-<li><span class="math inline">\((1 - L_{(D,f)(h)})^m\)</span> <span class="math inline">\(&lt;= (1 - \epsilon)^m\)</span> <span class="math inline">\(&lt;= e^{-\epsilon m}\)</span></li>
-<li><span class="math inline">\(1 - L_{(D,f)(h)}\)</span> is the probability of get an individual misleading example</li>
+<li><span class="math inline">\((1 - L_{(D,f)}(h))^m\)</span> <span class="math inline">\(&lt;= (1 - \epsilon)^m\)</span> <span class="math inline">\(&lt;= e^{-\epsilon m}\)</span></li>
+<li><span class="math inline">\(1 - L_{(D,f)}(h)\)</span> is the probability of get an individual misleading example</li>
 </ul>
 <p>Hence, we substitute the bound we got in the inequality above to the sum to obtain</p>
 <ul>
@@ -218,22 +223,23 @@
 <li><span class="math inline">\(D^m\)</span>(<span class="math inline">\(\cup_{h\in H}\)</span>{<span class="math inline">\(S|_x: L_{(D,f)}(h) &gt; \epsilon,\)</span> <span class="math inline">\(L_S(h) = 0\)</span>}) <span class="math inline">\(&lt;=\)</span> <span class="math inline">\(|H|\)</span> <span class="math inline">\(e^{-\epsilon m}\)</span></li>
 </ul>
 <p><br></p>
+<hr>
 <p>In the case that <span class="math inline">\(H\)</span> is finite, we can apply a lowerbound on <span class="math inline">\(m\)</span> given the condifence parameter <span class="math inline">\(\delta\)</span> and accuracy parameter <span class="math inline">\(\epsilon\)</span>.</p>
 <p>If we want to have at most $$ odds on getting a misleading hypothesis</p>
-<p>i.e. at least $1 - $ confidence of getting a hypothesis that's approximately correct(<span class="math inline">\(L_{(D,f)}(h) &lt; \epsilon\)</span>)</p>
+<p><strong>i.e.</strong> at least $1 - $ confidence of getting a hypothesis that's approximately correct(<span class="math inline">\(L_{(D,f)}(h) &lt; \epsilon\)</span>)</p>
 <ul>
-<li><span class="math inline">\(1 - |H|\)</span> <span class="math inline">\(e^{-\epsilon m}\)</span> $&gt;= 1 - $ , which gives the result below</li>
+<li><span class="math inline">\(1 - |H|\)</span> <span class="math inline">\(e^{-\epsilon m}\)</span> <span class="math inline">\(&gt;= 1 - \delta\)</span> , which gives the result below</li>
 <li><span class="math inline">\(m &gt;= \frac{log({|H|}/{\delta})}{\epsilon}\)</span></li>
 </ul>
-<p>We define <span class="math inline">\(m_H (\epsilon, delta)\)</span></p>
+<p>We define <span class="math inline">\(m_H (\epsilon, delta)\)</span> as <strong>sample complexity</strong></p>
 <ul>
 <li><span class="math inline">\(m_H (\epsilon, \delta) &lt;= \frac{log({|H|}/{\delta})}{\epsilon}\)</span></li>
 </ul>
-<p>as <strong>sample complexity</strong>, which denotes the minimum number of examples for any ERM learned from an i.i.d sample to be <strong>probably</strong>(<span class="math inline">\(P &gt;= 1 - \delta\)</span>) <strong>approximately</strong>(<span class="math inline">\(L_{(D,f)}(h) &gt; \epsilon\)</span>) correct.</p>
+<p>which denotes the minimum number of examples for any ERM learned from an i.i.d sample to be <strong>probably</strong>(with confidence <span class="math inline">\(&gt; 1 - \delta\)</span>) <strong>approximately</strong>(<span class="math inline">\(L_{D,f}(h) &lt; \epsilon\)</span>) correct.</p>
 <hr>
 <p>吐槽：</p>
-<p>听到这个名字的时候笑出了声，想想直译过来它的中文翻译是“我估摸着这大概差不多或许应该是对的吧”这种感觉。</p>
-<p>鲁迅曾经说过，“大约孔乙己的确死了”。这句话跟“我家门前有两棵树，一棵是枣树，另一棵也是枣树。”一起被当成病句。</p>
+<p>刚听到这个名字的时候笑出了声，因为翻译成中文大概是”我估摸着这大概差不多是对的吧“这种感觉。</p>
+<p>鲁迅曾经写过，”大约孔乙己的确死了“，或有异曲同工之妙。</p>
 <hr>
 <p><em>Shai Shalev-Shwartz and Shai Ben-David. 2014.</em> <em>Understanding Machine Learning: From Theory to Algorithms</em>. <em>Cambridge University Press, USA.</em></p>
 <p>Cover by <a href="https://www.pixiv.net/member.php?id=47488" target="_blank" rel="noopener">飴村</a> on Pixiv</p>
