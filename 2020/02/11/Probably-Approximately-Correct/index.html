@@ -168,20 +168,23 @@
 <p><span class="math inline">\(m\)</span> : Sample size</p>
 <p><span class="math inline">\(L\)</span> : Loss function</p>
 <p><br></p>
+<hr>
 <p><strong>Empirical Risk Minimization(ERM)</strong>:</p>
-<p>Find a predictor <span class="math inline">\(h\)</span> that minimizes empirical risk <span class="math inline">\(L_S(h)\)</span>.</p>
+<p>A principle that is to find a predictor <span class="math inline">\(h\)</span> that minimizes empirical risk <span class="math inline">\(L_S(h)\)</span>.</p>
+<p><br></p>
 <p>When <strong>realizability</strong> assumption holds, that is</p>
 <ul>
 <li><span class="math inline">\(\exists h_* \in H\)</span> such that <span class="math inline">\(L_{D,f}(h_*) = 0\)</span></li>
 <li>This means that it's possible to have a hypothesis that correctly predicts all the labels in the distribution <span class="math inline">\(D\)</span></li>
-<li>Corollary: <span class="math inline">\(P(L_S(h*) = 0) = 1\)</span>, with any <span class="math inline">\(S\)</span> sampled from <span class="math inline">\(D\)</span></li>
 </ul>
-<p>the predictor <span class="math inline">\(h\)</span> returned by the ERM always has an empirical risk of 0.</p>
+<p><em>Corollary</em>: <span class="math inline">\(P(L_S(h*) = 0) = 1\)</span>, with any <span class="math inline">\(S\)</span> sampled from <span class="math inline">\(D\)</span></p>
+<p>the predictor <span class="math inline">\(h\)</span> returned by the ERM always has an empirical risk <span class="math inline">\(L_S(h)\)</span> = 0.</p>
 <p><br></p>
-<p>And <strong><em>i.i.d. assumption</em></strong>:</p>
+<p>And the examples in the sample are sampled following</p>
+<p><strong>i.i.d. assumption</strong>:</p>
 <ul>
 <li>i.i.d. stands for &quot;independently and identically distributed&quot;</li>
-<li>i.e. all the examples in the sample follow this assumption with respect to the distribution <span class="math inline">\(D\)</span></li>
+<li><strong>i.e.</strong> all the examples in the sample follow this assumption with respect to the distribution <span class="math inline">\(D\)</span></li>
 <li>we denote it as <span class="math inline">\(S\)</span> ~ <span class="math inline">\(D^m\)</span></li>
 </ul>
 <p><br></p>
@@ -194,6 +197,7 @@
 <li><span class="math inline">\(\epsilon\)</span> , which denotes the error rate of the hypothesis in the true distribution.</li>
 </ul>
 <p><br></p>
+<hr>
 <p>We want to upperbound the probability of getting a <strong>misleading hypothesis</strong>. These hypotheses achieve 0 error on the training set but error &gt; <span class="math inline">\(\epsilon\)</span> on the distribution <span class="math inline">\(D\)</span>.</p>
 <h3 id="proof"><strong>Proof</strong></h3>
 <p>We define <span class="math inline">\(H_B\)</span> as the set of hypothesis that has an error &gt; <span class="math inline">\(\epsilon\)</span> on the distribution.</p>
@@ -210,7 +214,7 @@
 </ul>
 <p>The error of getting an individual bad hypothesis is</p>
 <ul>
-<li><span class="math inline">\((1 - L_{(D,f)}(h))^m\)</span> <span class="math inline">\(&lt;= (1 - \epsilon)^m\)</span> <span class="math inline">\(&lt;= e^{-\epsilon m}\)</span></li>
+<li><span class="math inline">\((1 - L_{(D,f)}(h))^m\)</span> <span class="math inline">\(\leq (1 - \epsilon)^m\)</span> <span class="math inline">\(&lt;= e^{-\epsilon m}\)</span></li>
 <li><span class="math inline">\(1 - L_{(D,f)}(h)\)</span> is the probability of get an individual misleading example</li>
 </ul>
 <p>Hence, we substitute the bound we got in the inequality above to the sum to obtain</p>
@@ -220,30 +224,81 @@
 </ul>
 <p>Putting all the things together, we have an upperbound that is</p>
 <ul>
-<li><span class="math inline">\(D^m\)</span>(<span class="math inline">\(\cup_{h\in H}\)</span>{<span class="math inline">\(S|_x: L_{(D,f)}(h) &gt; \epsilon,\)</span> <span class="math inline">\(L_S(h) = 0\)</span>}) <span class="math inline">\(&lt;=\)</span> <span class="math inline">\(|H|\)</span> <span class="math inline">\(e^{-\epsilon m}\)</span></li>
+<li><span class="math inline">\(D^m\)</span>(<span class="math inline">\(\cup_{h\in H}\)</span>{<span class="math inline">\(S|_x: L_{(D,f)}(h) &gt; \epsilon,\)</span> <span class="math inline">\(L_S(h) = 0\)</span>}) <span class="math inline">\(\leq |H|\)</span> <span class="math inline">\(e^{-\epsilon m}\)</span></li>
 </ul>
-<p><br></p>
 <hr>
 <p>In the case that <span class="math inline">\(H\)</span> is finite, we can apply a lowerbound on <span class="math inline">\(m\)</span> given the condifence parameter <span class="math inline">\(\delta\)</span> and accuracy parameter <span class="math inline">\(\epsilon\)</span>.</p>
 <p>If we want to have at most $$ odds on getting a misleading hypothesis</p>
 <p><strong>i.e.</strong> at least $1 - $ confidence of getting a hypothesis that's approximately correct(<span class="math inline">\(L_{(D,f)}(h) &lt; \epsilon\)</span>)</p>
 <ul>
 <li><span class="math inline">\(1 - |H|\)</span> <span class="math inline">\(e^{-\epsilon m}\)</span> <span class="math inline">\(&gt;= 1 - \delta\)</span> , which gives the result below</li>
-<li><span class="math inline">\(m &gt;= \frac{log({|H|}/{\delta})}{\epsilon}\)</span></li>
+<li><span class="math inline">\(m \geq \frac{log({|H|}/{\delta})}{\epsilon}\)</span></li>
 </ul>
 <p>We define <span class="math inline">\(m_H (\epsilon, delta)\)</span> as <strong>sample complexity</strong></p>
 <ul>
+<li><span class="math inline">\(m_H (\epsilon, \delta) \leq \frac{log({|H|}/{\delta})}{\epsilon}\)</span></li>
+</ul>
+<p>which denotes the minimum number of examples for any ERM learned from an i.i.d sample to be</p>
+<ul>
+<li><strong>probably</strong>(with confidence <span class="math inline">\(&gt; 1 - \delta\)</span>) <strong>approximately</strong> (<span class="math inline">\(L_{D,f}(h) &lt; \epsilon\)</span>) <strong>correct</strong>.</li>
+</ul>
+<p>This is where <strong>PAC</strong> comes from.</p>
+<hr>
+<p>Assume that the realizability assumption holds for <span class="math inline">\(H, D, f\)</span></p>
+<p>and <span class="math inline">\(m &gt;= m_H(\epsilon, \delta)\)</span> i.i.d. examples are sampled from <span class="math inline">\(D\)</span>.</p>
+<p>Then if given <span class="math inline">\(\forall\)</span> <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(\delta\)</span> , a learning algorithm(<strong>e.g.</strong> ERM) return a hypothesis <span class="math inline">\(h\)</span> such that with confidence <span class="math inline">\(1 - \delta\)</span>, its <span class="math inline">\(L_{D,f}(h) &lt; \epsilon\)</span>, we say that it is PAC learnable.</p>
+<p><em>Corollary</em>: Every finite class hypothesis is PAC learnable with sample complexity</p>
+<ul>
 <li><span class="math inline">\(m_H (\epsilon, \delta) &lt;= \frac{log({|H|}/{\delta})}{\epsilon}\)</span></li>
 </ul>
-<p>which denotes the minimum number of examples for any ERM learned from an i.i.d sample to be <strong>probably</strong>(with confidence <span class="math inline">\(&gt; 1 - \delta\)</span>) <strong>approximately</strong>(<span class="math inline">\(L_{D,f}(h) &lt; \epsilon\)</span>) correct.</p>
+<p>This doesn't mean that infinite classes aren't learnable. Some, such as axis-aligned rectangles and concentric circles in the exercises of the book are examples of the learnable ones.</p>
 <hr>
-<h3 id="steps-to-add-latex-support-to-your-hexo-blog"><strong>Steps to add Latex support to your hexo blog:</strong></h3>
+<h2 id="agnostic-pac-learnable"><strong>Agnostic PAC learnable</strong></h2>
+<p>Some people claim that they know how to see if a watermelon is tasty or not really well. Let's say they evaluate, or, make the prediction based on the following two features - weight and diameter. Though in reality it's impossible to have two identical watermelons, it's theoretically possible that some watermelons have the same numerical value of the two features, yet turn out that one is tasty while the other is not. Think about it in real life. Two watermelons can look really similar but taste very differently.</p>
+<p>I guess this is not a perfect example because tastiness is subjective, but let's assume that there's a universal standard of measuring tastiness. In that case, if we know everything about the watermelon, everything about every single piece of physical matter it is composed of, then I guess there exist a hypothesis that can generate perfect prediction anytime. However, this is obviously impossible, and the features given to us are usually <strong>not deterministic</strong>.</p>
+<p>Then there's no hypothesis that can give a correct definite answer. All the hypotheses can do is to give a <strong>distribution</strong> given the input features.</p>
+<p>For example, given that the watermelon weigh 12 kilos and have a diameter of 30 centimeters, the best possible prediction is to say that it has a 70% chance of being tasty and 30% chance that it tastes bad. This predictor is based on the labels on the distribution, and we can't do better than that. We call this predictor <strong>The Bayes Optimal Predictor</strong>.</p>
+<p>We can clearly see that the realizability assumption doesn't hold here, because</p>
+<ul>
+<li><span class="math inline">\(min_{h\in H} L_D(h)\)</span> &gt; 0</li>
+</ul>
+<p>We also want to define a new empirical error and a new true error:</p>
+<p><strong>New Empirical Error:</strong></p>
+<ul>
+<li><span class="math inline">\(L_S(h) = \frac{| \{i | h(x_i) \neq y_i)\}|}{m}\)</span></li>
+<li>Comparing to the original definition of empirical error <span class="math inline">\(L_S(h) = \frac{| \{i | h(x_i) \neq h_*(i)\}|}{m}\)</span> , we see that the <span class="math inline">\(h_*(i)\)</span> is replaced by <span class="math inline">\(y_i\)</span> because there's no <span class="math inline">\(h_*(i)\)</span> that predicts everything right anymore.</li>
+</ul>
+<p><strong>New True Error:</strong></p>
+<ul>
+<li><span class="math inline">\(L_D(h) = P_{(x,y)\sim D} [h(x) \neq y]\)</span></li>
+<li>Notice that <span class="math inline">\(y\)</span> , which is the label, is also drawn from the distribution, which is probablistic.</li>
+</ul>
+<p><br></p>
+<p>In this more general case of prediction task, we want to define <strong>Agnostic PAC Learnability</strong>:</p>
+<p>The definition is exactly the same as PAC learnability, except that we introduce an extra term <span class="math inline">\(min_{h\in H}L_D(h)\)</span> into the inequality of PAC.</p>
+<ul>
+<li><span class="math inline">\(P(L_{D,f}(h) -min_{h\in H} L_D(h) \leq \epsilon)\)</span> <span class="math inline">\(\geq 1-\delta\)</span></li>
+<li>The only difference is the <span class="math inline">\(min_{h\in H}L_D(h)\)</span> term</li>
+<li>Our goal now is to get close to the accuracy of the Bayes Optimal Predictor but not 0 error rate which is unrealistic</li>
+</ul>
+<p><br></p>
+<p>So now you know, when the people who claim to be expert in watermelon got you bad watermelons from the grocery store, it may not be because of they're lying. In fact they might be making the optimal decision but just happened to be unlucky.</p>
+<hr>
+<h3 id="steps-to-add-latex-support-to-your-hexo-blog"><strong>Steps to add LaTeX support to your hexo blog:</strong></h3>
 <p>First download Pandoc,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install Pandoc</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>brew install Pandoc</p>
+</blockquote>
 <p>Then install hexo-renderer-pandoc,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-pandoc --save</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>npm uninstall hexo-renderer-marked --save npm install hexo-renderer-pandoc --save</p>
+</blockquote>
 <p>After that, as usual, do</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>hexo clean</p>
+<p>hexo generate</p>
+<p>hexo deploy</p>
+</blockquote>
 <p>and you're good to go.</p>
 <p><br></p>
 <p>Reference | https://zhuanlan.zhihu.com/p/35988761</p>
@@ -253,6 +308,7 @@
 <p>鲁迅曾经写过，”大约孔乙己的确死了“，或有异曲同工之妙。</p>
 <hr>
 <p><em>Shai Shalev-Shwartz and Shai Ben-David. 2014.</em> <em>Understanding Machine Learning: From Theory to Algorithms</em>. <em>Cambridge University Press, USA.</em></p>
+<p>Mathematics of Machine Learning at USC, taught by Guillermo Reyes Souto</p>
 <p>Cover by <a href="https://www.pixiv.net/member.php?id=47488" target="_blank" rel="noopener">飴村</a> on Pixiv</p>
 
             </div>
