@@ -237,6 +237,17 @@
 </ul>
 <p>which denotes the minimum number of examples for any ERM learned from an i.i.d sample to be <strong>probably</strong>(with confidence <span class="math inline">\(&gt; 1 - \delta\)</span>) <strong>approximately</strong>(<span class="math inline">\(L_{D,f}(h) &lt; \epsilon\)</span>) correct.</p>
 <hr>
+<h3 id="steps-to-add-latex-support-to-your-hexo-blog"><strong>Steps to add Latex support to your hexo blog:</strong></h3>
+<p>First download Pandoc,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install Pandoc</span><br></pre></td></tr></table></figure>
+<p>Then install hexo-renderer-pandoc,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-pandoc --save</span><br></pre></td></tr></table></figure>
+<p>After that, as usual, do</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<p>and you're good to go.</p>
+<p><br></p>
+<p>Reference | https://zhuanlan.zhihu.com/p/35988761</p>
+<hr>
 <p>吐槽：</p>
 <p>刚听到这个名字的时候笑出了声，因为翻译成中文大概是”我估摸着这大概差不多是对的吧“这种感觉。</p>
 <p>鲁迅曾经写过，”大约孔乙己的确死了“，或有异曲同工之妙。</p>
