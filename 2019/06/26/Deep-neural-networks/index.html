@@ -246,7 +246,7 @@
 <p>Calculate with parameters W[l] and b[l]</p>
 <p>Output a[l]; <strong><em>cache a[l], z[l], W[l] and b[l]</em></strong></p>
 </blockquote>
-<p>*<strong>Backward:</strong></p>
+<p><strong>Backward:</strong></p>
 <blockquote>
 <p>input da[l], z[l]</p>
 <p>Calculate with parameters W[l] and b[l]</p>
@@ -263,8 +263,8 @@
 <p><br></p>
 <p><strong>Backward:</strong></p>
 <blockquote>
-<p>dZ[l] = ( W[l + 1] * dZ[l + 1] ) ***** g'[l](Z[l])</p>
-<p>​ =dA[l] ***** g'[l](Z[l]) // the bold **'*'** here denotes element wise multiplication</p>
+<p>dZ[l] = ( W[l + 1] * dZ[l + 1] ) * g'[l](Z[l])</p>
+<p>​ =dA[l] * g'[l](Z[l]) // the * here is element wise multiplication</p>
 <p>dW[l] = (1 / m) * ( dZ[l] * A[l] )</p>
 <p>// actually, notice that A[l] is used so it should be cache in the forward propagation process as well</p>
 <p>db[l] = (1 / m) * np.sum(dZ[l], axis = 1, keepdims = True)</p>
