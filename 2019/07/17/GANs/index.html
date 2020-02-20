@@ -178,7 +178,7 @@
 <p>We want to minimize both.</p>
 <p><br></p>
 <p><strong>How to generate adversarial images then?</strong></p>
-<p>Trained CNNs seem to be pretty robust in recognizing images we usually see in real life, but &quot;intentional&quot; slight changes in x can result in big change in yhat(the predicted y), due to vulnerability of linear model.</p>
+<p>Trained CNNs seem to be pretty robust in recognizing images we usually see in real life, but "intentional" slight changes in x can result in big change in yhat(the predicted y), due to vulnerability of linear model.</p>
 <p>Even for reasonably deep neural networks, since the most commonly used activation function — ReLU — is pretty linear(comparing to other functions like Sigmoid), the overall structure of a neural network will tend to be linear generally.</p>
 <p>By making this kind of slight changes on an image of a cat, it fools the detector that it is an iguana.</p>
 <blockquote>
@@ -193,8 +193,8 @@
 <p>Intuition: number of parameters of the model &lt;&lt; amount of data</p>
 </blockquote>
 <p>The motivation part is pretty interesting.</p>
-<p>I feel that the sort of AI we are able to create right now do not actually &quot;understand&quot; what they're doing. The example presented above is great: the network classifies a thing as an iguana, but the thing is actually a cat. It makes me feel like even if the network may outperforms cat classification in real images, it performs really bad with adversarial images. From our perspective, the networks don't seem to capture the concept(or maybe essence) of a cat as human do.</p>
-<p>In order to let the network at least seems to capture the &quot;concept&quot; of cat, we need to force it to understand cat in the way we do. The distribution of cat from the network's perspective should match that of in reality.</p>
+<p>I feel that the sort of AI we are able to create right now do not actually "understand" what they're doing. The example presented above is great: the network classifies a thing as an iguana, but the thing is actually a cat. It makes me feel like even if the network may outperforms cat classification in real images, it performs really bad with adversarial images. From our perspective, the networks don't seem to capture the concept(or maybe essence) of a cat as human do.</p>
+<p>In order to let the network at least seems to capture the "concept" of cat, we need to force it to understand cat in the way we do. The distribution of cat from the network's perspective should match that of in reality.</p>
 <p>To do that, we need to train it on the adversarial images. A GANs is made, composed of a <strong>discriminator</strong> and a <strong>generator</strong>. The discriminator is still a network doing classification jobs, but now it's confronting the adversarial examples, trying to distinguish them from the real ones. The generator is trying to generate things that cannot be distinguished by discriminator, things that fall within the real distribution.</p>
 <p>In general, we define their functionalities as,</p>
 <p><strong>Discriminator:</strong></p>
@@ -214,22 +214,22 @@
 <ul>
 <li>A few Japanese researchers created a CycleGAN that can transform a human face to <strong>ramen</strong>, then from ramen back to a human face. 不禁感嘆一下日本人真狂気（中国語警告/甚至不算偽日本語）</li>
 </ul>
-<p>Also, I've used &quot;Waifu2x&quot; for quite a few times to enhance the resolution of images I've found and the outcomes are great. I believe that this also uses GAN. The pic for the cover of this article is the high resolution version output by &quot;Waifu2x.&quot;</p>
-<p>Btw I just found out what &quot;Waifu2x&quot; means, and hmm….</p>
+<p>Also, I've used "Waifu2x" for quite a few times to enhance the resolution of images I've found and the outcomes are great. I believe that this also uses GAN. The pic for the cover of this article is the high resolution version output by "Waifu2x."</p>
+<p>Btw I just found out what "Waifu2x" means, and hmm….</p>
 <hr>
 <p><em>Some random things but I just wrote it anyway</em></p>
-<p>Continue the topic of &quot;capturing the concept.&quot;</p>
-<p>Even if we create the kind of artificial intelligence that does seem to capture the concept, understand the world as how humans understand, and behave exactly the same as human, it's still debatable regarding if such a creature really <strong>&quot;knows&quot;</strong> what it is doing.</p>
+<p>Continue the topic of "capturing the concept."</p>
+<p>Even if we create the kind of artificial intelligence that does seem to capture the concept, understand the world as how humans understand, and behave exactly the same as human, it's still debatable regarding if such a creature really <strong>"knows"</strong> what it is doing.</p>
 <p>There're a series of questions.</p>
 <ul>
 <li>They may have exactly the same functionality, but does the artificial intelligence run under the same mechanism(does it function as how the neurons work in our brains)?</li>
-<li>Even if the answer to this question is yes, does the AI(conceptually equivalent to the <strong>&quot;philosophical zombie&quot;</strong>) therefore acquire the <strong>first person perspective</strong>? Does it have <strong>&quot;qualia&quot;</strong>?</li>
-<li>If we deny the existence of qualia or <strong>&quot;consciousness&quot;</strong> in such creature, then what's the reason why carbon based lives are so special?</li>
+<li>Even if the answer to this question is yes, does the AI(conceptually equivalent to the <strong>"philosophical zombie"</strong>) therefore acquire the <strong>first person perspective</strong>? Does it have <strong>"qualia"</strong>?</li>
+<li>If we deny the existence of qualia or <strong>"consciousness"</strong> in such creature, then what's the reason why carbon based lives are so special?</li>
 </ul>
-<p>Right now it seems that Neuroscience and Cognitive science have a certain degree of common agreement on the existence of &quot;consciousness&quot;, but <strong>the hard problem of consciousness</strong> remains mysterious.</p>
+<p>Right now it seems that Neuroscience and Cognitive science have a certain degree of common agreement on the existence of "consciousness", but <strong>the hard problem of consciousness</strong> remains mysterious.</p>
 <p><br></p>
 <p>I experienced alchoholic black out once(that was so stupid and that would be the last time I ever do it). As my friends told me, I remained physically active until around 2:30 A.M. , but my conscious memory was cut off at around 12:00 A.M. They recorded a few short videos of what I was doing when I was drunk, but I didn't remember any of the things I've done, the words I've said.</p>
-<p>Based on the video records, I behaved as a drunk person without doubt, but I was also able to have conversations that make complete sense. So what happened? Did I just lose the memory, or I acted &quot;unconsciously&quot;? By the latter, I mean that I lost such a thing as <strong>how it feels to live</strong> during the period of time I blacked out.</p>
+<p>Based on the video records, I behaved as a drunk person without doubt, but I was also able to have conversations that make complete sense. So what happened? Did I just lose the memory, or I acted "unconsciously"? By the latter, I mean that I lost such a thing as <strong>how it feels to live</strong> during the period of time I blacked out.</p>
 <p>Under construction…. I WILL fill it up some time later.</p>
 <p><br></p>
 <hr>

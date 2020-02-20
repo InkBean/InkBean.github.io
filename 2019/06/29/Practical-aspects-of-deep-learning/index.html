@@ -180,7 +180,7 @@
 <p>Train set: cat pictures from webpages</p>
 <p>Dev/test sets: cat pictures from users using your app</p>
 <p>Tip: Make sure that dev and test sets come from the same distribution</p>
-<p>Not having test set might be OK if you don't need to have a completely unbiased estimate of your learning algorithm. Usually, when a dataset is divided to only two sets, which are train and dev sets, some people may call the dev set as &quot;test set&quot;. This use of terminalogy isn't quite appropriate, since the learning algorithm can be overfitting to the &quot;test set&quot;, which make it biased.</p>
+<p>Not having test set might be OK if you don't need to have a completely unbiased estimate of your learning algorithm. Usually, when a dataset is divided to only two sets, which are train and dev sets, some people may call the dev set as "test set". This use of terminalogy isn't quite appropriate, since the learning algorithm can be overfitting to the "test set", which make it biased.</p>
 <h2 id="biasvariance"><strong>2- Bias/variance</strong></h2>
 <p>High bias: underfitting | not even doing good on the training set</p>
 <p>High variance: overfitting | trainset error &gt; dev set error</p>
@@ -188,7 +188,7 @@
 <p>No high bias or high variance. We want our algorithm just right.</p>
 <p><br></p>
 <p>The metrics to evaluate is dependent on human error or optimal (bayes) error.</p>
-<h2 id="basic-recipe-for-machine-learning"><strong>3- Basic &quot;recipe&quot; for machine learning</strong></h2>
+<h2 id="basic-recipe-for-machine-learning"><strong>3- Basic "recipe" for machine learning</strong></h2>
 <p><strong>1- Does it have high bias? (training data performance)</strong></p>
 <blockquote>
 <p>Bigger network</p>
@@ -203,7 +203,7 @@
 <p>(Change a neural network architecture) May or may not help</p>
 </blockquote>
 <p><br></p>
-<p>Now we don't usually talk about &quot;Bias variance trade off&quot;, since we're able to reduce one of them without hurting the other thing that much.</p>
+<p>Now we don't usually talk about "Bias variance trade off", since we're able to reduce one of them without hurting the other thing that much.</p>
 <h1 id="regularizing-your-neural-network"><strong>Regularizing your neural network</strong></h1>
 <h2 id="regularization"><strong>1- Regularization</strong></h2>
 <p>In logistic regression, we make</p>
@@ -234,7 +234,7 @@
 <p>W[l] = W[l] - alpha * (dW[l](from back prop) + (lambda / m) * W[l])</p>
 <p>​ = (1 - (alpha * lambda / m) ) * W[l] - alpha * (dW[l](from back prop)</p>
 </blockquote>
-<p>L2 weight regularization is also called &quot;Weight decay&quot;</p>
+<p>L2 weight regularization is also called "Weight decay"</p>
 <h2 id="why-regularization-reduces-overfitting"><strong>2- Why regularization reduces overfitting?</strong></h2>
 <p>Intuition:</p>
 <p>Reduce the impact of lots of hidden units, make it a simpler neural network.</p>
@@ -247,7 +247,7 @@
 <h2 id="dropout-regularization"><strong>3- Dropout regularization</strong></h2>
 <p>Set some probability, <strong>keep-prob</strong>, of eliminating the nodes in a neural network</p>
 <p>Train it using the simplified network</p>
-<p><strong>Implementing dropout (&quot;Inverted dropout&quot;)</strong></p>
+<p><strong>Implementing dropout ("Inverted dropout")</strong></p>
 <blockquote>
 <p>For layer 3</p>
 <p>set keep-prob = 0.8</p>
@@ -304,7 +304,7 @@
 <p><strong>Normalized input features:</strong></p>
 <p>Cost function look more symmetric.</p>
 <p><br></p>
-<p>Reminds me of the <strong>&quot;Feature scaling&quot;</strong> section in Andrew's machine learning course.</p>
+<p>Reminds me of the <strong>"Feature scaling"</strong> section in Andrew's machine learning course.</p>
 <h2 id="vanishing-exploding-gradients"><strong>2- Vanishing / Exploding gradients</strong></h2>
 <blockquote>
 <p>If W[l] &gt; 1</p>
@@ -440,8 +440,8 @@ $('.btn_click_load').click(function() {
 -->
 <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'http://yoursite.com/2019/06/29/Study-notes-for-Practical-aspects-of-deep-learning/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://yoursite.com/2019/06/29/Study-notes-for-Practical-aspects-of-deep-learning/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://yoursite.com/2019/06/29/Practical-aspects-of-deep-learning/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/06/29/Practical-aspects-of-deep-learning/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 

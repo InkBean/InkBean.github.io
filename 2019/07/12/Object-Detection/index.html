@@ -175,12 +175,12 @@
 <p>Let's say there're 4 classes(3 object classes and 1 background).</p>
 <blockquote>
 <p>y = Pc, bx, by, bh, bw, c1, c2, c3</p>
-<p>If there's no object in the image(it's a background), then Pc = 0 and the rest will be &quot;don't care&quot;/ '?'</p>
+<p>If there's no object in the image(it's a background), then Pc = 0 and the rest will be "don't care"/ '?'</p>
 <p>If there's one object of the three classes in the image, then Pc = 1, and the rest will have values.</p>
 </blockquote>
 <p>Loss function</p>
 <blockquote>
-<p>If some components are &quot;don't care&quot;s, then the loss function won't take them into account.</p>
+<p>If some components are "don't care"s, then the loss function won't take them into account.</p>
 </blockquote>
 <p><br></p>
 <h3 id="landmark-detection"><strong>Landmark Detection</strong></h3>
@@ -227,7 +227,7 @@
 <p><strong>Intersection over union(IoU)</strong></p>
 <blockquote>
 <p>size of intersection / size of the union.</p>
-<p>by convention, if IoU &gt;= 0.5, the answer will be judged as &quot;correct&quot;</p>
+<p>by convention, if IoU &gt;= 0.5, the answer will be judged as "correct"</p>
 <p>you may set the threshold to a different value if you like</p>
 <p>More generally, IoU is a measure of the overlap between two bounding boxes.</p>
 </blockquote>
@@ -290,7 +290,7 @@
 <blockquote>
 <ul>
 <li><p>For each output, get 2 predicted bounding boxes</p></li>
-<li>Get rid of the low probability predictions</li>
+<li><p>Get rid of the low probability predictions</p></li>
 <li><p>For each class(pedestrian, car, motorcycle), independently use non-max supression to generate final predictions</p></li>
 </ul>
 </blockquote>
@@ -382,8 +382,8 @@ $('.btn_click_load').click(function() {
 -->
 <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'http://yoursite.com/2019/07/12/Study-Notes-fot-Object-Detection/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://yoursite.com/2019/07/12/Study-Notes-fot-Object-Detection/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://yoursite.com/2019/07/12/Object-Detection/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/07/12/Object-Detection/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 

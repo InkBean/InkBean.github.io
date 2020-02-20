@@ -153,173 +153,160 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/kwt.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
-                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Face Recognition &amp; Neural Style Transfer</h2></a>
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/hn.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Deep L-layer Neural Networks</h2></a>
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                <h1 id="face-recognition"><strong>Face Recognition</strong></h1>
+                <h1 id="programming-assignment"><strong>Programming assignment</strong></h1>
+<p>This week's programming assignment walked me through the process of implementing a <strong>L-layer deep neural network.</strong> Refer to the notes taken for the video lectures in the next section of this blog post to better understand the mechanism of the PA.</p>
+<h2 id="methodology"><strong>Methodology:</strong></h2>
+<blockquote>
+<ol type="1">
+<li>Initialize parameters / Define hyperparameters</li>
+<li>Loop for num_iterations:
+<ol type="a">
+<li>Forward propagation</li>
+<li>Compute cost function</li>
+<li>Backward propagation</li>
+<li>Update parameters (using parameters, and grads from backprop)</li>
+</ol></li>
+<li>Use trained parameters to predict labels</li>
+</ol>
+</blockquote>
+<h2 id="architecture"><strong>Architecture:</strong></h2>
+<p><strong>Forward propagation:</strong></p>
+<p>Repeat the process of Linear-ReLU from the 1st layer to the L-1 layer.</p>
+<blockquote>
+<p>Z[l] = np.dot(W[l], A[l - 1]) + b</p>
+<p>A[l] = relu(Z[l])</p>
+</blockquote>
+<p>Then for the Lth layer, do the same thing except for changing the activation function from "ReLU" "Sigmoid".</p>
+<p>In each layer, cache the value of A_prev, W, and b as linear_cache and the value of Z as activation cache, for future use in the backward propagation part.</p>
+<p><strong>Compute cost:</strong></p>
+<p>Compute the loss.</p>
+<p><strong>Backward propagation:</strong></p>
+<p>Compute the partial derivative of A in the Lth layer with respect to the loss function.</p>
+<p>Use dAL, Y, and the caches obtained from the forward propagation part to loop over the layers and compute dA_prev, dW, db for each layer.</p>
+<p><strong>Update parameters:</strong></p>
+<p>Loop through the layers and update the parameters W and b.</p>
+<p><br></p>
+<p><em>Below are notes taken for the video lectures.</em></p>
 <hr>
-<h3 id="what-is-face-recognition"><strong>What is face recognition?</strong></h3>
-<p>liveliness detection</p>
-<p><strong>Face verification</strong></p>
-<blockquote>
-<ul>
-<li>Input image, name/ID</li>
-<li>Output whether the input image is that of the claimed person</li>
-</ul>
-</blockquote>
-<p><strong>Face recognition</strong></p>
-<blockquote>
-<ul>
-<li>Has a database of K persons</li>
-<li>Get an input image</li>
-<li>Output ID if the image is any of the K persons(or &quot;not recognized&quot;)</li>
-</ul>
-</blockquote>
 <p><br></p>
-<h3 id="one-shot-learning"><strong>One Shot Learning</strong></h3>
-<p>Learn from one example to recognize the person again.</p>
-<p>To solve it,</p>
-<p>Learn a &quot;similarity&quot; function</p>
+<h1 id="notations-for-a-deep-neural-network"><strong>Notations for a deep neural network</strong></h1>
 <blockquote>
-<p>d(img1, img2) = degree of difference between the 2 images</p>
-<p>if d(img1, img2) &lt;= τ (a certain threshold)</p>
-<p>​ output &quot;same&quot;</p>
-<p>if d(img1, img2) &gt; τ</p>
-<p>​ output &quot;different&quot;</p>
+<p>l (lower case L) denotes number of layers</p>
+<p>n[l] = number of units in layer l</p>
+<p>a[l] = activations in layer l</p>
+<p>​ = g[l](z[l])</p>
+<p>w[l] = weights to compute z[l]</p>
+<p>b[l] = biases to compute z[l]</p>
+<p>x = a[0]</p>
+<p>a[L] = yhat</p>
 </blockquote>
-<p><br></p>
-<h3 id="siamese-network"><strong>Siamese Network</strong></h3>
+<p><strong>P.S.</strong> Note that the []s above are all superscripts.</p>
+<h1 id="forward-propagation-in-a-deep-network"><strong>Forward propagation in a deep network</strong></h1>
+<p>General rule(vectorized)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Z[l] = W[l] * A[l - 1] + b[l]</span><br><span class="line">A[l] = g[l](Z[l])</span><br></pre></td></tr></table></figure>
+<p>Though we do want to get rid of explicit for loops whenever we can, when implementing forward propagation, we still have to write one, looping over the l layers.</p>
+<h1 id="get-your-matrix-dimensions-right"><strong>Get your matrix dimensions right</strong></h1>
 <blockquote>
-<p>Input an image x(1) into a ConvNet, have a FC output layer that has 128 units and view this as “encoding of x(1)”, which is an image.</p>
-<p>Input an image x(2) and get the output.</p>
-<p>Compare the two outputs</p>
-<p>d(x(1), x(2)) = eucledian distance between x(1) and x(2)</p>
-<p>Parameters of NN define f(x(i)) / encoding of x(i)</p>
-<p>Learn parameters so that</p>
-<p>if x(i) and x(j) are the same person, d(x(i), x(j)) is small</p>
-<p>if x(i) and x(j) are different persons, d(x(i), x(j)) is large</p>
-</blockquote>
-<p><br></p>
-<h3 id="triplet-loss"><strong>Triplet Loss</strong></h3>
-<p>Learning objective</p>
-<blockquote>
-<ul>
-<li><p>Want the distance between the <strong>anchor</strong> and <strong>positive</strong> image be small</p></li>
-<li><p>Want the distance between the <strong>anchor</strong> and <strong>negative</strong> image be large</p></li>
-</ul>
-</blockquote>
-<p>Looking at 3 images at a time</p>
-<blockquote>
-<p>Anchor as 'A', Positive as 'P', Negative as 'N'</p>
-<p>Want d(A, P) &lt;= d(A, N)</p>
-<p>which is equivalent to the equation: d(A, P) - d(A, N) &lt;= 0</p>
-<p>but in pratice, since we don't want it to output a trivial solution(that both encodings are close to or equal to 0), we need to add an extra parameter <strong>α</strong>, to make sure that the difference between d(A, P) and d(A, N) is sufficiently big. α here is also called <strong>margin parameter.</strong></p>
-<p><strong>d(A, P) - d(A, N) + α &lt;= 0</strong></p>
-</blockquote>
-<p>Loss function:</p>
-<blockquote>
-<p>Given 3 images A, P, N:</p>
-<p>L(A, P, N) = max(d(A, P) - d(A, N) + α, 0)</p>
-<p>So long as d(A, P) - d(A, N) + α &lt;=0, the loss is 0.</p>
-<p>otherwise, is the equation &quot;d(A, P) - d(A, N) + α &lt;= 0&quot; isn't satisfied</p>
-<p>Loss = d(A, P) - d(A, N) + α, which is a positive loss.</p>
-</blockquote>
-<p>For the training set, we do need multiple images of the same person.</p>
-<p>After training this network, the &quot;one shot learning&quot; problem can be solved.</p>
-<p>Choosing triplets A, P, N</p>
-<blockquote>
-<p>Choose triplets that're hard to train on,</p>
-<p>that d(A, P) + α &lt;= d(A, N) is hard to be satisfied.</p>
-</blockquote>
-<p><br></p>
-<h3 id="face-verification-and-binary-classification"><strong>Face Verification and Binary Classification</strong></h3>
-<p>Alternatively, we can also input a pair of images and output a logistic regression unit(1 or 0) to evaluate if these are of the same person or not.</p>
-<blockquote>
-<p>Precompute the encoding of the images in the database can save lots of computational power.</p>
-</blockquote>
-<p>Use pairs to train the network.</p>
-<p><br></p>
-<h1 id="neural-style-transfer"><strong>Neural Style Transfer</strong></h1>
-<hr>
-<h3 id="what-is-neural-style-transfer"><strong>What is neural style transfer?</strong></h3>
-<p>Content(C), Style(S), Generated(G)</p>
-<p><br></p>
-<h3 id="what-are-deep-convnets-learning"><strong>What are deep ConvNets learning?</strong></h3>
-<blockquote>
-<p>Pick a unit in layer 1. Fine the nine image patches that maximize the unit's activation.</p>
-<p>Repeat for other units.</p>
-</blockquote>
-<p>Through this, it can give you a sense of which unit captures what kind of features in the image.</p>
-<p>In deeper layers, each unit sees larger image patches.</p>
-<blockquote>
-<p>From shallower to deeper layers, the image patches each unit detects gradually get more complex(from edges to specific objects)</p>
-</blockquote>
-<p><br></p>
-<h3 id="cost-function"><strong>Cost Function</strong></h3>
-<p><strong>Neural Style Transfer Cost Function</strong></p>
-<p>J(G) =α * Jcontent(C, G) + β * Jstyle(S, G)</p>
-<blockquote>
-<ul>
-<li><p>Initialize G randomly</p>
-<p>​ G = 100 x 100 x3</p></li>
-<li><p>Use gradient descent to minimize J(G)</p>
-<p>It's updating the pixel values of G.</p></li>
-</ul>
-</blockquote>
-<p><br></p>
-<p><strong>Content Cost Function</strong></p>
-<p>J(G) =α * <strong>Jcontent(C, G)</strong> + β * Jstyle(S, G)</p>
-<blockquote>
-<ul>
-<li>Use hidden layer l to compute content cost (l is usually neither too shallow nor too deep)</li>
-<li>Use pre-trained ConvNet (E.g., VGG network)</li>
-<li>Let a[l](C) and a[l](G) be the activations of layer l on the images.</li>
-<li>If a[l](C) and a[l](G) are similar, both images have similar content</li>
-</ul>
-<p>J[l]content(C, G) = (Forbenius norm of (a[l](C) - a[l](G)) ) ^2</p>
-</blockquote>
-<p><br></p>
-<p><strong>Style Cost Function</strong></p>
-<p>Meaning of the style of an image:</p>
-<blockquote>
-<p>Say we're using hidden layer l's activation to measure &quot;style&quot;.</p>
-<p>Define style as <strong>correlation between activations across channels</strong>.</p>
-<p>How often they(the high level features) occur or don't occur together</p>
-</blockquote>
-<p>Style matrix:</p>
-<blockquote>
-<p>Let a[l]i, j, k = activation at (i, j, k). The dimension of G[l] is <strong>nc[l] x nc[l]</strong></p>
-<p>k and k' range from 1 to nc[l]</p>
-<p>G[l](S)kk' = (sum over i, j) * (a[l](S)i, j, k) * (a[l](S)i, j, k') // style matrix of image S</p>
-<p>G[l](G)kk' = (sum over i, j) * (a[l](G)i, j, k) * (a[l](G)i, j, k') // style matrix of image G</p>
-<p>In linear algebra, this is also called &quot;gram matrix&quot;</p>
-</blockquote>
-<p>For each layer,</p>
-<blockquote>
-<p>J[l]style(S, G) = (Forbenius norm of (G[l](S) - G[l](G)) ) ^2</p>
-</blockquote>
-<p>The overall equation is,</p>
-<blockquote>
-<p>Jstyle(S, G) = (sum over the l layers) (λ[l] * J[l]style(S, G))</p>
-<p>Allows to take both low level and high level features into account when computing the style.</p>
-</blockquote>
-<p><br></p>
-<h3 id="d-and-3d-generalizations"><strong>1D and 3D Generalizations</strong></h3>
-<p>1D:</p>
-<blockquote>
-<p>EKG of someone's heartbeat</p>
-<p>e.g. a 14 dimensional thing convolve with a 5 dimensional filter gives a 10 dimensional output</p>
-</blockquote>
-<p>In most cases for 1D data we may use a Recurrent Neural Network though.</p>
-<p><br></p>
-<p>3D:</p>
-<blockquote>
-<p>e.g. 14 x 14 x 14 x 1(nc[l]) convolve with a 5 x 5 x 5 x 1(nc[l+1]) filter gives a 10 x 10 x 10 volume.</p>
+<p>W[l] = (n[l], n[l - 1])</p>
+<p>b[l] = (n[l], 1)</p>
+<p>Z[l] = (n[l], m)</p>
+<p>A[l] = (n[l], m)</p>
 </blockquote>
 <hr>
-<p>Week 4 in Andrew Ng's <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome" target="_blank" rel="noopener">Convolutional Neural Networks</a> on Coursera.</p>
+<p>The derivatives of the functions have the same dimensions as those of the original functions</p>
+<blockquote>
+<p>dW[l] = (n[l], n[l - 1])</p>
+<p>db[l] = (n[l], 1)</p>
+<p>dZ[l] = (n[l], m)</p>
+<p>dA[l] = (n[l], m)</p>
+</blockquote>
+<h1 id="why-deep-representations"><strong>Why deep representations?</strong></h1>
+<p><strong>e.g.</strong> Face recognition</p>
+<p>1st layer: what're the edges in the picture</p>
+<p>2nd layer: group edges to detect different parts of faces</p>
+<p>3rd layer: put together different parts of faces</p>
+<p><br></p>
+<p>It's a simple to complex hiearchical, compositional representation.</p>
+<p>Shallower layers detect simpler things, then the deeper layers put together the simpler things detected.</p>
+<p><br></p>
+<p><strong>Circuit theory</strong></p>
+<blockquote>
+<p>Informally: there're functions you can compute with a "small" L-layer deep neural network that shallower networks require exponentially more hidden units to compute</p>
+</blockquote>
+<h1 id="building-blocks-of-deep-neural-networks"><strong>Building blocks of deep neural networks</strong></h1>
+<p>In layer l</p>
+<p><strong>Forward:</strong></p>
+<blockquote>
+<p>Input a[l - 1]</p>
+<p>Calculate with parameters W[l] and b[l]</p>
+<p>Output a[l]; <strong><em>cache a[l], z[l], W[l] and b[l]</em></strong></p>
+</blockquote>
+<p><strong>Backward:</strong></p>
+<blockquote>
+<p>input da[l], z[l]</p>
+<p>Calculate with parameters W[l] and b[l]</p>
+<p>Output da[l - 1], dW[l], db[l] // dZ[l] will be calculated in between as an intermediate matrix.</p>
+</blockquote>
+<p>Repeat this process over the l layers.</p>
+<h1 id="forward-and-backward-propagation"><strong>Forward and backward propagation</strong></h1>
+<p><strong>Forward:</strong></p>
+<blockquote>
+<p>Z[l] = W[l] A[l - 1] + b[l]</p>
+<p>A[l] = g[l](Z[l])</p>
+</blockquote>
+<hr>
+<p><br></p>
+<p><strong>Backward:</strong></p>
+<blockquote>
+<p>dZ[l] = ( W[l + 1] * dZ[l + 1] ) * g'[l](Z[l])</p>
+<p>​ =dA[l] * g'[l](Z[l]) // the * here is element wise multiplication</p>
+<p>dW[l] = (1 / m) * ( dZ[l] * A[l] )</p>
+<p>// actually, notice that A[l] is used so it should be cache in the forward propagation process as well</p>
+<p>db[l] = (1 / m) * np.sum(dZ[l], axis = 1, keepdims = True)</p>
+<p>dA[l - 1] = (W[l].T * dZ[l])</p>
+</blockquote>
+<p>dA[L], which is dA of the final/output layer, is calculated as follows</p>
+<blockquote>
+<p>dA[L] = - ( Y / A ) + (1 - Y) / (1 - A )</p>
+</blockquote>
+<p>This is obtained by taking the derivative of the <strong>Cross-entropy Loss Function</strong></p>
+<blockquote>
+<p>( Y * log(A) + (1 - Y) * log(1 - A) )</p>
+</blockquote>
+<h1 id="parameters-vs-hyperparameters"><strong>Parameters vs Hyperparameters</strong></h1>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<p>W[1], b[1], W[2], b[2] …</p>
+</blockquote>
+<p><br></p>
+<p><strong>Hyperparameters:</strong></p>
+<blockquote>
+<ol type="1">
+<li>Learning rate - alpha</li>
+<li>Number of iterations</li>
+<li>Number of hidden layers - L</li>
+<li>Number of hidden units - from n[1] to n[L]</li>
+<li>Choice of activation function - g[1] to g[l]</li>
+</ol>
+</blockquote>
+<p>The hyperparameters are those that somehow determine the final values of the parameters W and b.</p>
+<p>There're also other hyperparameters.</p>
+<p><strong>e.g.</strong> Momentum, mini batch size, regularization...</p>
+<p># <strong>What does deep learning have to do with the human brain?</strong></p>
+<blockquote>
+<p>Still, even neuroscientists today don't quite understand what even a single neuron is doing.</p>
+</blockquote>
+<p>Andrew mentioned that he became less and less prone to the analogy of human brain and neural network.</p>
+<p><br></p>
+<p>When I was taking a class in Cognitive Science, I found that "Connectionism", which is an idea to explain the underlying mental phenomena behind human brain, resonates with neural network. A neuron has two states, either it fires or not. What decides the state is if it receives a signal that's strong enough to activate it. The process of calculating the strength of the signal is analogous to forward propagation, and that of adjusting the activation threshold and weights of a neuron is analogous to backward propagation.</p>
+<p>I personally felt that this did make an intuitive sense when I was reading it, but for now I also somehow feel like it's oversimplified. Hope to study and investigate more on this myself in the future. Part of the reason why I didn't give up studying Computer Science upon the completion of my first year in college is that I thought deep learning could be a very useful tool in studying the human brain, in the respect of both itself as an analogy and its functionality.</p>
+<hr>
+<p>Week 4 in Andrew Ng's <a href="https://www.coursera.org/learn/neural-networks-deep-learning/home/welcome" target="_blank" rel="noopener">'Neural Networks and Deep Learning'</a> on Coursera.</p>
 <p>Cover by <a href="https://www.pixiv.net/member.php?id=772547" target="_blank" rel="noopener">loundraw</a> on Pixiv.</p>
 
             </div>
@@ -383,8 +370,8 @@ $('.btn_click_load').click(function() {
 -->
 <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'http://yoursite.com/2019/07/13/Study-Notes-for-Face-Recognition-Neural-Style-Transfer/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://yoursite.com/2019/07/13/Study-Notes-for-Face-Recognition-Neural-Style-Transfer/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://yoursite.com/2019/06/26/DNNs/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/06/26/DNNs/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 

@@ -153,147 +153,25 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/umb.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
-                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Interpretability of Neural Network</h2></a>
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/cxm.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>No Free Lunch</h2></a>
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                <h1 id="interpreting-neural-networks-outputs"><strong>Interpreting Neural Networks' Outputs</strong></h1>
+                <h1 id="uniform-convergence">Uniform Convergence</h1>
 <hr>
-<h3 id="saliency-maps"><strong>Saliency Maps</strong></h3>
-<p>The probability of dog(after softmax) = <strong>score of dog</strong> / score of the sum over all categories</p>
-<p>For the saliency map, we want to get the the score <strong>pre-softmax</strong> - <strong>the score of the dog</strong>.</p>
-<p><strong>σS_dog / σ_x</strong> has the same dimension as the input image.</p>
-<p>We can plot it out to see where <strong>σS_dog / σ_x</strong> has obvious changes, which can reveal the location of the dog.</p>
-<p><br></p>
-<h3 id="occlusion-sensitivity"><strong>Occlusion sensitivity</strong></h3>
-<p>We can put a grey square on an image to block that part out.</p>
-<p>Move the grey square around and compute the probability of the labeled class.</p>
-<p>Color the area based on the confidence you get for predicting the output when the grey square is put at the location. We would plot red for high confidence, and blue for low confidence. The shape of the blue area would be approximately the area where the object we want to predict appears.</p>
-<p><br></p>
-<h3 id="class-activation-mapsglobal-average-pooling"><strong>Class activation maps(Global Average Pooling)</strong></h3>
-<p>Usually in a CNN, we would flatten the last convolutional layer to subsequently have a couple of FC layers right before the softmax layer.</p>
-<p>However, here we don't want to flatten the last convolutional layer because we don't want to lose the spatial information. We will instead take average pooling of this layer and get a new layer of size 1 x 1 x nc, and mark each point as an activation node. Then train the CNN using this new architecture.</p>
-<p>You can map it back to the original pixels(since the layer is not flattened but was applied average pooling, the spacial information is kept so it can be mapped back) to see which pixels are activated in each feature map. It provides a sense of which feature map corresponds to which category.</p>
-<h1 id="visualizing-neural-networks-from-the-inside"><strong>Visualizing Neural Networks from the inside</strong></h1>
+<p>applies to a hypothesis class <span class="math inline">\(H\)</span>,</p>
+<h1 id="no-free-lunch-theorem"><strong>No Free Lunch Theorem</strong></h1>
 <hr>
-<h3 id="gradient-ascentclass-model-visualization"><strong>Gradient ascent(class model visualization)</strong></h3>
-<p>Keep the weights fixed and use gradient ascent on the input image to maximize this loss:</p>
-<blockquote>
-<p>L = S_dog(x) - λ(L2norm of x) | the second term is a regularization term so that x should look natural.</p>
-</blockquote>
-<p>Gradient ascent:</p>
-<blockquote>
-<p>x = x + α * (σL/σx)</p>
-</blockquote>
-<p>Repeat this process:</p>
-<blockquote>
-<ol type="1">
-<li>Forward propagate with input image x</li>
-<li>Compute the objective l</li>
-<li>Back propagate to get σL/σx</li>
-<li>Update image x's pixels with gradient ascent</li>
-</ol>
-</blockquote>
-<p><br></p>
-<h3 id="dataset-search"><strong>Dataset search</strong></h3>
-<p>Given a filter, what examples in the dataset lead to a strongly activated feature map.</p>
-<p><br></p>
-<h3 id="the-deconvolution-and-its-application"><strong>The deconvolution and its application</strong></h3>
-<p>Deconvolution: upsample height and width</p>
-<blockquote>
-<p>Select a feature map</p>
-<p>Keep the max activation of the feature map</p>
-<p>Set all other activations of the layer to 0</p>
-<p>Repeat <strong>Unpool, "Un ReLU", and deconvolution</strong>, until get to the input layer</p>
-</blockquote>
-<p><br></p>
-<p><strong>1D convolution and deconvolution</strong>:</p>
-<p>We can write</p>
-<blockquote>
-<p>y = W * X</p>
-<p>So we can infer that x = W^-1 * y</p>
-</blockquote>
-<p>Assume</p>
-<blockquote>
-<p>W is an invertible matrix</p>
-<p>W is an orthogonal matrix</p>
-</blockquote>
-<p>When W is orthogonal,</p>
-<blockquote>
-<p>W^-1 = W.T</p>
-<p>W.T * W = 1</p>
-</blockquote>
-<p><br></p>
-<p>Sub pixel convolution(x = W * y):</p>
-<blockquote>
-<p>This is exactly the same as y = W * x(convolution), but with</p>
-<ol type="1">
-<li><p>Inserted 0s inbetween values of y</p></li>
-<li><p>Flipped weight</p></li>
-<li><p>stride divided by 2</p></li>
-</ol>
-</blockquote>
-<p><br></p>
-<p><strong>Unpool:</strong></p>
-<p>Cache the maximum values and create <strong>switches</strong>, a matrix having the same dimension as the pooling layer but have values of 1s and 0s, where the positions taken as "max" will be set to 1 and the rest would be 0.</p>
-<p>When unpooling, simply map the maximum values cached back to the switches, regardless the 0s because during forward propagation they have had no impact on the loss function(and therefore the gradients passed back).</p>
-<p><br></p>
-<p>For going back of the ReLU activation layer,</p>
-<p>One approach is <strong>ReLU backward:</strong></p>
-<blockquote>
-<p>Have switches, a matrix composed of 0 and 1, where positive values are set to 1 and the rest are 0.</p>
-<p>Apply the switches to the gradient passed back</p>
-</blockquote>
-<p>However, we would use <strong>Relu DeconvNet</strong> instead,</p>
-<blockquote>
-<p>Keep only the positive gradients passed back and set the rest to 0.</p>
-<p>We don't want to know(or be affected by) what happens in the forward prop process, so in this case we wouldn't.</p>
-</blockquote>
-<h1 id="deep-dreams-going-deeper-in-the-nns"><strong>Deep Dreams: going deeper in the NNs</strong></h1>
+<p>Intuition behind the proof of NFLT:</p>
+<p>We have no knowledge of <span class="math inline">\(\geq\)</span> <span class="math inline">\(\frac{1}{2}\)</span> of the distribution, and for that unknown part of the distribution we have exactly <span class="math inline">\(\frac{1}{2}\)</span> of error rate. So they combined up to</p>
+<p>This 1/2 of error rate</p>
+<p>we shouldn't consider all functions <span class="math inline">\(f\)</span> from <span class="math inline">\(X\)</span> to {<span class="math inline">\(0, 1\)</span>} as good candidates.</p>
+<p>There exist half of the</p>
+<p>Any algorithm that chooses its output from hypothesis in <span class="math inline">\(H\)</span>. will fail on some learning task.</p>
 <hr>
-<p>Repeat:</p>
-<blockquote>
-<ol type="1">
-<li>Forward propagate image until the dreaming layer</li>
-<li>Set activations of dreaming layer to be equal to its activations</li>
-<li>Back propagate gradients to input image</li>
-<li>Update pixels of the image</li>
-</ol>
-</blockquote>
-<p>If the network feels like it sees something, it's gonna make it appear on the picture.</p>
-<hr>
-<h1 id="questions-were-now-able-to-answer"><strong>Questions we're now able to answer:</strong></h1>
-<p>What part of the input is responsible for the output?</p>
-<blockquote>
-<p>Occlusion sensitivity</p>
-<p>Class activation map</p>
-</blockquote>
-<p>What is the role of a given neuron/filter/layer?</p>
-<blockquote>
-<p>Deconvolutions can help visualize the role of a neuron</p>
-<p>Search dataset images maximizing the activation</p>
-<p>Gradient ascent(class model visualization)</p>
-</blockquote>
-<p>Can we check what the network focuses on given an input image?</p>
-<blockquote>
-<p>Occlusion sensitivity</p>
-<p>Saliency map(one-time gradient ascent)</p>
-<p>Class activation map</p>
-</blockquote>
-<p>How does a neural network see our world?</p>
-<blockquote>
-<p>Gradient ascent(class model visualization)</p>
-<p>Deep dream</p>
-</blockquote>
-<p>Does these visualizations have use cases?</p>
-<blockquote>
-<p>Segmentation(saliency maps)</p>
-<p>Art(Deep dream)</p>
-</blockquote>
-<hr>
-<p>On <a href="https://www.youtube.com/embed/gCJCgQW_LKc" target="_blank" rel="noopener">video lecture 7</a> in CS230 at Stanford</p>
-<p>Cover by <a href="https://www.pixiv.net/member_illust.php?id=189732" target="_blank" rel="noopener">爽々</a> on Pixiv</p>
+<p><em>Shai Shalev-Shwartz and Shai Ben-David. 2014.</em> <em>Understanding Machine Learning: From Theory to Algorithms</em>. <em>Cambridge University Press, USA.</em></p>
+<p>Cover by <a href="https://www.pixiv.net/member.php?id=47488" target="_blank" rel="noopener">飴村</a> on Pixiv</p>
 
             </div>
 
@@ -356,8 +234,8 @@ $('.btn_click_load').click(function() {
 -->
 <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'http://yoursite.com/2019/07/19/Interpretability-of-Neural-Network/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://yoursite.com/2019/07/19/Interpretability-of-Neural-Network/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://yoursite.com/2020/02/15/No-Free-Lunch/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2020/02/15/No-Free-Lunch/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 

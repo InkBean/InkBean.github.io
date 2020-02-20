@@ -154,7 +154,7 @@
 
         <div id="main">
             <div class="post_page_title_img" style="height: 25rem;background-image: url(/gallery/uwt.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
-                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>NLP &amp; Word Embeddings</h2></a>
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Word Embeddings</h2></a>
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
@@ -196,7 +196,7 @@
 <p><strong>Analogies:</strong></p>
 <blockquote>
 <p><strong>Man</strong> <strong>→</strong> <strong>Woman</strong> is <strong>King</strong> <strong>→</strong> ? (This should be Queen)</p>
-<p><strong>E.g.</strong> e_man - e_woman ≈ [-2, 0, 0, 0] // &quot;e_n&quot; denotes word embeddings of n</p>
+<p><strong>E.g.</strong> e_man - e_woman ≈ [-2, 0, 0, 0] // "e_n" denotes word embeddings of n</p>
 <p>Find to word that e_king - e_word ≈ e_man - e_woman</p>
 <p>It turns out that e_king - e_queen ≈ [-2, 0, 0, 0]</p>
 <p>So queen should be the work</p>
@@ -219,7 +219,7 @@
 <blockquote>
 <p>Learn an embedding matrix of (300, 10000), which is <strong># features</strong> x <strong># vocabulary</strong></p>
 <p>Let's say that orange is the 6257th element in the vocabulary, so we use O6257 to denote the one hot vector of orange.</p>
-<p>E(300, 10k) * O6257(10k, 1) = <strong>e_6257(300,1)</strong> // e_6257 is the embedding for &quot;orange&quot;</p>
+<p>E(300, 10k) * O6257(10k, 1) = <strong>e_6257(300,1)</strong> // e_6257 is the embedding for "orange"</p>
 </blockquote>
 <p>Generally,</p>
 <blockquote>
@@ -252,7 +252,7 @@
 <p><strong>Model:</strong></p>
 <blockquote>
 <p>Vocab size = 10,000</p>
-<p>Context c (&quot;orange&quot;/6257)→ Target t (&quot;juice&quot;/4834)</p>
+<p>Context c ("orange"/6257)→ Target t ("juice"/4834)</p>
 <p>Learn to map <strong>x/c</strong> to <strong>y/t</strong></p>
 <p><strong>Softmax:</strong> P(t | c) = e^(θ_t.T * e_c) / (sum over the vocabulary e^(θ_j * e_c) )</p>
 <p>// θ_t is parameter associated with output t. <strong>θ_t</strong> and <strong>e_c</strong> have the same dimension, and θ_t.T * e_c gives an output of a real number.</p>
@@ -272,7 +272,7 @@
 </blockquote>
 <p><strong>How to sample context c?</strong></p>
 <blockquote>
-<p>P(c) isn't taken entirely at random based on distribution, because besides the really common words like &quot;the&quot;, &quot;of&quot;, you also want to train on less commonly used words like &quot;apple&quot; and &quot;orange&quot;.</p>
+<p>P(c) isn't taken entirely at random based on distribution, because besides the really common words like "the", "of", you also want to train on less commonly used words like "apple" and "orange".</p>
 </blockquote>
 <p><br></p>
 <h3 id="negative-sampling"><strong>Negative Sampling</strong></h3>

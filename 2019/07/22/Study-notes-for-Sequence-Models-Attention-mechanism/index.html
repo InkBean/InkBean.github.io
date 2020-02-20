@@ -271,7 +271,7 @@
 <p><br></p>
 <h3 id="bleu-score"><strong>Bleu Score</strong></h3>
 <p>If there're multiple great answers, how to measure accuracy?</p>
-<p>Bleu stands for <strong>&quot;Bilingual evaluation understudy&quot;</strong></p>
+<p>Bleu stands for <strong>"Bilingual evaluation understudy"</strong></p>
 <p>Given a machine generated translation. If the translation is pretty close to references provided by human, then it will have a high Bleu Score.</p>
 <blockquote>
 <p>Look at the machine translation in the output and see if each of the words appears in any of the reference sentences.</p>
@@ -356,13 +356,13 @@
 <p>CTC stands for Connectionist temporal classification</p>
 </blockquote>
 <blockquote>
-<p>Let's say we have a clause &quot;the quick brown fox&quot;</p>
-<p>we start to recognize &quot;the q&quot;</p>
+<p>Let's say we have a clause "the quick brown fox"</p>
+<p>we start to recognize "the q"</p>
 <p>When the neural network is forced to generate the same number of output features as that of input, since the # features of the input can be really big(if the 10 seconds audio clip is 100 hertz, there would be 1000 features as input), we can represent the output as</p>
 <p>**ttt_h_eee_ _ _ _ ' '_ _ _ qqq_ _**</p>
 <p>// '_' as blank character and ' ' as space character.</p>
 <p>Basic rule: collapse repeated characters not separated by blank.</p>
-<p>After being collapsed, the output will be &quot;the q&quot;</p>
+<p>After being collapsed, the output will be "the q"</p>
 </blockquote>
 <p><br></p>
 <h3 id="trigger-word-detection"><strong>Trigger Word Detection</strong></h3>
@@ -377,7 +377,7 @@
 <p>Intrepreting audio clips</p>
 <blockquote>
 <p>What really is an audio recording? A microphone records little variations in air pressure over time, and it is these little variations in air pressure that your ear also perceives as sound. You can think of an audio recording is a long list of numbers measuring the little air pressure changes detected by the microphone. We will use audio sampled at 44100 Hz (or 44100 Hertz). This means the microphone gives us 44100 numbers per second. Thus, a 10 second audio clip is represented by 441000 numbers (= 10×44100).</p>
-<p>It is quite difficult to figure out from this &quot;raw&quot; representation of audio whether the word &quot;activate&quot; was said. In order to help your sequence model more easily learn to detect triggerwords, we will compute a <em>spectrogram</em> of the audio. The spectrogram tells us how much different frequencies are present in an audio clip at a moment in time.</p>
+<p>It is quite difficult to figure out from this "raw" representation of audio whether the word "activate" was said. In order to help your sequence model more easily learn to detect triggerwords, we will compute a <em>spectrogram</em> of the audio. The spectrogram tells us how much different frequencies are present in an audio clip at a moment in time.</p>
 </blockquote>
 <hr>
 <p>Week 3 in Andrew Ng's <a href="https://www.coursera.org/learn/nlp-sequence-models/home/welcome" target="_blank" rel="noopener">Sequence Models</a> on Coursera.</p>
